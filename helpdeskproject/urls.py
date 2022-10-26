@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from helpdesk.views import home, tarefa
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', home),
+    path('tarefa/', tarefa),
 
 ]
