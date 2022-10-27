@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def home(request):
-    return HttpResponse('HOME')
+    return render(request, "helpdesk/pages/home.html")
 
 
 def tarefa(request):
