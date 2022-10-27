@@ -1,8 +1,8 @@
 from django.urls import path
 
-from helpdesk.views import home, tarefa
+from . import views
 
 urlpatterns = [
-    path('', home),
-    path('tarefa/', tarefa),
+    path('', views.home),
+    path('tarefa/<int:id>/', views.tarefa),
 ]
