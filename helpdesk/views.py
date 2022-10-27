@@ -8,4 +8,4 @@ def home(request):
 
 
 def tarefa(request):
-    return HttpResponse('TAREFA')
+    return render(request, "helpdesk/pages/tarefa.html")
