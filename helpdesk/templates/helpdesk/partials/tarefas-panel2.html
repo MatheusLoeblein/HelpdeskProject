@@ -1,5 +1,5 @@
 <main class="main-tarefas-conteiner">
-    <div class="tarefas-panel-a" >
+    <div class="tarefas-panel-t" >
         <div class="tarefa">
             <a href="#" class="tarefa-id">#{{ tarefa.ticketid }}</a>
         </div>
@@ -13,7 +13,6 @@
             <a href="#" class="tarefa-data">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</a>
         </div>
         <div class="tarefa">
-            <a href="{% url 'tarefas-category' tarefa.Category_id %}" class="categoria">{{tarefa.Category}}</a>
+            <a href="#" class="categoria">{{tarefa.Category}}</a>
         </div>
     </div>
- 

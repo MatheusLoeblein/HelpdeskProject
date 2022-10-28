@@ -1,11 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import get_list_or_404, render
 from utils.helpdesk.factory import make_recipe
+
+from .models import Tarefa
 
 
 # Create your views here.
 def home(request):
+    tarefas = Tarefa.objects.all().order_by('-id')
     return render(request, "helpdesk/pages/home.html", context={
-        'tarefas': [make_recipe() for _ in range(60)],
+        'tarefas': tarefas,
+    })
+
+
+def category(request, Category_id):
+    tarefas = get_list_or_404(Tarefa, Category__id=Category_id)
+
+    return render(request, "helpdesk/pages/category.html", context={
+        'tarefas': tarefas,
+        'title': f' Setor | {tarefas[0].Category.name}'
     })
 
 

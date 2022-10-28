@@ -1,0 +1,13 @@
+{% extends 'global/base.html' %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+    {% include 'helpdesk/partials/search.html'%}
+    {% include 'helpdesk/partials/tarefas-head.html'%}
+   
+    {% for tarefa in tarefas %}
+    {% include 'helpdesk/partials/tarefas-panel.html'%}
+    {% endfor %}
+{% endblock content %}
