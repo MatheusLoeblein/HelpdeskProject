@@ -6,15 +6,15 @@ from .models import Tarefa
 
 # Create your views here.
 def home(request):
-    tarefas = Tarefa.objects.all().order_by('-id')
+    tarefas = Tarefa.objects.all().order_by('-data_at')
     return render(request, "helpdesk/pages/home.html", context={
         'tarefas': tarefas,
     })
 
 
 def category(request, Category_id):
-    tarefas = get_list_or_404(Tarefa, Category__id=Category_id)
-
+    tarefas = get_list_or_404(Tarefa.objects.filter(
+        Category__id=Category_id).order_by('-data_at'))
     return render(request, "helpdesk/pages/category.html", context={
         'tarefas': tarefas,
         'title': f' Setor | {tarefas[0].Category.name}'
