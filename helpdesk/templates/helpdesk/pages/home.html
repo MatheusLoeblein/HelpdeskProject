@@ -1,16 +1,13 @@
-{% include 'helpdesk/partials/head.html'%}
+{% extends 'global/base.html' %}
 
+{% block title %} HOME{% endblock title %}
 
-<body>
-{% include 'helpdesk/partials/header.html'%}
-{% include 'helpdesk/partials/search.html'%}
-{% include 'helpdesk/partials/tarefas-head.html'%}
-{% include 'helpdesk/partials/tarefas-panel.html'%}
-{% include 'helpdesk/partials/tarefas-panel.html'%}
-{% include 'helpdesk/partials/tarefas-panel.html'%}
-{% include 'helpdesk/partials/tarefas-panel.html'%}
-{% include 'helpdesk/partials/footer.html' %}
+{% block content %}
 
-</body>
-
-</html>
+    {% include 'helpdesk/partials/search.html'%}
+    {% include 'helpdesk/partials/tarefas-head.html'%}
+   
+    {% for tarefa in tarefas %}
+    {% include 'helpdesk/partials/tarefas-panel.html'%}
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    {% include 'helpdesk/partials/head.html'%}
+
+    <title>Help Desk | {% block title %}{% endblock title %}</title>
+</head>
+<body>
+    {% include 'helpdesk/partials/header.html'%}
+
+    {% block content %}{% endblock content %}
+
+    {% include 'helpdesk/partials/footer.html' %}
+
+</body>
+
+</html>

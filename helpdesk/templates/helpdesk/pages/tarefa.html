@@ -1,9 +1,8 @@
-{% include 'helpdesk/partials/head.html'%}
+{%extends 'global/base.html'%}
 
+{% block title %} TAREFA{% endblock title %}
 
-<body>
-    {% include 'helpdesk/partials/header.html'%}
-
+{% block content %}
     <div class="head-tarefa-content">
         <span><b>Ticket ID:</b></span>
         <span>#61500</span>
@@ -21,8 +20,4 @@
             <span class="tarefa-descricao"></span>
         </div>
     </main>
-
-    {% include 'helpdesk/partials/footer.html' %}
-</body>
-
-</html>
+{% endblock content %}
