@@ -1,16 +1,19 @@
 <main class="main-tarefas-conteiner">
     <div class="tarefas-panel-a" >
         <div class="tarefa">
-            <a href="#" class="tarefa-id">#{{ tarefa.ticketid }}</a>
+            <a href="{% url 'tarefas' tarefa.id %}" class="tarefa-id">#{{ tarefa.ticketid }}</a>
         </div>
         <div class="tarefa">
-            <a href="#" class="tarefa-descrição">{{ tarefa.title}}</a>
+            <a href="{% url 'tarefas' tarefa.id %}" class="tarefa-descrição">{{ tarefa.title}}</a>
         </div>
         <div class="tarefa">
             <a href="#" class="tarefa-situacao">{{tarefa.status}}</a>
         </div>
         <div class="tarefa">
             <a href="#" class="tarefa-data">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</a>
+        </div>
+        <div class="tarefa">
+            <a href="#" class="tarefa-prioridade">{{tarefa.prioridade}}</a>
         </div>
         <div class="tarefa">
             <a href="{% url 'tarefas-category' tarefa.Category_id %}" class="categoria">{{tarefa.Category}}</a>

@@ -5,29 +5,25 @@
 {% block content %}
 <div class="head-tarefa-content">
     <span><b>Ticket ID:</b></span>
-    <span>#61500</span>
+    <span>#{{ tarefa.ticketid }}</span>
     <span></span>
-    <span>Compra de teclados</span>
+    <span>{{ tarefa.title}}</span>
 
 </div>
 <main class="main-content-tarefa">
     <div class="content-tarefa-status">
-        <span class="tarefa-autor">Autor: Matheus</span>
-        <span class="tarefa-starus">Status: Em Andamento</span>
-        <span class="tarefa-prioridade">Prioridade: Emergencia</span>
-        <span class="tarefa-cetegoria">Setor: Marketing</span>
-        <span class="tarefa-cetegoria">28/10/2022</span>
+        <span class="tarefa-autor">Autor: {{tarefa.author}}</span>
+        <span class="tarefa-starus">Status: {{tarefa.status}}</span>
+        <span class="tarefa-prioridade">Prioridade: {{tarefa.prioridade}}</span>
+        <span class="tarefa-cetegoria">Setor: {{tarefa.Category}}</span>
+        <span class="tarefa-cetegoria">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
 
     </div>
     <div class="division"></div>
     <div class="content-tarefa-descricao">
         <div class="tarefa-descricao">Descrição</div>
         <div class="content-tarefa-conteudo">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus, sed amet! Voluptates velit
-                doloribus,
-                delectus veniam suscipit cum impedit quis autem pariatur temporibus enim ducimus, iusto ipsa
-                consequatur,
-                nisi earum?</p>
+            <p>{{tarefa.description}}</p>
         </div>
 
     </div>

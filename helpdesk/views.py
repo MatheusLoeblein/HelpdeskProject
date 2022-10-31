@@ -1,5 +1,4 @@
 from django.shortcuts import get_list_or_404, render
-from utils.helpdesk.factory import make_recipe
 
 from .models import Tarefa
 
@@ -22,6 +21,15 @@ def category(request, Category_id):
 
 
 def tarefa(request, id):
+
+    tarefa = Tarefa.objects.filter(
+        pk=id).order_by('-id').first()
+
     return render(request, "helpdesk/pages/tarefa.html", context={
-        'tarefa': [make_recipe(), ]
+        'tarefa': tarefa,
     })
+
+
+def search(request):
+    search_term = request.GET.get()
+    return render(request, 'helpdesk/pages/search.html')
