@@ -28,6 +28,19 @@
 
     </div>
 
+<div class="-title">
+    <h1>Comentarios</h1>
 
+</div>
+<div class="comentarios">
+    <form id="comment"action="/tarefa/{{Tarefa.id}}" method="POST">
+        {% csrf_token %}
+        <input name="name" type="text">
+        <textarea name="comment" type="text"></textarea>
+        <button type="submit" >Enviar</button>
+
+    </form>
+
+</div>
 </main>
 {% endblock content %}

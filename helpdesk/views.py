@@ -1,6 +1,7 @@
-from django.shortcuts import get_list_or_404, render
+from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
 
-from .models import Tarefa
+from .forms import CommentForm
+from .models import Comment, Tarefa
 
 
 # Create your views here.
@@ -31,5 +32,19 @@ def tarefa(request, id):
 
 
 def search(request):
-    search_term = request.GET.get()
+    #search_term = request.GET.get()
     return render(request, 'helpdesk/pages/search.html')
+
+
+def addcomment(request, id):
+    url = request.META.get('HTTP_REFERER')
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            data = Comment()
+            data.name = form.cleaned_data['name']
+            data.comment = form.cleaned_data['comment']
+            data.Tarefa_id = id
+            data.save()
+            return HttpResponseRedirect(url)
+    return HttpResponseRedirect(url)

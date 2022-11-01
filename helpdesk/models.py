@@ -25,3 +25,14 @@ class Tarefa(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    Tarefa = models.ForeignKey(Tarefa, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=False)
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.name
