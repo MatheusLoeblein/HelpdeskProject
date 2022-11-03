@@ -102,14 +102,14 @@ def dashboard_tarefa_edit(request, id):
     tarefa = Tarefa.objects.filter(
         author=request.user,
         pk=id,
-    )
+    ).first()
 
     if not tarefa:
         raise Http404()
 
     form = AuthorTarefaForm(
         request.POST or None,
-        instace=tarefa
+        instance=tarefa
     )
 
     return render(request, 'authors/pages/dashboard_tarefa.html', {
