@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
 
 from .forms import CommentForm
@@ -7,6 +8,7 @@ from .models import Comment, Tarefa
 # Create your views here.
 def home(request):
     tarefas = Tarefa.objects.all().order_by('-data_at')
+
     return render(request, "helpdesk/pages/home.html", context={
         'tarefas': tarefas,
     })
