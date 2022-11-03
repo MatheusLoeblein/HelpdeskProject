@@ -1,0 +1,26 @@
+{% extends 'global/base.html' %}
+
+{% block title %}| Dashboard | {{ user }}{% endblock title %}
+
+{% block content %}
+<div class="main-content-register">
+    <h2>Dashboard ({{user}})</h2>
+{% include 'helpdesk/partials/message.html' %}
+{% include  'authors/partials/login_message.html'%}
+    <div class="authors-dashboard-container">
+        <h3>Your recipes</h3>
+
+        <ul>
+        {% for tarefa in tarefas %}
+            <li>
+            <a href="{% url 'authors:dashboard_tarefa_edit' tarefa.id %}">{{ tarefa.title }}</a>
+            </li>
+        {% empty %}
+            <li>
+            <p>You do not have recipes, please create one.</p>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>   
+</div>
+{% endblock content %}
