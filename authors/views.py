@@ -1,3 +1,5 @@
+
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -127,4 +129,31 @@ def dashboard_tarefa_edit(request, id):
 
     return render(request, 'authors/pages/dashboard_tarefa.html', {
         'form': form
+    })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_tarefa_new(request):
+
+    form = AuthorTarefaForm(
+        data=request.POST or None
+    )
+
+    if form.is_valid():
+        # Agora, o form é valido e eu posso tentar salvar
+        tarefa = form.save(commit=False)
+
+        # se o usuario da sessão for o mesmo que criou a tarefa..
+        tarefa.author = request.user
+
+        tarefa.save()
+
+        messages.success(request, 'Sua tarefa foi criada com sucesso!')
+
+        return redirect(reverse('authors:dashboard_tarefa_edit', args=(tarefa.id,)))
+
+    return render(request, 'authors/pages/dashboard_tarefa.html', {
+        'form': form,
+        'form_action': reverse('authors:dashboard_tarefa_new'),
+
     })

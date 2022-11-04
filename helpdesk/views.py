@@ -1,7 +1,11 @@
 from django.contrib import messages
-from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import (HttpResponseRedirect, get_list_or_404, redirect,
+                              render)
+from django.urls import reverse
 
-from .forms import CommentForm
+from authors.forms import CommentForm
+
 from .models import Comment, Tarefa
 
 
@@ -28,8 +32,15 @@ def tarefa(request, id):
     tarefa = Tarefa.objects.filter(
         pk=id).order_by('-id').first()
 
+    comment = Comment.objects.filter().first()
+
+    comment_form_data = request.session.get('comment_form_data', None)
+    form = CommentForm(comment_form_data)
+
     return render(request, "helpdesk/pages/tarefa.html", context={
         'tarefa': tarefa,
+        'form': form,
+        'comment': comment
     })
 
 
@@ -38,15 +49,19 @@ def search(request):
     return render(request, 'helpdesk/pages/search.html')
 
 
-def addcomment(request, id):
-    url = request.META.get('HTTP_REFERER')
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            data = Comment()
-            data.name = form.cleaned_data['name']
-            data.comment = form.cleaned_data['comment']
-            data.Tarefa_id = id
-            data.save()
-            return HttpResponseRedirect(url)
-    return HttpResponseRedirect(url)
+@login_required(login_url='authors:login', redirect_field_name='next')
+def addcomment(request):
+
+    POST = request.POST
+    request.session['comment_form_data'] = POST
+    form = CommentForm(POST)
+
+    if form.is_valid():
+        form = form.save()
+
+        messages.success(request, 'Usuario Criado, por favor efetue o log in.')
+
+        del (request.session['register_form_data'])
+        return redirect(reverse('authors:login'))
+
+    return redirect('authors:register')

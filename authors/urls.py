@@ -11,6 +11,8 @@ urlpatterns = [
     path('login/create/', views.login_create, name="login_create"),
     path('logout/', views.logout_view, name="logout"),
     path('dashboard/', views.dashboard, name="dashboard"),
-    path('dashboard/tarefa/<int:id>/edit', views.               dashboard_tarefa_edit,
+    path('dashboard/tarefa/new', views.dashboard_tarefa_new,
+         name="dashboard_tarefa_new"),
+    path('dashboard/tarefa/<int:id>/edit', views.dashboard_tarefa_edit,
          name="dashboard_tarefa_edit"),
 ]

@@ -1,46 +1,57 @@
 {%extends 'global/base.html'%}
 
-{% block title %} TAREFA{% endblock title %}
+{% block title %} | Tarefa #{{ tarefa.id }}{% endblock title %}
 
 {% block content %}
-<div class="head-tarefa-content">
-    <span><b>Ticket ID:</b></span>
-    <span>#{{ tarefa.ticketid }}</span>
-    <span></span>
-    <span>{{ tarefa.title}}</span>
 
-</div>
 <main class="main-content-tarefa">
-    <div class="content-tarefa-status">
-        <span class="tarefa-autor">Autor: {{tarefa.author}}</span>
-        <span class="tarefa-starus">Status: {{tarefa.status}}</span>
-        <span class="tarefa-prioridade">Prioridade: {{tarefa.prioridade}}</span>
-        <span class="tarefa-cetegoria">Setor: {{tarefa.Category}}</span>
-        <span class="tarefa-cetegoria">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
 
+    <div class="head-tarefa-content">
+        <span><b>Ticket ID:</b></span>
+        <span># {{ tarefa.id }}</span>
+        <span>{{ tarefa.title}}</span>
     </div>
-    <div class="division"></div>
     <div class="content-tarefa-descricao">
-        <div class="tarefa-descricao">Descrição</div>
+        <div class="content-tarefa-status">
+            <span class="tarefa-autor">{{user.first_name}} {{user.last_name}}</span>
+            <span class="tarefa-starus">Status: Executando {{tarefa.status}}</span>
+            <span class="tarefa-prioridade">Prioridade: {{tarefa.prioridade}}</span>
+            <span class="tarefa-cetegoria">Setor: {{tarefa.Category}}</span>
+            <span class="tarefa-cetegoria">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
+
+        </div>
+        <div class="division"></div>
+        
         <div class="content-tarefa-conteudo">
             <p>{{tarefa.description}}</p>
+        </div>
+    </div>
+    
+
+    <div class="content-tarefa-comment">
+        <div class="content-tarefa-comment-status">
+            <span class="tarefa-autor">{{user.first_name}} {{user.last_name}}</span>
+            <span class="tarefa-starus">Status: {{tarefa.status}}</span>
+            <span class="tarefa-cetegoria">{{comment.create_at|date:"d/m/Y"}} às {{comment.create_at|date:"H:i"}}</span>
+
+        </div>
+        <div class="division-comment"></div>
+        
+        <div class="content-tarefa-comment-conteudo">
+            <p>{{comment.comment}}</p>
         </div>
 
     </div>
 
-<div class="-title">
-    <h1>Comentarios</h1>
+    
+    
+    <div class="content-tarefa-comment">
+        <div class="form-content-comment-grid">
+            <div class="form-content-comment">
+                {% include  'authors/partials/forms.html'%}
 
-</div>
-<div class="comentarios">
-    <form id="comment"action="/tarefa/{{Tarefa.id}}" method="POST">
-        {% csrf_token %}
-        <input name="name" type="text">
-        <textarea name="comment" type="text"></textarea>
-        <button type="submit" >Enviar</button>
-
-    </form>
-
-</div>
+            </div>
+        </div>
+    </div>
 </main>
 {% endblock content %}
