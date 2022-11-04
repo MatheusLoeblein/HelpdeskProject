@@ -54,7 +54,7 @@ def login_create(request):
         raise Http404()
 
     form = LoginForm(request.POST)
-    login_url = reverse('authors:login')
+    login_url = reverse('authors:dashboard')
 
     if form.is_valid():
         authenticated_user = authenticate(
@@ -108,9 +108,22 @@ def dashboard_tarefa_edit(request, id):
         raise Http404()
 
     form = AuthorTarefaForm(
-        request.POST or None,
+        data=request.POST or None,
         instance=tarefa
     )
+
+    if form.is_valid():
+        # Agora, o form é valido e eu posso tentar salvar
+        tarefa = form.save(commit=False)
+
+        # se o usuario da sessão for o mesmo que criou a tarefa..
+        tarefa.author = request.user
+
+        tarefa.save()
+
+        messages.success(request, 'Sua tarefa foi salva com sucesso!')
+
+        return redirect(reverse('authors:dashboard_tarefa_edit', args=(id,)))
 
     return render(request, 'authors/pages/dashboard_tarefa.html', {
         'form': form
