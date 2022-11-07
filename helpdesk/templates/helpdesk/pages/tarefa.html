@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{% include 'helpdesk/partials/message.html' %}
+
 <main class="main-content-tarefa">
 
     <div class="head-tarefa-content">
@@ -14,8 +16,8 @@
     <div class="content-tarefa-descricao">
         <div class="content-tarefa-status">
             <span class="tarefa-autor">{{tarefa.author.first_name}} {{tarefa.author.last_name}}</span>
-            <span class="tarefa-starus">Status: Executando {{tarefa.status}}</span>
-            <span class="tarefa-prioridade">Prioridade: {{tarefa.prioridade}}</span>
+            <span class="tarefa-starus">Status: {{tarefa.status}}</span>
+            <span class="tarefa-prioridade">Prioridade:{{tarefa.prioridade}}</span>
             <span class="tarefa-cetegoria">Setor: {{tarefa.Category}}</span>
             <span class="tarefa-cetegoria">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
 

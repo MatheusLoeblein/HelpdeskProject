@@ -58,6 +58,9 @@ def addcomment(request, id):
             data.Tarefa_id = id
             data.author = request.user
             data.save()
+
+            messages.success(request, 'Seu Comentario foi salvo com sucesso!')
+
             return (HttpResponseRedirect(url))
 
     return (HttpResponseRedirect(url))

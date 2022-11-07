@@ -14,6 +14,10 @@
         {% for tarefa in tarefas %}
             <li>
             <a href="{% url 'authors:dashboard_tarefa_edit' tarefa.id %}">{{ tarefa.title }}</a>
+                <form action="{% url 'authors:dashboard_tarefa_delete' tarefa.id %}" class="logout-form form-delete" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="plaintext-button">❌</button>
+                </form>
             </li>
         {% empty %}
             <li>

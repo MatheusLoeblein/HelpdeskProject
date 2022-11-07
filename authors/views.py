@@ -1,5 +1,3 @@
-
-
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -157,3 +155,18 @@ def dashboard_tarefa_new(request):
         'form_action': reverse('authors:dashboard_tarefa_new'),
 
     })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_tarefa_delete(request, id):
+    tarefa = Tarefa.objects.filter(
+        author=request.user,
+        pk=id,
+    ).first()
+
+    if not tarefa:
+        raise Http404()
+
+    tarefa.delete()
+    messages.success(request, 'Deletada com Sucesso.')
+    return redirect(reverse('authors:dashboard'))

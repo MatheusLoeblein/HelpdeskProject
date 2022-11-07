@@ -11,15 +11,21 @@ class Category(models.Model):
 
 
 class Tarefa(models.Model):
+    status_choices = (
+        ("Aberto", "Aberto"),
+        ("Em Andamento", "Em Andamento"),
+        ("Fechado", "Fechado"),
+    )
     title = models.CharField(max_length=65)
     description = models.TextField()
     ticketid = models.SlugField(max_length=5)
     prioridade = models.CharField(max_length=20)
-    status = models.CharField(max_length=20)
+    status = models.CharField(
+        max_length=12, choices=status_choices, blank=False, null=False, default="Aberto")
     data_at = models.DateTimeField(auto_now_add=True)
     data_up_at = models.DateTimeField(auto_now=True)
     Category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+        Category, on_delete=models.SET_NULL, null=True, blank=True)
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True)
 
