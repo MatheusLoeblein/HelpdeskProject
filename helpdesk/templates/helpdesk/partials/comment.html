@@ -1,0 +1,14 @@
+<div class="content-tarefa-comment">
+    <div class="content-tarefa-comment-status">
+        <span class="tarefa-autor">{{comment.author.first_name}} {{comment.author.last_name}}</span>
+        <span class="tarefa-starus">Status: {{tarefa.status}}</span>
+        <span class="tarefa-cetegoria">{{comment.created_at|date:"d/m/Y"}} às {{comment.created_at|date:"H:i"}}</span>
+
+    </div>
+    <div class="division-comment"></div>
+    
+    <div class="content-tarefa-comment-conteudo">
+        <p>{{comment.comment}}</p>
+    </div>
+
+</div>

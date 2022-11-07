@@ -24,6 +24,8 @@ class AuthorTarefaForm(forms.ModelForm):
                     ('Baixa', 'Baixa'),
                 )
             )
-
-
         }
+        Category = forms.CharField(
+            error_messages={'required': 'Por favor selecione o seu "Setor"'},
+            label='Setor'
+        )
