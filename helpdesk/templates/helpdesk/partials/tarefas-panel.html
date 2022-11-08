@@ -1,10 +1,10 @@
 <main class="main-tarefas-conteiner">  
    <div class="tarefas-panel-a" >
         <div class="tarefa">
-            <a href="{% url 'tarefas' tarefa.id %}" class="tarefa-id">#{{ tarefa.id }}</a>
+            <a href="{% url 'tarefa' tarefa.id %}" class="tarefa-id">#{{ tarefa.id }}</a>
         </div>
         <div class="tarefa">
-            <a href="{% url 'tarefas' tarefa.id %}" class="tarefa-descrição">{{ tarefa.title}}</a>
+            <a href="{% url 'tarefa' tarefa.id %}" class="tarefa-descrição">{{ tarefa.title}}</a>
         </div>
         <div class="tarefa">
             <a href="#" class="tarefa-situacao">{{tarefa.status}}</a>

@@ -1,13 +1,14 @@
 {% if request.user.is_authenticated %}
         
-<form class="logout-form"action="{% url 'authors:logout'%}" method="POST">
+<form class="logout-form form-logout"action="{% url 'authors:logout'%}" method="POST">
  {% csrf_token %}
  <p>{{request.user.first_name}},
      Voce esta logado.
-     Veja suas <a href="{% url 'authors:dashboard'%}">tarefas</a> abertas ou
+     Veja suas 
+ <a href="{% url 'authors:dashboard'%}">tarefas</a> abertas ou
  <input type="hidden" name="username" value="{{request.user.username}}">
- <button class="plaintext-button" type="submit">click aqui</button>
+ <button class="plaintext-button author-logout-link" type="submit">click aqui</button>
  para deslogar. </p>
-</form> 
+</form>     
 
 {% endif %}

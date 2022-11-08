@@ -9,6 +9,7 @@
     <title>Help Desk {% block title %}{% endblock title %}</title>
 </head>
 <body>
+    {% include 'helpdesk/partials/menu.html' %}
     {% include 'helpdesk/partials/header.html'%}
 
     {% block content %}{% endblock content %}

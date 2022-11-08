@@ -158,7 +158,13 @@ def dashboard_tarefa_new(request):
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
-def dashboard_tarefa_delete(request, id):
+def dashboard_tarefa_delete(request):
+    if not request.POST:
+        raise Http404()
+
+    POST = request.POST
+    id = POST.get('id')
+
     tarefa = Tarefa.objects.filter(
         author=request.user,
         pk=id,
@@ -168,5 +174,5 @@ def dashboard_tarefa_delete(request, id):
         raise Http404()
 
     tarefa.delete()
-    messages.success(request, 'Deletada com Sucesso.')
+    messages.success(request, 'Sua Tarefa foi apagada com Sucesso.')
     return redirect(reverse('authors:dashboard'))
