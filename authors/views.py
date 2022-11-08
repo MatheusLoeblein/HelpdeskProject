@@ -80,6 +80,7 @@ def logout_view(request):
         return redirect(reverse('authors:login'))
 
     if request.POST.get('username') != request.user.username:
+        messages.success(request, 'Você esta deslogado.!')
         return redirect(reverse('authors:login'))
 
     logout(request)
@@ -146,7 +147,7 @@ def dashboard_tarefa_new(request):
 
         tarefa.save()
 
-        messages.success(request, 'Sua tarefa foi criada com sucesso!')
+        messages.success(request, 'tarefa criada com sucesso.')
 
         return redirect(reverse('authors:dashboard_tarefa_edit', args=(tarefa.id,)))
 
@@ -174,5 +175,5 @@ def dashboard_tarefa_delete(request):
         raise Http404()
 
     tarefa.delete()
-    messages.success(request, 'Sua Tarefa foi apagada com Sucesso.')
+    messages.success(request, 'Tarefa apagada com Sucesso.')
     return redirect(reverse('authors:dashboard'))

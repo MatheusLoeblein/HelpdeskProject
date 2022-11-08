@@ -1,14 +1,12 @@
-{% if request.user.is_authenticated %}
-        
-<form class="logout-form form-logout"action="{% url 'authors:logout'%}" method="POST">
- {% csrf_token %}
- <p>{{request.user.first_name}},
-     Voce esta logado.
-     Veja suas 
- <a href="{% url 'authors:dashboard'%}">tarefas</a> abertas ou
- <input type="hidden" name="username" value="{{request.user.username}}">
- <button class="plaintext-button author-logout-link" type="submit">click aqui</button>
- para deslogar. </p>
-</form>     
-
-{% endif %}
+<main class="main-login-menssage">
+    {% if user.is_authenticated %}
+    <div class="login-message">
+    Voce esta logando com 
+    {{ request.user.first_name }}. 
+    <a href="{% url 'authors:dashboard' %}">Suas tarefas</a>, 
+    <a href="{% url 'authors:dashboard_tarefa_new' %}">Crier uma tarefa</a> ou  
+    {% include 'authors/partials/form_logout.html' %}
+    <a class="authors-logout-link" href="#">click aqui</a> para logout.
+    </div>
+    {% endif %}
+</main>

@@ -63,6 +63,7 @@ def addcomment(request, id):
 
             return (HttpResponseRedirect(url))
 
+        messages.error(request, 'Teste!')
     return (HttpResponseRedirect(url))
 
 

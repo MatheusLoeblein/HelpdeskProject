@@ -13,7 +13,17 @@
             <a href="#" class="tarefa-data">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</a>
         </div>
         <div class="tarefa">
-            <a href="#" class="tarefa-prioridade">{{tarefa.prioridade}}</a>
+            {% if tarefa.prioridade == 'Urgencia' %}
+                <a href="#" class="tarefa-prioridade-urgencia">{{tarefa.prioridade}}</a>
+            {% elif tarefa.prioridade == 'Alta' %}
+            <a href="#" class="tarefa-prioridade-alta">{{tarefa.prioridade}}</a>
+            {% elif tarefa.prioridade == 'Moderada' %}
+            <a href="#" class="tarefa-prioridade-moderada">{{tarefa.prioridade}}</a>
+            {% elif tarefa.prioridade == 'Baixa' %}
+            <a href="#" class="tarefa-prioridade-baixa">{{tarefa.prioridade}}</a>
+            {% else %}
+                <a href="#" class="tarefa-prioridade">{{tarefa.prioridade}}</a>
+            {% endif %}
         </div>
         <div class="tarefa">
             <a href="{% url 'tarefas-category' tarefa.Category_id %}" class="categoria">{{tarefa.Category}}</a>
