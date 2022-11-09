@@ -103,6 +103,7 @@ def dashboard_tarefa_edit(request, id):
     tarefa = Tarefa.objects.filter(
         author=request.user,
         pk=id,
+        status="Aberto",
     ).first()
 
     if not tarefa:

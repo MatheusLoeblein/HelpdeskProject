@@ -5,8 +5,8 @@
 {% block content %}
 
 {% include 'helpdesk/partials/message.html' %}
-
 <main class="main-content-tarefa">
+    
     <div class="content-tarefa-main">
         <div class="head-tarefa-content">
 
@@ -17,8 +17,14 @@
         <div class="division"></div>
 
         <div class="content-tarefa-conteudo">
+            <div class="content-tarefa-conteudo-status">
+                <h3 class="tarefa-autor">{{tarefa.author.first_name}} {{tarefa.author.last_name}}</h3>
+                <span class="tarefa-data-criação">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
+            </div>
              <p>{{tarefa.description}}</p>
         </div>
+
+        <div class="division"></div>
 
 
 
@@ -36,8 +42,12 @@
                         <form name="comment" action="/tarefa/addcomment/{{tarefa.id}}" method="POST">
                             {% csrf_token %}
                             <label for="{{ field.id.for_label }}">{{ field.label }}</label>
-                            <input name="name" id="name" type="text" required="True">
-                            <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                            
+                            <select id="name" name="name" label="name" required="True">
+                                <option>Resposta</option>
+                                <option>Complemento</option>
+                            </select>
+                            <textarea name="comment" id="comment" cols="30" rows="10" placeholder="Comentario"></textarea>
                             <button class= "B-Comment" type="subimit">Send</button>
                         </form>
                     </div>
@@ -47,12 +57,28 @@
     </div> 
 
     <div class="content-tarefa-status">
-        <span>Ticket ID: #{{ tarefa.id }}</span>
-        <span class="tarefa-autor">{{tarefa.author.first_name}} {{tarefa.author.last_name}}</span>
-        <span class="tarefa-starus">Status: {{tarefa.status}}</span>
-        <span class="tarefa-prioridade">Prioridade: {{tarefa.prioridade}}</span>
-        <span class="tarefa-cetegoria">Setor: {{tarefa.Category}}</span>
-        <span class="tarefa-cetegoria">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
+        <span><b>Ticket</b> #{{ tarefa.id }}</span>
+        <span class="tarefa-autor"><b>Autor </b>{{tarefa.author.first_name}} {{tarefa.author.last_name}}</span>
+        <span class="tarefa-data-created"><b>Criado</b> {{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
+        <span class="tarefa-data-updated"><b>Atualizado</b> {{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</span>
+        <div class="division-status"></div>
+        
+        <span class="tarefa-starus"><b>Status</b> {{tarefa.status}}</span>
+        <span class="tarefa-prioridade"><b>Prioridade</b>
+            {% if tarefa.prioridade == 'Urgencia' %}
+                <span href="#" class="tarefa-prioridade-urgencia">{{tarefa.prioridade}}</span>
+            {% elif tarefa.prioridade == 'Alta' %}
+                <span href="#" class="tarefa-prioridade-alta">{{tarefa.prioridade}}</span>
+            {% elif tarefa.prioridade == 'Moderada' %}
+             <span href="#" class="tarefa-prioridade-moderada">{{tarefa.prioridade}}</span>
+            {% elif tarefa.prioridade == 'Baixa' %}
+                <span href="#" class="tarefa-prioridade-baixa">{{tarefa.prioridade}}</span>
+            {% else %}
+                <span href="#" class="tarefa-prioridade">{{tarefa.prioridade}}</span>
+            {% endif %}
+        </span>
+        <span class="tarefa-categoria"><b>Setor</b> {{tarefa.Category}}</span>
+        
 
     </div>
 </main>

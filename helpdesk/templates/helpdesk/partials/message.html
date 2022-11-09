@@ -1,11 +1,13 @@
-{% if messages %}
-    {% for message in messages%}
-        <div class="messages-status">
-            <div class="messages {{message.tags}}">
-        
-                {{message}}
+
+    {% if messages %}
+        {% for message in messages%}
+            <div class="messages-status">
+                <div class="message {{message.tags}}">
             
-            </div>
-        </div>   
-    {% endfor %}
-{% endif %}
+                    {{message}}
+                
+                </div>
+            </div>   
+        {% endfor %}
+    {% endif %}
+
