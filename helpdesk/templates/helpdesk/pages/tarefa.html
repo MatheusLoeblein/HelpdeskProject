@@ -7,44 +7,53 @@
 {% include 'helpdesk/partials/message.html' %}
 
 <main class="main-content-tarefa">
+    <div class="content-tarefa-main">
+        <div class="head-tarefa-content">
 
-    <div class="head-tarefa-content">
-        <span><b>Ticket ID:</b></span>
-        <span># {{ tarefa.id }}</span>
-        <span>{{ tarefa.title}}</span>
-    </div>
-    <div class="content-tarefa-descricao">
-        <div class="content-tarefa-status">
-            <span class="tarefa-autor">{{tarefa.author.first_name}} {{tarefa.author.last_name}}</span>
-            <span class="tarefa-starus">Status: {{tarefa.status}}</span>
-            <span class="tarefa-prioridade">Prioridade:{{tarefa.prioridade}}</span>
-            <span class="tarefa-cetegoria">Setor: {{tarefa.Category}}</span>
-            <span class="tarefa-cetegoria">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
-
-        </div>
+            <h2>{{ tarefa.title}}</h2>
+        </div>  
+            
+           
         <div class="division"></div>
-        
+
         <div class="content-tarefa-conteudo">
-            <p>{{tarefa.description}}</p>
+             <p>{{tarefa.description}}</p>
         </div>
-    </div>
-    {% for comment in comments %}
-        {% include 'helpdesk/partials/comment.html' %}
-    {% endfor %}
-    <div class="content-tarefa-comment">
-        <div class="form-content-comment-grid">
-            <div class="form-content-comment">
-                <div class="form-group {{field.field.widget.attrs.class}}">
-                    <form name="comment" action="/tarefa/addcomment/{{tarefa.id}}" method="POST">
-                        {% csrf_token %}
-                        <label for="{{ field.id.for_label }}">{{ field.label }}</label>
-                        <input name="name" id="name" type="text" required="True">
-                        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-                        <button class= "B-Comment" type="subimit">Send</button>
-                    </form>
+
+
+
+
+        {% for comment in comments %}
+            {% include 'helpdesk/partials/comment.html' %}
+        {% endfor %}
+
+
+        
+       
+            <div class="form-content-comment-grid">
+                <div class="form-content-comment">
+                    <div class="form-group {{field.field.widget.attrs.class}}">
+                        <form name="comment" action="/tarefa/addcomment/{{tarefa.id}}" method="POST">
+                            {% csrf_token %}
+                            <label for="{{ field.id.for_label }}">{{ field.label }}</label>
+                            <input name="name" id="name" type="text" required="True">
+                            <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                            <button class= "B-Comment" type="subimit">Send</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        
+    </div> 
+
+    <div class="content-tarefa-status">
+        <span>Ticket ID: #{{ tarefa.id }}</span>
+        <span class="tarefa-autor">{{tarefa.author.first_name}} {{tarefa.author.last_name}}</span>
+        <span class="tarefa-starus">Status: {{tarefa.status}}</span>
+        <span class="tarefa-prioridade">Prioridade: {{tarefa.prioridade}}</span>
+        <span class="tarefa-cetegoria">Setor: {{tarefa.Category}}</span>
+        <span class="tarefa-cetegoria">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
+
     </div>
 </main>
 {% endblock content %}
