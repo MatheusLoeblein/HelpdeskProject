@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import (HttpResponseRedirect, get_list_or_404, redirect,
-                              render)
+from django.core.paginator import Paginator
+from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
 
 from authors.forms import CommentForm
+from utils.pagination import make_pagination_range
 
 from .models import Comment, Tarefa
 
@@ -12,8 +13,23 @@ from .models import Comment, Tarefa
 def home(request):
     tarefas = Tarefa.objects.all().order_by('-data_up_at')
 
+    try:
+        current_page = int(request.GET.get('page', 1))
+    except ValueError:
+        current_page = 1
+
+    paginator = Paginator(tarefas, 30)
+    page_obj = paginator.get_page(current_page)
+
+    pagination_range = make_pagination_range(
+        paginator.page_range,
+        4,
+        current_page
+    )
+
     return render(request, "helpdesk/pages/home.html", context={
-        'tarefas': tarefas,
+        'tarefas': page_obj,
+        'pagination_range': pagination_range,
     })
 
 
@@ -42,7 +58,6 @@ def tarefa(request, id):
 
 
 def search(request):
-    #search_term = request.GET.get()
     return render(request, 'helpdesk/pages/search.html')
 
 
@@ -67,19 +82,3 @@ def addcomment(request, id):
 
         messages.error(request, 'Comentario Invalido.')
     return (HttpResponseRedirect(url))
-
-
-'''    POST = request.POST
-    request.session['comment_form_data'] = POST
-    form = CommentForm(POST)
-
-    if form.is_valid():
-        form = form.save()
-
-        messages.success(request, 'Usuario Criado, por favor efetue o log in.')
-
-        del (request.session['register_form_data'])
-        return redirect(reverse('authors:login'))
-
-    return redirect('authors:register')
-'''

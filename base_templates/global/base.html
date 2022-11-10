@@ -11,9 +11,12 @@
 <body>
     {% include 'helpdesk/partials/menu.html' %}
     {% include 'helpdesk/partials/header.html'%}
+    <main class="main-tarefas-conteiner"></div>
 
-    {% block content %}{% endblock content %}
-
+        {% block content %}{% endblock content %}
+        
+        {% include 'helpdesk/partials/pagination.html' %}
+    </main>
     {% include 'helpdesk/partials/footer.html' %}
 
     <script src="{% static 'helpdesk/js/scripts.js'%}"></script>

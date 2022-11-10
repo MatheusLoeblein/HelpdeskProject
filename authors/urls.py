@@ -17,5 +17,4 @@ urlpatterns = [
          name="dashboard_tarefa_edit"),
     path('dashboard/tarefa/delete/', views.dashboard_tarefa_delete,
          name="dashboard_tarefa_delete"),
-
 ]
