@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
+from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
 
 from authors.forms import CommentForm
-from utils.pagination import make_pagination_range
+from utils.pagination import make_pagination
 
 from .models import Comment, Tarefa
 
@@ -13,19 +14,7 @@ from .models import Comment, Tarefa
 def home(request):
     tarefas = Tarefa.objects.all().order_by('-data_up_at')
 
-    try:
-        current_page = int(request.GET.get('page', 1))
-    except ValueError:
-        current_page = 1
-
-    paginator = Paginator(tarefas, 30)
-    page_obj = paginator.get_page(current_page)
-
-    pagination_range = make_pagination_range(
-        paginator.page_range,
-        4,
-        current_page
-    )
+    page_obj, pagination_range = make_pagination(request, tarefas, 30)
 
     return render(request, "helpdesk/pages/home.html", context={
         'tarefas': page_obj,
@@ -36,17 +25,20 @@ def home(request):
 def category(request, Category_id):
     tarefas = get_list_or_404(Tarefa.objects.filter(
         Category__id=Category_id,
+    ).order_by('-data_up_at'))
 
-    ).order_by('-data_at'))
+    page_obj, pagination_range = make_pagination(request, tarefas, 30)
+
     return render(request, "helpdesk/pages/category.html", context={
-        'tarefas': tarefas,
+        'tarefas': page_obj,
+        'pagination_range': pagination_range,
         'title': f' Setor | {tarefas[0].Category.name}'
     })
 
 
 def tarefa(request, id):
     tarefa = Tarefa.objects.filter(
-        pk=id).order_by('-id').first()
+        pk=id).first()
 
     comments = Comment.objects.filter(
         Tarefa__id=id).order_by('created_at')
@@ -58,7 +50,21 @@ def tarefa(request, id):
 
 
 def search(request):
-    return render(request, 'helpdesk/pages/search.html')
+    search_term = request.GET.get('q', '').strip()
+
+    if not search_term:
+        raise Http404()
+
+    tarefas = Tarefa.objects.filter(
+        Q(Q(title__icontains=search_term) | Q(
+            status__icontains=search_term) | Q(id__icontains=search_term)),
+    ).order_by('-data_up_at')
+
+    return render(request, 'helpdesk/pages/search.html', {
+        'page_title': f'Pesquisa por "{search_term}"',
+        'search_term': search_term,
+        'tarefas': tarefas,
+    })
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')

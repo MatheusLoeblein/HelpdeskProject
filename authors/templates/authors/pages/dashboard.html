@@ -1,31 +1,31 @@
 {% extends 'global/base.html' %}
 
-{% block title %}| Dashboard | {{ user }}{% endblock title %}
+{% block title %} Dashboard | {{ user.first_name }} |{% endblock title %}
 
 {% block content %}
-<div class="main-content-register">
-    <h2>Dashboard ({{user.first_name}})</h2>
-{% include 'helpdesk/partials/message.html' %}
-{% include  'authors/partials/login_message.html'%}
-    <div class="authors-dashboard-container">
-        <h3>Suas tarefas</h3>
+    <div class="main-content-register">
+        <h2>Dashboard ({{user.first_name}})</h2>
+    {% include 'helpdesk/partials/message.html' %}
+    {% include  'authors/partials/login_message.html'%}
+        <div class="authors-dashboard-container">
+            <h3>Suas tarefas</h3>
 
-        <ul>
-        {% for tarefa in tarefas %}
-            <li>
-            <a class = "lista-dashboard"href="{% url 'authors:dashboard_tarefa_edit' tarefa.id %}">{{ tarefa.title }}</a>
-                <form action="{% url 'authors:dashboard_tarefa_delete' %}" class="logout-form form-delete" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="id" value="{{tarefa.id}}">
-                    <button type="submit" class="plaintext-button plaintext-button2">❌</button>
-                </form>
-            </li>
-        {% empty %}
-            <li>
-            <p>Você não tem tarefas, por favor crie uma.</p>
-            </li>
-        {% endfor %}
-        </ul>
-    </div>   
-</div>
+            <ul>
+            {% for tarefa in tarefas %}
+                <li>
+                <a class = "lista-dashboard"href="{% url 'authors:dashboard_tarefa_edit' tarefa.id %}">{{ tarefa.title }}</a>
+                    <form action="{% url 'authors:dashboard_tarefa_delete' %}" class="logout-form form-delete" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{tarefa.id}}">
+                        <button type="submit" class="plaintext-button plaintext-button2">❌</button>
+                    </form>
+                </li>
+            {% empty %}
+                <li>
+                <p>Você não tem tarefas, por favor crie uma.</p>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>   
+    </div>
 {% endblock content %}
