@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -9,12 +11,15 @@ from utils.pagination import make_pagination
 
 from .models import Comment, Tarefa
 
+PER_PAGE = os.environ.get('PER_PAGE', 25)
 
 # Create your views here.
+
+
 def home(request):
     tarefas = Tarefa.objects.all().order_by('-data_up_at')
 
-    page_obj, pagination_range = make_pagination(request, tarefas, 30)
+    page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
     return render(request, "helpdesk/pages/home.html", context={
         'tarefas': page_obj,
@@ -27,7 +32,7 @@ def category(request, Category_id):
         Category__id=Category_id,
     ).order_by('-data_up_at'))
 
-    page_obj, pagination_range = make_pagination(request, tarefas, 30)
+    page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
     return render(request, "helpdesk/pages/category.html", context={
         'tarefas': page_obj,
@@ -60,10 +65,14 @@ def search(request):
             status__icontains=search_term) | Q(id__icontains=search_term)),
     ).order_by('-data_up_at')
 
+    page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
+
     return render(request, 'helpdesk/pages/search.html', {
         'page_title': f'Pesquisa por "{search_term}"',
         'search_term': search_term,
-        'tarefas': tarefas,
+        'tarefas': page_obj,
+        'pagination_range': pagination_range,
+        'additional_url_query': f'&q={search_term}',
     })
 
 

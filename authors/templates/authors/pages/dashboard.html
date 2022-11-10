@@ -10,22 +10,22 @@
         <div class="authors-dashboard-container">
             <h3>Suas tarefas</h3>
 
-            <ul>
+            <main>
             {% for tarefa in tarefas %}
-                <li>
-                <a class = "lista-dashboard"href="{% url 'authors:dashboard_tarefa_edit' tarefa.id %}">{{ tarefa.title }}</a>
+                <div>
+                <a class = "lista-dashboard"href="{% url 'authors:dashboard_tarefa_edit' tarefa.id %}">#{{tarefa.id}} {{ tarefa.title }}</a>
                     <form action="{% url 'authors:dashboard_tarefa_delete' %}" class="logout-form form-delete" method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="id" value="{{tarefa.id}}">
                         <button type="submit" class="plaintext-button plaintext-button2">❌</button>
                     </form>
-                </li>
+                </div>
             {% empty %}
-                <li>
+                <div>
                 <p>Você não tem tarefas, por favor crie uma.</p>
-                </li>
+                </div>
             {% endfor %}
-            </ul>
+            <main>
         </div>   
     </div>
 {% endblock content %}

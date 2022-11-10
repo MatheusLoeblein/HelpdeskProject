@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -6,8 +8,11 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from helpdesk.models import Tarefa
+from utils.pagination import make_pagination
 
 from .forms import AuthorTarefaForm, LoginForm, RegisterForm
+
+PER_PAGE = os.environ.get('PER_PAGE', 25)
 
 
 def register_view(request):
@@ -92,8 +97,12 @@ def dashboard(request):
     tarefas = Tarefa.objects.filter(
         author=request.user
     )
+
+    page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
+
     return render(request, 'authors/pages/dashboard.html', {
-        'tarefas': tarefas,
+        'tarefas': page_obj,
+        'pagination_range': pagination_range,
 
     })
 
