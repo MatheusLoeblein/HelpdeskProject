@@ -1,7 +1,7 @@
 <section class="search">
     <div class="search-tarefas">
         <form action="{% url 'search' %}" class="search-form">
-            <input type="search" name="q" value="{{ search_term }}"placeholder="Pesquisar" required>
+            <input class="search-input"type="search" name="q" value="{{ search_term }}"placeholder="" required>
              <!-- <select id="situacao" name="situacao" label="situacao">
                 <option>Aberto</option>
                 <option>Em Andamento</option>
@@ -15,7 +15,7 @@
                 <option>Financeiro</option>
                 <option>RH</option>
             </select> -->
-            <button type="submit" class="search-button"> Filtrar </button>
+            <button type="submit" class="search-button"> <i class="fas fa-search"></i> </button>
         </form>
     </div>
 </section>

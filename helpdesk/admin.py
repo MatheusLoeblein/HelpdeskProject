@@ -10,10 +10,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class TarefaAdmin(admin.ModelAdmin):
-    list_display = ['ticketid', 'id', 'title', 'data_at', 'data_up_at']
+    list_display = ['id', 'title', 'data_at', 'data_up_at']
     list_display_links = 'title',
     search_fields = ['id', 'title', 'data_at',
-                     'Category', 'ticketid', 'author', 'prioridade', ]
+                     'Category', 'author', 'prioridade', ]
     list_filter = 'Category', 'author',
     list_per_page = 15
     ordering = '-data_up_at',

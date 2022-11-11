@@ -2,7 +2,7 @@
     {% if user.is_authenticated %}
     <div class="login-message">
     Voce esta logando com 
-    {{ request.user.first_name }}. 
+    {{ request.user.first_name }}.
     <a href="{% url 'authors:dashboard' %}">Suas tarefas</a>, 
     <a href="{% url 'authors:dashboard_tarefa_new' %}">Crier uma tarefa</a> ou  
     {% include 'authors/partials/form_logout.html' %}

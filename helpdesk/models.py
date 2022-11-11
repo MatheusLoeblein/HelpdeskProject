@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.urls import reverse
 
 
 # Create your models here.
@@ -19,12 +18,13 @@ class Tarefa(models.Model):
     )
     title = models.CharField(max_length=65)
     description = models.TextField()
-    ticketid = models.SlugField(max_length=5)
     prioridade = models.CharField(max_length=20)
     status = models.CharField(
         max_length=12, choices=status_choices, blank=False, null=False, default="Aberto")
     data_at = models.DateTimeField(auto_now_add=True)
     data_up_at = models.DateTimeField(auto_now=True)
+    cover = models.ImageField(
+        upload_to='tarefas/covers/%Y/%m/%d/', blank=False, null=False)
     Category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True)
     author = models.ForeignKey(
