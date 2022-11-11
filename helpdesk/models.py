@@ -24,7 +24,7 @@ class Tarefa(models.Model):
     data_at = models.DateTimeField(auto_now_add=True)
     data_up_at = models.DateTimeField(auto_now=True)
     cover = models.ImageField(
-        upload_to='tarefas/covers/%Y/%m/%d/', blank=False, null=False)
+        upload_to='helpdesk/covers/%Y/%m/%d/', blank=True, null=True)
     Category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True)
     author = models.ForeignKey(

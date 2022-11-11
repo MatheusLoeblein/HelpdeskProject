@@ -15,11 +15,12 @@ class AuthorTarefaForm(forms.ModelForm):
 
         add_attr(self.fields.get('title'), 'class', 'span-2')
         add_attr(self.fields.get('description'), 'class', 'span-2')
+        add_attr(self.fields.get('cover'), 'class', 'span-2')
 
     class Meta:
         model = Tarefa
         fields = ['title',  'prioridade',
-                  'Category', 'description', ]
+                  'Category', 'description', 'cover']
         widgets = {
             'prioridade': forms.Select(
                 choices=(
