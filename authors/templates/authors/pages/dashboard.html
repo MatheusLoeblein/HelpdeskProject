@@ -24,7 +24,11 @@
                 <a class = "lista-dashboard"href="{% url 'tarefa' tarefa.id %}">#{{tarefa.id}} </a>
                 <a class = "lista-dashboard"href="{% url 'tarefa' tarefa.id %}">{{ tarefa.title }}</a>   
                 <a class = "lista-dashboard"href="{% url 'tarefa' tarefa.id %}">{{ tarefa.data_at }}</a>
+                {% if tarefa.status == 'Aberto' %}
                 <a class = "lista-dashboard-edit"href="{% url 'authors:dashboard_tarefa_edit' tarefa.id %}">✒️</a>
+                {% else %}
+                <a class = "lista-dashboard-edit"href=""> </a>
+                {% endif %}
                     <form action="{% url 'authors:dashboard_tarefa_delete' %}" class="logout-form form-delete" method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="id" value="{{tarefa.id}}">
@@ -33,7 +37,7 @@
                 </div>
             {% empty %}
                 <div>
-                <p>Você não tem tarefas, por favor crie uma.</p>
+                <p>Você não tem tarefas com status ABERTO, por favor crie uma.</p>
                 </div>
             {% endfor %}
             <main>

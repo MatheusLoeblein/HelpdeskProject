@@ -24,11 +24,16 @@ class AuthorTarefaForm(forms.ModelForm):
         widgets = {
             'prioridade': forms.Select(
                 choices=(
-                    ('Urgencia', 'Urgencia'),
-                    ('Alta', 'Alta'),
-                    ('Moderada', 'Moderada'),
                     ('Baixa', 'Baixa'),
+                    ('Moderada', 'Moderada'),
+                    ('Alta', 'Alta'),
+                    ('Urgencia', 'Urgencia'),
                 )
+            ),
+            'cover': forms.FileInput(
+                attrs={
+                    'class': 'span-2'
+                }
             )
         }
         Category = forms.CharField(

@@ -18,8 +18,6 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'name': forms.Select(
                 choices=(
-                    ('Urgencia', 'Urgencia'),
-                    ('Alta', 'Alta'),
-                    ('Moderada', 'Moderada'),
-                    ('Baixa', 'Baixa'),
+                    ('Resposta', 'Resposta'),
+                    ('Complemento', 'Complemento'),
                 ))}

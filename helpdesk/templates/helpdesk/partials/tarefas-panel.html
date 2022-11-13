@@ -4,10 +4,10 @@
             <a href="{% url 'tarefa' tarefa.id %}" class="tarefa-id">#{{ tarefa.id }}</a>
         </div>
         <div class="tarefa">
-            <a href="{% url 'tarefa' tarefa.id %}" class="tarefa-descrição">{{ tarefa.title}}</a>
+            <a href="#" class="tarefa-situacao">{{tarefa.status}}</a>
         </div>
         <div class="tarefa">
-            <a href="#" class="tarefa-situacao">{{tarefa.status}}</a>
+            <a href="{% url 'tarefa' tarefa.id %}" class="tarefa-titulo">{{ tarefa.title}}</a>
         </div>
         <div class="tarefa">
             <a href="#" class="tarefa-data">{{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</a>

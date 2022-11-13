@@ -95,7 +95,7 @@ def logout_view(request):
 @login_required(login_url='authors:login', redirect_field_name='next')
 def dashboard(request):
     tarefas = Tarefa.objects.filter(
-        author=request.user
+        author=request.user,
     )
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
@@ -120,6 +120,7 @@ def dashboard_tarefa_edit(request, id):
 
     form = AuthorTarefaForm(
         data=request.POST or None,
+        files=request.FILES or None,
         instance=tarefa
     )
 
@@ -145,7 +146,8 @@ def dashboard_tarefa_edit(request, id):
 def dashboard_tarefa_new(request):
 
     form = AuthorTarefaForm(
-        data=request.POST or None
+        data=request.POST or None,
+        files=request.FILES or None,
     )
 
     if form.is_valid():

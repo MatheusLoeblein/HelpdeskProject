@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
+from django.urls import reverse
 
 from authors.forms import CommentForm
 from utils.pagination import make_pagination
@@ -72,7 +73,7 @@ def search(request):
         'search_term': search_term,
         'tarefas': page_obj,
         'pagination_range': pagination_range,
-        'additional_url_query': f'&q={search_term}',
+
     })
 
 
@@ -89,6 +90,7 @@ def addcomment(request, id):
             data.comment = form.cleaned_data['comment']
             data.Tarefa_id = id
             data.author = request.user
+            Tarefa.data_up_at = data.created_at
             data.save()
 
             messages.success(request, 'Seu Comentario foi salvo com sucesso!')

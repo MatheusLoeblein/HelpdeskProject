@@ -20,7 +20,12 @@ class TarefaAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    ...
+    list_display = ['id', 'name', 'Tarefa', 'created_at']
+    list_display_links = 'name',
+    search_fields = ['id', 'name', 'Tarefa', 'created_at']
+    list_filter = ['id', 'name', 'Tarefa', 'created_at']
+    list_per_page = 15
+    ordering = 'created_at',
 
 
 admin.site.register(Tarefa, TarefaAdmin)
