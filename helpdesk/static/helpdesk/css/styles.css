@@ -1,0 +1,725 @@
+
+:root{
+    --color-font-text: white;
+    --color-font-tarefa-t: #1C1C1C;
+    --color-font-tarefa-a:  #4F4F4F;
+    --color-font-formedica: #1C75BC;
+    --color-footer: rgb(9, 30, 66);
+    --color-back: #B0C4DE;
+
+    --color-primary: #269fe6;
+    --color-primary-hover: #2086c2;
+    --color-primary-dark: #13141f;
+    --color-primary-dark-hover: #212336;
+    --color-primary-light: #d4ecfa;
+    --color-primary-light-hover: #bdd8e7;
+
+    --color-white: #fff;
+    --color-black: #000;
+
+    --color-dark-text: #444;
+    --color-info-light: #cce5ff;
+    --color-debug-light: #cce5ff;
+    --color-success-light: #d4edda;
+    --color-alert-light: #fff3cd;
+    --color-warning-light: #fff3cd;
+    --color-error-light: #f8d7da;
+
+    --color-info-dark: #4d86c4;
+    --color-debug-dark: #4d86c4;
+    --color-success-dark: #4a9c5d;
+    --color-alert-dark: #927f40;
+    --color-warning-dark: #927f40;
+    --color-error-dark: #da525d;
+
+    --color-gray-0: #f9f9f9;
+    --color-gray-1: #e0e0e0;
+    --color-gray-2: #c7c7c7;
+    --color-gray-3: #aeaeae;
+    --color-gray-4: #959595;
+    --color-gray-5: #7d7d7d;
+    --color-gray-6: #646464;
+    --color-gray-7: #4b4b4b;
+    --color-gray-8: #323232;
+    --color-gray-9: #191919;
+
+    --font-primary: sans-serif;
+   /* --font-headings: 'Roboto Slab', serif; */
+    --font-headings:  Verdana;
+
+    --spacing-gutter-medium: 3rem;
+    --spacing-gutter-large: 4rem;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color:var(--color-gray-0);
+    font-family: var(--font-headings);
+    font-family: Arial, Helvetica, sans-serif;
+    }
+
+img{
+    max-width: 100%;
+}
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+   /* background-color: rgba(0, 0, 0, 0.756);*/
+    background: white;
+    flex-flow: row-reverse;
+    box-shadow: 2px 2px 2px rgba(70, 69, 69, 0.281);
+}
+
+
+.menu {
+    padding: 20px;
+    font-size: 18px;
+
+}
+
+.menu a {
+    padding: 18px;
+    text-decoration: none;
+    font-family:var(--font-primary);
+    color: var(--color-font-formedica);
+    font-size: 30px;
+}
+
+.logo {
+    margin-top: 10px;
+    width: 150px;
+    cursor: pointer;
+    top: 150px;
+
+}
+
+.search-form{
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 2px solid var(--color-primary-dark);
+    max-width: 40rem;
+    border-radius: 3px;
+    position: relative;
+    transition: all 100ms ease-in-out;
+}
+
+.search-input,
+.search-button {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0.4rem;
+    transition: all 100ms ease-in-out;
+}
+.search-input{
+    width: 100%;
+    padding-right: 1.8em;
+}
+.search-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.search-form:focus-within,
+.search-form:focus-within .search-button{
+    border-color: var(--color-font-formedica);
+    color: var(--color-font-formedica);
+}
+
+.center-m-y{
+    margin-top: 50px;
+    margin-bottom: -50px;
+    text-align: center;
+
+}
+
+.main-tarefas-conteiner{
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tarefas-panel-head {
+    display: grid;
+    grid-template-columns: 10% 10% 37% 20% 12% 10%;
+    padding-top: 13px;
+    padding-bottom: 7px;
+    margin: 0 auto;
+    text-align: left;
+    border-bottom: 2px solid var(--color-gray-5);
+    font-size: 12px;
+    font-family: var(--font-headings);
+    color: var(--color-gray-8);
+}
+
+.tarefas-panel-a {
+    display: grid;
+    grid-template-columns: 10% 10% 37% 20% 12% 10%;
+    padding-top: 10px;
+    padding-bottom: 7px;
+    margin: 0 auto;
+    text-align: left;
+    font-family: var(--font-headings);
+    transition: all 300ms ease-in-out;
+    font-size: 12px;
+    border-bottom: solid .5px var(--color-gray-5);
+    color: var(--color-gray-8);
+
+}
+.tarefas-panel-a:hover {
+    background-color: #cce5ff;
+
+}
+
+.tarefas-panel-a a {
+    text-decoration: none;
+    color: black
+
+}
+
+.tarefas-panel-a a:hover {
+    transition: 300ms;
+
+}
+.tarefas-panel-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr .5fr .5fr;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    font-family: var(--font-headings);
+    transition: all 300ms ease-in-out;
+    font-size: 12px;
+    border-bottom: solid .5px var(--color-gray-5);
+    color: var(--color-gray-8);
+
+}
+.tarefas-panel-dashboard:hover {
+    background-color: #cce5ff;
+
+}
+
+.tarefas-panel-dashboard a {
+    text-decoration: none;
+    color: black;
+
+}
+
+.tarefas-panel-dashboard a:hover {
+    transition: all 300ms ease-in-out;
+
+}
+.lista-dashboard-edit:hover{
+    transition: all 300ms ease-in-out;
+    transform: scale(1.2);
+}
+
+.pagination-content{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+    margin: 0 auto;
+    margin-top: 45px;
+    width: 900px;
+    justify-content: center;
+
+    
+}
+.pagination .page-item {
+    background: var(--color-gray-1);
+    padding: 0.1rem 0.5rem;
+
+}
+.pagination .page-link{
+    text-decoration: none;
+    color: var(--color-gray-0);
+    background-color: var(--color-font-formedica);
+}
+.pagination .page-current{
+    background-color: var(--color-font-tarefa-t);
+}
+
+.main-footer-position{
+    position: absolute;
+    width: 100%;
+    margin-top: 550px;
+}
+.main-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background:var(--color-font-formedica);
+    padding: 50px;
+    
+}
+
+.main-footer a {
+    color: var(--color-gray-0);
+    text-decoration: none;
+    transition: all 300ms ease-in-out;
+
+}
+
+.main-footer a:hover {
+    filter: brightness(.8);
+    color: black;
+}
+
+.head-tarefa-content{
+    margin-left: 10px;
+}
+
+.head-tarefa-content span{
+}
+
+.main-content-tarefa {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-gap: 10%;
+    max-width: 900px;
+    margin: 0 auto;
+    color: black;
+    font-family: var(--font-headings);
+    margin-top: 50px;
+    color: var(--color-gray-8);
+    font-size: 12px;
+}
+
+.content-tarefa-status {
+    display: grid;
+    background-color: var(--color-gray-1);
+    border-radius: 5px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 300px;
+    height: 380px;
+    
+
+}
+
+.content-tarefa-status span{
+    text-align: left;
+    margin: 10px;
+
+}
+.tarefa-anexo{
+    text-decoration:none;
+    font-size: 20px;
+}
+
+
+.division-status{
+    padding: 0px;
+    border-bottom: 1px solid var(--color-gray-3);
+    margin-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 85%;
+    
+}
+
+.content-tarefa-conteudo-status{
+    display: grid;
+}
+
+.content-tarefa-conteudo-status span, 
+.content-tarefa-conteudo-status h3{
+    margin-left: 10px;
+
+}
+
+.content-tarefa-conteudo{
+    word-wrap: break-word;
+    margin-bottom: 100px;
+
+
+}
+
+.content-tarefa-conteudo p{
+    text-align: left;
+    word-wrap: break-word;
+    margin: 10px;
+
+}
+
+.division{
+    background-color: var(--color-gray-3);
+    padding: 0.5px;
+    width: 100%;
+    margin: 10px;
+}
+
+.content-tarefa-comment-status {
+    display: grid;
+
+
+}
+.content-tarefa-comment-status span, .content-tarefa-comment-status h3{
+    margin-left: 10px;
+
+}
+
+.content-tarefa-comment{
+    
+}
+
+.content-tarefa-comment-conteudo{
+    display: flex;
+    word-wrap: break-word;
+
+}
+
+.content-tarefa-comment-conteudo p{
+    text-align: left;
+    margin: 10px;
+    margin-bottom: 50px;
+    max-width: 90%;
+}
+
+.division-comment{
+    background-color: var(--color-gray-3);
+    padding: 0.5px;
+    width: 100%;
+    margin: 10px;
+}
+
+.form-content-comment-grid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 30px 70px;
+    max-width: 700px;
+}
+
+.form-content-comment{
+
+}
+
+.form-content-comment input,
+.form-content-comment textarea,
+.form-content-comment select {
+    width: 100%;
+    min-width: 540px;
+    border: 1px solid var(--color-gray-7);
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 3px;
+
+
+}
+.form-content-comment select {
+    min-width: 552px;
+    width: 100%;
+}
+.form-content-comment button{
+    width: 100%;
+    min-width: 552px;
+    margin-left: 10px; 
+    padding: 15px;
+    border-radius: 3px;
+    margin-top: 0;
+    border: none;
+    background-color: #000;
+    color: white;
+    
+}
+
+.form-content-comment button:hover {
+    transition: all 300ms ease-in-out;
+    background-color: var(--color-font-formedica);
+
+
+}
+
+
+.main-content-register{
+    margin: 70px;
+    
+
+}
+.main-content-register h2, p{
+    text-align: center;
+
+}
+
+.form-content{
+    max-width: 34rem;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    margin-top: 50px;
+}
+
+.form-content input,
+.form-content textarea,
+.form-content select{
+    width: 100%;
+    padding: 1rem;
+    border-radius: 3px;
+    border: 1px solid var(--color-primary-dark);    
+}
+.form-content-grid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 30px 70px;
+
+}
+
+.form-content button{
+    padding: 1rem 2rem;
+    border: none;
+    background-color:#1C1C1C;
+    color: white;
+}
+.form-content button:hover {
+    background-color:#1C75BC;
+    transition: all 300ms ease-in-out;
+
+
+}
+
+.form-content label,
+.help-text,
+.errorlist
+{
+    display:block;
+    font-size: 1rem;
+}
+.errorlist {
+    color:rgb(245, 96, 96);
+}
+
+.logout-form{
+    display: inline;
+}
+
+.logout-form a{
+    color: #1C75BC;
+    text-decoration: none;
+
+}
+
+.authors-dashboard-container{
+    max-width: 54rem;
+    text-align: left;
+    padding: (--spacing-gutter-medium);
+    margin: 0 auto;
+
+}
+.authors-dashboard-container h3,
+.authors-dashboard-container p,
+.authors-dashboard-container ul{
+    list-style:none;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.plaintext-button{
+    display: inline;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--color-font-formedica);
+
+}
+
+.plaintext-button2:hover{
+    transform: scale(1.2);
+    transition: all 300ms ease-in-out;
+
+}
+
+
+.login-message a{
+    text-decoration: none;
+    color: var(--color-font-formedica);
+    cursor: pointer;
+
+}
+
+.main-login-menssage{
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+.left{
+    text-align: left;
+}
+
+.span-2{
+    grid-column: span 2;
+}
+
+.messages-status{
+    max-width: 700px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+.message {
+    padding: 0.3rem;
+    border-radius: 4px;
+    border: 1px solid var(--color-dark-text);
+    background: var(--color-gray-2);
+    color: var(--color-dark-text);
+  }
+  
+.message-error {
+    border: 1px solid var(--color-error-dark);
+    background: var(--color-error-light);
+    color: var(--color-error-dark);
+  }
+  
+.message-success {
+    border: 1px solid var(--color-success-dark);
+    background: var(--color-success-light);
+    color: var(--color-success-dark);
+  }
+  
+.message-warning {
+    border: 1px solid var(--color-warning-dark);
+    background: var(--color-warning-light);
+    color: var(--color-warning-dark);
+  }
+  
+.message-info {
+    border: 1px solid var(--color-info-dark);
+    background: var(--color-info-light);
+    color: var(--color-info-dark);
+  }
+  
+.message-debug {
+    border: 1px solid var(--color-debug-dark);
+    background: var(--color-debug-light);
+    color: var(--color-debug-dark);
+  }
+
+.form-content input {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 3px;
+    border: 1px solid var(--color-font-tarefa-a)
+}
+
+.main-content-main{
+    max-width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.hidden-text{
+    display: none;
+}
+.menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 190px;
+    min-height: 100vh;
+    overflow-y: auto;
+    background: var(--color-font-formedica);
+    z-index: 2;
+    transition: all 400ms ease-in-out;
+}
+  
+.menu-container a {
+    color: var(--color-white);
+}
+  
+.menu-hidden {
+    left: -185px;
+}
+.button-show-menu {
+    position: fixed;
+    left: 190px;
+    top: 2rem;
+    color: var(--color-white);
+    background-color: var(--color-font-formedica);
+    border: none;
+    font-size: 1rem;
+    z-index: 3;
+    padding: 0.5rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 500ms ease-in-out;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+  
+.button-show-menu-visible {
+    visibility: visible;
+    opacity: 1;
+    left: 5px;
+}
+  
+.button-close-menu {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--color-white);
+    background: none;
+    border: none;
+    font-size: 1rem;
+    z-index: 3;
+    cursor: pointer;
+}
+  
+.menu-nav {
+    display: flex;
+    flex-flow: column wrap;
+    font-family: var(--font-headings);
+    font-size: 1.2rem;
+    margin-left: 15px;
+    margin-top: 1.5rem;
+    
+}
+  
+.menu-nav a {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    
+}
+.menu-nav a:hover{
+    transform: scale(1.01);
+    transition: all 300ms ease-in-out;
+    margin-left: 10px;
+
+}
+
+.tarefa-prioridade-urgencia{
+    background-color: red;
+    border-radius: 3px;
+    padding: 5px 13px;
+
+}
+.tarefa-prioridade-alta,
+.tarefa-prioridade-alta a  {
+    background: rgb(245, 245, 97);
+    border-radius: 3px;
+    padding: 5px 28px;
+    color: #000;
+    text-decoration: #000;
+}
+.tarefa-prioridade-moderada{
+    background-color: rgba(71, 145, 255, 0.637);
+    border-radius: 3px;
+    padding: 5px 11px;
+
+}
+.tarefa-prioridade-baixa{
+    background-color: var(--color-gray-3);
+    border-radius: 3px;
+    padding: 5px 23px;
+    width: 50px;
+
+}
+
+
