@@ -6,6 +6,8 @@ __pycache__
 db.sqlite3
 gunicorn-error-log
 db.sqlite3
+static/
+
 
 # Backup files #
 *.bak
@@ -128,6 +130,7 @@ _local_settings.py
 gunicorn-error-log
 db.sqlite3
 db copy.sqlite3
+static/
 Footer
 © 2022 GitHub, Inc.
 Footer navigation
