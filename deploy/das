@@ -1,0 +1,75 @@
+###############################################################################
+# Replace
+# helpdesk to the name of the gunicorn file you want
+# matheus\matheus to your user name
+# app_repo to the folder name of your project
+# helpdeskproject to the folder name where you find a file called wsgi.py
+#
+###############################################################################
+# Criando o arquivo helpdesk.socket
+sudo nano /etc/systemd/system/helpdesk.socket
+
+###############################################################################
+# Conteúdo do arquivo
+[Unit]
+Description=gunicorn blog socket
+
+[Socket]
+ListenStream=/run/helpdesk.socket
+
+[Install]
+WantedBy=sockets.target
+
+###############################################################################
+# Criando o arquivo helpdesk.service
+sudo nano /etc/systemd/system/helpdesk.service
+
+###############################################################################
+# Conteúdo do arquivo
+[Unit]
+Description=Gunicorn daemon (You can change if you want)
+Requires=helpdesk.socket
+After=network.target
+
+[Service]
+User=matheus\matheus
+Group=www-data
+Restart=on-failure
+EnvironmentFile=/home/matheus\matheus/app_repo/.env
+WorkingDirectory=/home/matheus\matheus/app_repo
+# --error-logfile --enable-stdio-inheritance --log-level and --capture-output
+# are all for debugging purposes.
+ExecStart=/home/matheus\matheus/app_repo/venv/bin/gunicorn \
+          --error-logfile /home/matheus\matheus/app_repo/gunicorn-error-log \
+          --enable-stdio-inheritance \
+          --log-level "debug" \
+          --capture-output \
+          --access-logfile - \
+          --workers 6 \
+          --bind unix:/run/helpdesk.socket \
+          helpdeskproject.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+###############################################################################
+# Ativando
+sudo systemctl start helpdesk.socket
+sudo systemctl enable helpdesk.socket
+
+# Checando
+sudo systemctl status helpdesk.socket
+curl --unix-socket /run/helpdesk.socket localhost
+sudo systemctl status helpdesk
+
+# Restarting
+sudo systemctl restart helpdesk.service
+sudo systemctl restart helpdesk.socket
+sudo systemctl restart helpdesk
+
+# After changing something
+sudo systemctl daemon-reload
+
+# Debugging
+sudo journalctl -u helpdesk.service
+sudo journalctl -u helpdesk.socket
