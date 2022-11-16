@@ -1,15 +1,19 @@
 {% extends 'global/base.html' %}
 
-{% block title %} Dashboard | Tarefa #{{ tarefa.id }}{% endblock title %}
+{% block title %} Dashboard |{% endblock title %}
 
 {% block content %}
 <div class="main-content-register">
     <h2>Dashboard ({{user}})</h2>
   {% include 'helpdesk/partials/message.html' %}
+
   {% include  'authors/partials/login_message.html'%}
 
-  <div class="left">
-    {% include  'authors/partials/forms.html'%}
-  </div>
+  <div class="main-content-dash-tarefa">
+     <div class="main-content-dash-tarefa-align">
+      {% include  'authors/partials/forms.html'%}
+     </div>
+  </div>   
+
 </div>
 {% endblock content %}

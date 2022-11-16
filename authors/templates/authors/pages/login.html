@@ -5,12 +5,15 @@
 {% block content %}
 <div class="main-content-register">
     <h2>Entrar</h2>
-{% include  'authors/partials/login_message.html'%}
-    
-{% include 'helpdesk/partials/message.html' %}
-
-{% if not user.is_authenticated %}
-{% include  'authors/partials/forms.html'%}
-{% endif %}
+    {% include 'helpdesk/partials/message.html' %}
+    {% include  'authors/partials/login_message.html'%}
+        
+    {% if not user.is_authenticated %}
+    <div class="main-content-login">
+        <div class="main-content-login-align">
+            {% include  'authors/partials/forms_login.html'%}
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock content %}

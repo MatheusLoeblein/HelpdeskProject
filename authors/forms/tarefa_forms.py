@@ -30,16 +30,15 @@ class AuthorTarefaForm(forms.ModelForm):
                     ('Urgencia', 'Urgencia'),
                 )
             ),
-            'cover': forms.FileInput(
-                attrs={
-                    'class': 'span-2'
-                }
+            'cover': forms.FileInput(attrs={
+                'class': 'span-2'
+            }
             )
         }
-        Category = forms.CharField(
-            error_messages={'required': 'Por favor selecione o seu "Setor"'},
-            label='Setor'
-        )
+        Category = forms.CharField(label='Setor',
+                                   error_messages={
+                                       'required': 'Por favor selecione o seu "Setor"'}
+                                   )
 
     def clean(self, *args, **kwargs):
         super_clean = super().clean(*args, **kwargs)
