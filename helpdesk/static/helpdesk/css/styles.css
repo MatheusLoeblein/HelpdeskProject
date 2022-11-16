@@ -441,7 +441,7 @@ img{
 
 }
 .main-content-register h2, p{
-    text-align: center;
+    text-align: left;
 
 }
 
@@ -638,8 +638,8 @@ img{
 }
 .main-content-login{
     width: 400px;
-    margin-top: 20px;
     margin: 0 auto;
+    margin-top: 120px;
     background: rgb(216, 229, 248);
     box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
     border-radius: 3px;
