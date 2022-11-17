@@ -5,8 +5,12 @@
 {% block content %}
     <div class="main-content-register">
         <h2>Dashboard ({{user.first_name}})</h2>
+
     {% include 'helpdesk/partials/message.html' %}
     {% include  'authors/partials/login_message.html'%}
+    {% if request.user.is_superuser %}
+        {% include 'authors/partials/dash_admin_menu.html' %}
+    {% endif %}
         <div class="authors-dashboard-container">
             <h3>Suas tarefas</h3>
 
@@ -15,7 +19,7 @@
             <div class="tarefas-panel-dashboard">
                 <a class = "lista-dashboard"href="">Ticket</a>
                 <a class = "lista-dashboard"href="">Titulo</a>   
-                <a class = "lista-dashboard"href="">Data</a>
+                <a class = "lista-dashboard"href="">Ultima Atualização</a>
                 <a class = "lista-dashboard"href="">Editar</a>
                 <a class = "lista-dashboard"href="">Excluir</a>
             </div>

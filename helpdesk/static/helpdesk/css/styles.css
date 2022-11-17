@@ -440,10 +440,40 @@ img{
     
 
 }
-.main-content-register h2, p{
+.main-content-register h2{
+    text-align: center;
+}
+
+.main-content-register p{
     text-align: left;
 
 }
+
+
+.dash-menu-admin-content{
+    display: grid; 
+    grid-template-columns: 20% 20% 60%;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.export-xlsx{
+    background-color: rgb(216, 229, 248);
+    text-align: center;
+    padding: 10px;
+    box-shadow: -3px 3px 3px var(--color-gray-5);
+    border-radius: 3px;
+
+}
+.dash-menu-admin-content a{
+    text-decoration: none;
+    color: #000;
+}
+.export-xlsx:hover{
+    background: var(--color-font-formedica);
+    transition: all 300ms ease-in-out;
+}
+
 
 .form-content{
     max-width: 34rem;
