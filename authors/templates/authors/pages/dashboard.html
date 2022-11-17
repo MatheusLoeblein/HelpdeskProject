@@ -12,22 +12,24 @@
         {% include 'authors/partials/dash_admin_menu.html' %}
     {% endif %}
         <div class="authors-dashboard-container">
+            {% if tarefas %}
             <h3>Suas tarefas</h3>
 
             <main>
-
+            
             <div class="tarefas-panel-dashboard">
-                <a class = "lista-dashboard"href="">Ticket</a>
-                <a class = "lista-dashboard"href="">Titulo</a>   
-                <a class = "lista-dashboard"href="">Ultima Atualização</a>
-                <a class = "lista-dashboard"href="">Editar</a>
-                <a class = "lista-dashboard"href="">Excluir</a>
+                <span class = "lista-dashboard"href="">Ticket</span>
+                <span class = "lista-dashboard"href="">Titulo</span>   
+                <span class = "lista-dashboard"href="">Ultima Atualização</span>
+                <span class = "lista-dashboard"href="">Editar</span>
+                <span class = "lista-dashboard"href="">Excluir</span>
             </div>
+            {% endif %}
             {% for tarefa in tarefas %}
-                <div class="tarefas-panel-dashboard">
-                <a class = "lista-dashboard"href="{% url 'tarefa' tarefa.id %}">#{{tarefa.id}} </a>
-                <a class = "lista-dashboard"href="{% url 'tarefa' tarefa.id %}">{{ tarefa.title }}</a>   
-                <a class = "lista-dashboard"href="{% url 'tarefa' tarefa.id %}">{{ tarefa.data_at }}</a>
+                <div class="tarefas-panel-dashboard-">
+                <a class = "lista-dashboard"href="{% url 'helpdesk:tarefa' tarefa.id %}">#{{tarefa.id}} </a>
+                <a class = "lista-dashboard"href="{% url 'helpdesk:tarefa' tarefa.id %}">{{ tarefa.title }}</a>   
+                <a class = "lista-dashboard"href="{% url 'helpdesk:tarefa' tarefa.id %}">{{ tarefa.data_at }}</a>
                 {% if tarefa.status == 'Aberto' %}
                 <a class = "lista-dashboard-edit"href="{% url 'authors:dashboard_tarefa_edit' tarefa.id %}">✒️</a>
                 {% else %}
@@ -40,8 +42,8 @@
                     </form>
                 </div>
             {% empty %}
-                <div>
-                <p>Você não tem tarefas com status ABERTO, por favor crie uma.</p>
+                <div class="tarefas-none">
+                <h3 >Você não tem tarefas com status ABERTO, por favor crie uma.</h3>
                 </div>
             {% endfor %}
             <main>

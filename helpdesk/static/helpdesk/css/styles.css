@@ -58,6 +58,7 @@ body {
     background-color:var(--color-gray-0);
     font-family: var(--font-headings);
     font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
     }
 
 img{
@@ -70,7 +71,7 @@ img{
    /* background-color: rgba(0, 0, 0, 0.756);*/
     background: white;
     flex-flow: row-reverse;
-    box-shadow: 2px 2px 2px rgba(70, 69, 69, 0.281);
+    box-shadow: 2px 2px 2px rgba(80, 75, 75, 0.281);
 }
 
 
@@ -132,7 +133,7 @@ img{
 }
 
 .center-m-y{
-    margin-top: 50px;
+    margin-top: 150px;
     margin-bottom: -50px;
     text-align: center;
 
@@ -185,7 +186,7 @@ img{
     transition: 300ms;
 
 }
-.tarefas-panel-dashboard {
+.tarefas-panel-dashboard, .tarefas-panel-dashboard-{
     display: grid;
     grid-template-columns: 1fr 2fr 2fr .5fr .5fr;
     padding-top: 10px;
@@ -198,21 +199,23 @@ img{
     color: var(--color-gray-8);
 
 }
-.tarefas-panel-dashboard:hover {
+.tarefas-panel-dashboard-:hover {
     background-color: #cce5ff;
 
 }
 
-.tarefas-panel-dashboard a {
+.tarefas-panel-dashboard- a ,
+.tarefas-panel-dashboard span{
     text-decoration: none;
     color: black;
 
 }
 
-.tarefas-panel-dashboard a:hover {
+.tarefas-panel-dashboard- a:hover {
     transition: all 300ms ease-in-out;
 
 }
+
 .lista-dashboard-edit:hover{
     transition: all 300ms ease-in-out;
     transform: scale(1.2);
@@ -253,7 +256,7 @@ img{
     align-items: center;
     justify-content: space-between;
     background:var(--color-font-formedica);
-    padding: 50px;
+    padding: 40px;
     
 }
 
@@ -271,9 +274,6 @@ img{
 
 .head-tarefa-content{
     margin-left: 10px;
-}
-
-.head-tarefa-content span{
 }
 
 .main-content-tarefa {
@@ -363,9 +363,6 @@ img{
 
 }
 
-.content-tarefa-comment{
-    
-}
 
 .content-tarefa-comment-conteudo{
     display: flex;
@@ -387,6 +384,24 @@ img{
     margin: 10px;
 }
 
+.content-tarefa-comment-cover{
+    margin: 10px;
+
+}
+.content-tarefa-comment-cover a{
+    text-decoration: none;
+    color: var(--color-gray-8);
+    margin: 10px;
+
+
+}
+
+
+.content-tarefa-comment-cover a:hover{
+    color: var(--color-font-formedica);
+
+}
+
 .form-content-comment-grid{
     display: grid;
     grid-template-columns: 50% 50%;
@@ -403,10 +418,11 @@ img{
 .form-content-comment select {
     width: 100%;
     min-width: 540px;
-    border: 1px solid var(--color-gray-7);
+    border: 0.5px solid var(--color-gray-7);
     padding: 5px;
     margin-left: 10px;
     border-radius: 3px;
+    margin-bottom: 2px;
 
 
 }
@@ -420,7 +436,6 @@ img{
     margin-left: 10px; 
     padding: 15px;
     border-radius: 3px;
-    margin-top: 0;
     border: none;
     background-color: #000;
     color: white;
@@ -430,8 +445,13 @@ img{
 .form-content-comment button:hover {
     transition: all 300ms ease-in-out;
     background-color: var(--color-font-formedica);
+    cursor: pointer;
 
 
+}
+.form-content-comment textarea:focus,
+.form-content-comment select:focus {
+    outline: none;
 }
 
 
@@ -661,6 +681,12 @@ img{
 
 .left{
     text-align: left;
+}
+.tarefas-none{
+    margin-top: 50px;
+}
+.tarefas-none h3{
+    text-align: center;
 }
 
 .span-2{

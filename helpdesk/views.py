@@ -86,14 +86,16 @@ def addcomment(request, id):
     url = request.META.get('HTTP_REFERER')
 
     if request.method == 'POST':
-        form = CommentForm(request.POST)
+        form = CommentForm(request.POST, request.FILES)
+        status = request.POST.get('status_modify', None)
         if form.is_valid():
             data = Comment()
-            data.name = form.cleaned_data['name']
             data.comment = form.cleaned_data['comment']
+            if not status == None:
+                data.status_modify = form.cleaned_data['status_modify']
+            data.cover = form.cleaned_data['cover']
             data.Tarefa_id = id
             data.author = request.user
-            Tarefa.data_up_at = data.created_at
             data.save()
 
             messages.success(request, 'Seu Comentario foi salvo com sucesso!')
