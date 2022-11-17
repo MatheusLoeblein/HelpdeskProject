@@ -58,10 +58,11 @@ body {
     background-color:var(--color-gray-0);
     font-family: var(--font-headings);
     font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
     }
 
 img{
-    max-width: 100%;
+    max-width: 105%;
 }
 .header {
     display: flex;
@@ -70,7 +71,7 @@ img{
    /* background-color: rgba(0, 0, 0, 0.756);*/
     background: white;
     flex-flow: row-reverse;
-    box-shadow: 2px 2px 2px rgba(70, 69, 69, 0.281);
+    box-shadow: 2px 2px 2px rgba(80, 75, 75, 0.281);
 }
 
 
@@ -132,7 +133,7 @@ img{
 }
 
 .center-m-y{
-    margin-top: 50px;
+    margin-top: 150px;
     margin-bottom: -50px;
     text-align: center;
 
@@ -185,7 +186,7 @@ img{
     transition: 300ms;
 
 }
-.tarefas-panel-dashboard {
+.tarefas-panel-dashboard, .tarefas-panel-dashboard-{
     display: grid;
     grid-template-columns: 1fr 2fr 2fr .5fr .5fr;
     padding-top: 10px;
@@ -198,21 +199,23 @@ img{
     color: var(--color-gray-8);
 
 }
-.tarefas-panel-dashboard:hover {
+.tarefas-panel-dashboard-:hover {
     background-color: #cce5ff;
 
 }
 
-.tarefas-panel-dashboard a {
+.tarefas-panel-dashboard- a ,
+.tarefas-panel-dashboard span{
     text-decoration: none;
     color: black;
 
 }
 
-.tarefas-panel-dashboard a:hover {
+.tarefas-panel-dashboard- a:hover {
     transition: all 300ms ease-in-out;
 
 }
+
 .lista-dashboard-edit:hover{
     transition: all 300ms ease-in-out;
     transform: scale(1.2);
@@ -253,7 +256,7 @@ img{
     align-items: center;
     justify-content: space-between;
     background:var(--color-font-formedica);
-    padding: 50px;
+    padding: 40px;
     
 }
 
@@ -271,9 +274,6 @@ img{
 
 .head-tarefa-content{
     margin-left: 10px;
-}
-
-.head-tarefa-content span{
 }
 
 .main-content-tarefa {
@@ -363,9 +363,6 @@ img{
 
 }
 
-.content-tarefa-comment{
-    
-}
 
 .content-tarefa-comment-conteudo{
     display: flex;
@@ -387,6 +384,24 @@ img{
     margin: 10px;
 }
 
+.content-tarefa-comment-cover{
+    margin: 10px;
+
+}
+.content-tarefa-comment-cover a{
+    text-decoration: none;
+    color: var(--color-gray-8);
+    margin: 10px;
+
+
+}
+
+
+.content-tarefa-comment-cover a:hover{
+    color: var(--color-font-formedica);
+
+}
+
 .form-content-comment-grid{
     display: grid;
     grid-template-columns: 50% 50%;
@@ -403,10 +418,11 @@ img{
 .form-content-comment select {
     width: 100%;
     min-width: 540px;
-    border: 1px solid var(--color-gray-7);
+    border: 0.5px solid var(--color-gray-7);
     padding: 5px;
     margin-left: 10px;
     border-radius: 3px;
+    margin-bottom: 2px;
 
 
 }
@@ -420,7 +436,6 @@ img{
     margin-left: 10px; 
     padding: 15px;
     border-radius: 3px;
-    margin-top: 0;
     border: none;
     background-color: #000;
     color: white;
@@ -430,35 +445,97 @@ img{
 .form-content-comment button:hover {
     transition: all 300ms ease-in-out;
     background-color: var(--color-font-formedica);
+    cursor: pointer;
 
 
+}
+.form-content-comment textarea:focus,
+.form-content-comment select:focus {
+    outline: none;
 }
 
 
 .main-content-register{
-    margin: 70px;
+    margin-top: 70px;
     
 
 }
-.main-content-register h2, p{
+.main-content-register h2{
     text-align: center;
+}
+
+.main-content-register p{
+    text-align: left;
 
 }
+
+
+.dash-menu-admin-content{
+    display: grid; 
+    grid-template-columns: 20% 20% 60%;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.export-xlsx{
+    background-color: rgb(216, 229, 248);
+    text-align: center;
+    padding: 10px;
+    box-shadow: -3px 3px 3px var(--color-gray-5);
+    border-radius: 3px;
+
+}
+.dash-menu-admin-content a{
+    text-decoration: none;
+    color: #000;
+}
+.export-xlsx:hover{
+    background: var(--color-font-formedica);
+    transition: all 300ms ease-in-out;
+}
+
 
 .form-content{
     max-width: 34rem;
     margin: 0 auto;
     margin-bottom: 3rem;
     margin-top: 50px;
+
 }
 
 .form-content input,
-.form-content textarea,
 .form-content select{
+    border: none;
     width: 100%;
-    padding: 1rem;
-    border-radius: 3px;
-    border: 1px solid var(--color-primary-dark);    
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 0.5rem;
+    border-bottom: 1px solid  var(--color-gray-8);
+    background: none;
+}
+.form-content textarea{
+    width: 100%;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    border-bottom: 1px solid  var(--color-gray-8);
+}
+
+.form-content textarea:focus{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid  var(--color-gray-8);
+
+}
+
+.form-content input:focus,
+.form-content select:focus{
+    width: 100%;
+    border: none;
+    background: none;
+    border-bottom: 1px solid  var(--color-gray-8);
+    outline: none;
+
 }
 .form-content-grid{
     display: grid;
@@ -468,15 +545,18 @@ img{
 }
 
 .form-content button{
-    padding: 1rem 2rem;
+    padding: 1rem 19rem;
     border: none;
     background-color:#1C1C1C;
     color: white;
+    margin-top: -20px;
+    cursor: pointer;
+    border-radius: 3px;
+    
 }
 .form-content button:hover {
     background-color:#1C75BC;
     transition: all 300ms ease-in-out;
-
 
 }
 
@@ -489,6 +569,58 @@ img{
 }
 .errorlist {
     color:rgb(245, 96, 96);
+}
+.form-content-login{
+    max-width: 14rem;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    margin-top: 50px;
+
+}
+
+.form-content-login input,
+.form-content-login textarea,
+.form-content-login select{
+    width: 100%;
+    margin-top: 5px;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1px solid  black;
+    background: none;
+}
+.form-content-login input:focus,
+.form-content-login textarea:focus,
+.form-content-login select:focus{
+    width: 100%;
+    border: none;
+    background: none;
+    border-bottom: 1px solid  black;
+    outline: none;
+
+}
+.form-content-grid-login{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 30px 70px;
+
+}
+
+.form-content-login button{
+    padding: 1rem 9rem;
+    border: none;
+    background-color:#1C1C1C;
+    color: white;
+    margin-top: -20px;
+    cursor: pointer;
+    border-radius: 3px;
+    
+}
+.form-content-login button:hover {
+    background-color:#1C75BC;
+    transition: all 300ms ease-in-out;
+
+
+
 }
 
 .logout-form{
@@ -550,9 +682,72 @@ img{
 .left{
     text-align: left;
 }
+.tarefas-none{
+    margin-top: 50px;
+}
+.tarefas-none h3{
+    text-align: center;
+}
 
 .span-2{
     grid-column: span 2;
+}
+.main-content-login{
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 120px;
+    background: rgb(216, 229, 248);
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+
+}
+
+.main-content-login-align{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-right: 150px;
+    max-width: 200px;
+
+}
+.main-content-register-form{
+    background-color: rgb(216, 229, 248);
+    width: 700px;
+    margin-top: 240px;
+    margin: 0 auto;
+    max-height: 850px;
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+
+}
+
+
+.main-content-register-align{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-right: 295px;
+    max-width: 200px;
+
+}
+.main-content-dash-tarefa{
+    background-color: rgb(216, 229, 248);
+    width: 720px;
+    margin-top: 240px;
+    margin: 0 auto;
+    max-height: 1200px;
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+}
+
+.main-content-dash-tarefa-align{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-right: 275px;
+    max-width: 280px;
+
 }
 
 .messages-status{
@@ -598,14 +793,6 @@ img{
     background: var(--color-debug-light);
     color: var(--color-debug-dark);
   }
-
-.form-content input {
-    width: 100%;
-    padding: 0.8rem;
-    border-radius: 3px;
-    border: 1px solid var(--color-font-tarefa-a)
-}
-
 .main-content-main{
     max-width: 100%;
     text-align: center;

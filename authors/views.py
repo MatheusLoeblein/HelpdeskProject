@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -8,6 +9,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from helpdesk.models import Tarefa
+from utils.helpdesk.export_xlsx import export_xlsx
 from utils.pagination import make_pagination
 
 from .forms import AuthorTarefaForm, LoginForm, RegisterForm
@@ -189,3 +191,21 @@ def dashboard_tarefa_delete(request):
     tarefa.delete()
     messages.success(request, 'Tarefa apagada com Sucesso.')
     return redirect(reverse('authors:dashboard'))
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def export_tarefas_xlsx(request):
+    mdata = datetime.now().strftime('%Y-%m-%d')
+    model = 'Tarefa'
+    filename = 'produtos_exportados.xls'
+    __filename = filename.split('.')
+    filename_final = f'{__filename[0]}_{mdata}.{__filename[1]}'
+
+    queryset = Tarefa.objects.all().values_list('title', 'description', 'prioridade',  # noqa
+                                                'status', 'Category', 'author')
+
+    columns = ['Titulo', 'Descrição', 'Prioridade', 'Status',
+               'Setor', 'Autor']
+
+    response = export_xlsx(model, filename_final, queryset, columns)
+    return response

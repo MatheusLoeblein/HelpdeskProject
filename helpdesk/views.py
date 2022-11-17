@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
-from django.urls import reverse
 
 from authors.forms import CommentForm
 from utils.pagination import make_pagination
@@ -17,6 +16,7 @@ PER_PAGE = os.environ.get('PER_PAGE', 25)
 # Create your views here.
 
 
+@login_required(login_url='authors:login', redirect_field_name='next')
 def home(request):
     tarefas = Tarefa.objects.all().order_by('-data_up_at')
 
@@ -28,6 +28,7 @@ def home(request):
     })
 
 
+@login_required(login_url='authors:login', redirect_field_name='next')
 def category(request, Category_id):
     tarefas = get_list_or_404(Tarefa.objects.filter(
         Category__id=Category_id,
@@ -42,6 +43,7 @@ def category(request, Category_id):
     })
 
 
+@login_required(login_url='authors:login', redirect_field_name='next')
 def tarefa(request, id):
     tarefa = Tarefa.objects.filter(
         pk=id).first()
@@ -55,6 +57,7 @@ def tarefa(request, id):
     })
 
 
+@login_required(login_url='authors:login', redirect_field_name='next')
 def search(request):
     search_term = request.GET.get('q', '').strip()
 
@@ -83,14 +86,16 @@ def addcomment(request, id):
     url = request.META.get('HTTP_REFERER')
 
     if request.method == 'POST':
-        form = CommentForm(request.POST)
+        form = CommentForm(request.POST, request.FILES)
+        status = request.POST.get('status_modify', None)
         if form.is_valid():
             data = Comment()
-            data.name = form.cleaned_data['name']
             data.comment = form.cleaned_data['comment']
+            if not status == None:
+                data.status_modify = form.cleaned_data['status_modify']
+            data.cover = form.cleaned_data['cover']
             data.Tarefa_id = id
             data.author = request.user
-            Tarefa.data_up_at = data.created_at
             data.save()
 
             messages.success(request, 'Seu Comentario foi salvo com sucesso!')

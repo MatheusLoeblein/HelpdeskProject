@@ -1,13 +1,13 @@
 <div class="main-tarefas-conteiner">  
    <div class="tarefas-panel-a" >
         <div class="tarefa">
-            <a href="{% url 'tarefa' tarefa.id %}" class="tarefa-id">#{{ tarefa.id }}</a>
+            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-id">#{{ tarefa.id }}</a>
         </div>
         <div class="tarefa">
             <a href="#" class="tarefa-situacao">{{tarefa.status}}</a>
         </div>
         <div class="tarefa">
-            <a href="{% url 'tarefa' tarefa.id %}" class="tarefa-titulo">{{ tarefa.title}}</a>
+            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-titulo">{{ tarefa.title}}</a>
         </div>
         <div class="tarefa">
             <a href="#" class="tarefa-data">{{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</a>
@@ -26,7 +26,7 @@
             {% endif %}
         </div>
         <div class="tarefa">
-            <a href="{% url 'tarefas-category' tarefa.Category_id %}" class="categoria">{{tarefa.Category}}</a>
+            <a href="{% url 'helpdesk:tarefas-category' tarefa.Category_id %}" class="categoria">{{tarefa.Category}}</a>
         </div>
     </div>
     <div class="divisoria-main"></div>
