@@ -52,7 +52,7 @@ class AuthorTarefaForm(forms.ModelForm):
                 'O Titulo precisa de no minimo 5 Caracteres.')
         if len(title) > 35:
             self._my_errors['title'].append(
-                'O Titulo precisa de no minimo 25 Caracteres.')
+                'O Titulo não pode ter mais de 35 Caracteres.')
 
         if len(description) < 25:
             self._my_errors['description'].append(

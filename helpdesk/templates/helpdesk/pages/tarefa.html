@@ -1,5 +1,5 @@
 {%extends 'global/base.html'%}
-
+{% load static %}
 {% block title %} Tarefa | #{{ tarefa.id }} |{% endblock title %}
 
 {% block content %}
@@ -18,8 +18,11 @@
 
         <div class="content-tarefa-conteudo">
             <div class="content-tarefa-conteudo-status">
-                <h3 class="tarefa-autor">{{tarefa.author.first_name}} {{tarefa.author.last_name}}</h3>
-                <span class="tarefa-data-criação">{{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
+                <img src="{% static "helpdesk/imgs/user.jpg"%}" alt="" class="user-img">
+                <div class="content-tarefa-conteudo-status-grid">
+                <h3 class="tarefa-autor">{{tarefa.author.first_name}} {{tarefa.author.last_name}}</br>{{usuario_setor}}</h3>
+                <span class="tarefa-data-criação">Criado em {{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
+                </div>
             </div>
              <p>{{tarefa.description}}</p>
         </div>
@@ -33,33 +36,22 @@
             {% include 'helpdesk/partials/comment.html' %}
         {% endfor %}
 
-
-
-            <div class="form-content-comment-grid">
-                <div class="form-content-comment">
-                    <div class="form-group {{field.field.widget.attrs.class}}">
-                        <form enctype="multipart/form-data" name="comment" action="/tarefa/addcomment/{{tarefa.id}}" method="POST">
-                            {% csrf_token %}
-                        {% if request.user.is_superuser %}
-                            <select maxlength="12" name="status_modify" id="id_status_modify" label="status_modify">
-                                <option value"Aberto">Aberto</option>
-                                <option value"Execução">Execução</option>
-                                <option value"Fechado">Fechado</option>
-                            </select>  
-                            
-                        {% endif %}                          
-                            <textarea name="comment" id="comment" cols="30" rows="10" placeholder="Comentario"></textarea>
-                            <input type="file" name="cover" accept="image/*" id="id_cover">
-                            <button class= "B-Comment" type="subimit">Enviar Comentario</button>
-                        </form>
-                    </div>
-                </div>
-            </div>      
+        {% if not request.user.is_superuser %}
+            {% if not tarefa.status == 'Finalizado'%}
+                {% include 'helpdesk/partials/form_comment.html' %}
+            {% else %}
+                <p class="tarefa-finalizada">
+                <h3 class="tarefa-finalizada" > -- Ticket finalizado! Solicite aos administradores para abrilo Novamente! --</h3>
+                </p>
+            {% endif %}
+        {% elif request.user.is_superuser %}
+            {% include 'helpdesk/partials/form_comment.html' %}
+        {% endif %}
          </div> 
-
     <div class="content-tarefa-status">
         <span><b>Ticket</b> #{{ tarefa.id }}</span>
         <span class="tarefa-autor"><b>Autor </b>{{tarefa.author.first_name}} {{tarefa.author.last_name}}</span>
+        <span class="tarefa-autor"><b>Setor </b>{{usuario_setor}}</span>
         <span class="tarefa-data-created"><b>Criado</b> {{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
         <span class="tarefa-data-updated"><b>Atualizado</b> {{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</span>
        
@@ -79,7 +71,7 @@
                 <span href="#" class="tarefa-prioridade">{{tarefa.prioridade}}</span>
             {% endif %}
         </span>
-        <span class="tarefa-categoria"><b>Setor</b> {{tarefa.Category}}</span>
+        <span class="tarefa-categoria"><b>Setor Atribuido</b> {{tarefa.Category}}</span>
         {% if tarefa.cover %}
         <span><b>Anexo</b> <a class="tarefa-anexo" target="_blank" href="{{tarefa.cover.url}}">📎 </a></span>
         {% endif %}

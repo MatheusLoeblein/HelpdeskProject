@@ -94,7 +94,11 @@ img{
     width: 150px;
     cursor: pointer;
     top: 150px;
-
+}
+.user-img{
+    width: 60px;
+    margin: 5px 10px;
+    margin-bottom: 15px;
 }
 
 .search-form{
@@ -249,7 +253,7 @@ img{
 .main-footer-position{
     position: absolute;
     width: 100%;
-    margin-top: 550px;
+    margin-top: 580px;
 }
 .main-footer {
     display: flex;
@@ -323,12 +327,16 @@ img{
 }
 
 .content-tarefa-conteudo-status{
+    display: flex;    
+}
+.content-tarefa-conteudo-status-grid{
     display: grid;
+    margin-top: 5px;
 }
 
 .content-tarefa-conteudo-status span, 
 .content-tarefa-conteudo-status h3{
-    margin-left: 10px;
+    margin-left: 5px;
 
 }
 
@@ -354,8 +362,14 @@ img{
 }
 
 .content-tarefa-comment-status {
-    display: grid;
+    display: flex;
 
+
+}
+.content-tarefa-comment-status-grid{
+    display: grid;
+    margin-top:5px;
+    margin-left: -5px;
 
 }
 .content-tarefa-comment-status span, .content-tarefa-comment-status h3{
@@ -400,6 +414,10 @@ img{
 .content-tarefa-comment-cover a:hover{
     color: var(--color-font-formedica);
 
+}
+
+.tarefa-finalizada{
+    margin: 10px;
 }
 
 .form-content-comment-grid{
@@ -882,27 +900,27 @@ img{
 }
 
 .tarefa-prioridade-urgencia{
-    background-color: red;
+    background-color:#F88E82;
     border-radius: 3px;
     padding: 5px 13px;
 
 }
 .tarefa-prioridade-alta,
 .tarefa-prioridade-alta a  {
-    background: rgb(245, 245, 97);
+    background: #FFC38F;
     border-radius: 3px;
     padding: 5px 28px;
     color: #000;
     text-decoration: #000;
 }
 .tarefa-prioridade-moderada{
-    background-color: rgba(71, 145, 255, 0.637);
+    background-color: #F1F18D;
     border-radius: 3px;
     padding: 5px 11px;
 
 }
 .tarefa-prioridade-baixa{
-    background-color: var(--color-gray-3);
+    background-color: #C4F5C4;
     border-radius: 3px;
     padding: 5px 23px;
     width: 50px;

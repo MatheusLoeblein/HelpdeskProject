@@ -12,4 +12,4 @@ class Profile(models.Model):
         Category, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return self.author
+        return str(self.author)

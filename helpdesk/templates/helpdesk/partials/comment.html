@@ -1,8 +1,11 @@
+{% load static %}
 <div class="content-tarefa-comment">
     <div class="content-tarefa-comment-status">
-        <h3 class="tarefa-autor">{{comment.author.first_name}} {{comment.author.last_name}}</h3>
-        <span class="tarefa-cetegoria">{{comment.created_at|date:"d/m/Y"}} às {{comment.created_at|date:"H:i"}}</span>
-
+        <img src="{% static "helpdesk/imgs/user.jpg"%}" alt="" class="user-img">
+        <div class="content-tarefa-comment-status-grid">
+            <h3 class="tarefa-autor">{{comment.author.first_name}} {{comment.author.last_name}}</h3>
+            <span class="tarefa-cetegoria">Criado em {{comment.created_at|date:"d/m/Y"}} às {{comment.created_at|date:"H:i"}}</span>
+        </div> 
     </div>
     
     <div class="content-tarefa-comment-conteudo">
