@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -59,12 +60,7 @@ class Comment(models.Model):
 
 
 @receiver(post_save, sender=Comment)
-def update_data(sender, instance, **kwargs):
+def update_tarefa(sender, instance, **kwargs):
     instance.Tarefa.data_up_at = instance.created_at
-    instance.Tarefa.save()
-
-
-@receiver(post_save, sender=Comment)
-def update_status(sender, instance, **kwargs):
     instance.Tarefa.status = instance.status_modify
     instance.Tarefa.save()

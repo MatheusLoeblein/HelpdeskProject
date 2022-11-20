@@ -2,6 +2,7 @@ import os
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
@@ -24,9 +25,9 @@ def home(request):
         tarefas = Tarefa.objects.all().order_by('-data_up_at')
     else:
         usuario = Profile.objects.get(author=request.user)
-        usuario = usuario.Category_id
+
         tarefas = Tarefa.objects.filter(
-            Category=usuario).order_by('-data_up_at')
+            Category=usuario.Category_id).order_by('-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
@@ -55,12 +56,6 @@ def category(request, Category_id):
 
 @login_required(login_url='authors:login', redirect_field_name='next')
 def tarefa(request, id):
-    usuario_setor = Tarefa.objects.get(pk=id)
-    usuario_setor = usuario_setor.author_id
-    usuario_setor = Profile.objects.get(author=usuario_setor)
-    usuario_setor = usuario_setor.Category
-    print(usuario_setor)
-
     tarefa = Tarefa.objects.filter(
         pk=id).first()
 
@@ -70,7 +65,6 @@ def tarefa(request, id):
     return render(request, "helpdesk/pages/tarefa.html", context={
         'tarefa': tarefa,
         'comments': comments,
-        'usuario_setor': usuario_setor,
     })
 
 

@@ -18,9 +18,13 @@
 
         <div class="content-tarefa-conteudo">
             <div class="content-tarefa-conteudo-status">
+                {% if tarefa.author.profile.cover_profile %}
+                <img src="{{tarefa.author.profile.cover_profile.url}}" alt="" class="user-img">
+                {% else %}
                 <img src="{% static "helpdesk/imgs/user.jpg"%}" alt="" class="user-img">
+                {% endif %}
                 <div class="content-tarefa-conteudo-status-grid">
-                <h3 class="tarefa-autor">{{tarefa.author.first_name}} {{tarefa.author.last_name}}</br>{{usuario_setor}}</h3>
+                <h3 class="tarefa-autor">{{tarefa.author.first_name}} {{tarefa.author.last_name}}</br>{{tarefa.author.profile.Category}}</h3>
                 <span class="tarefa-data-criação">Criado em {{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
                 </div>
             </div>
@@ -33,7 +37,9 @@
 
 
         {% for comment in comments %}
-            {% include 'helpdesk/partials/comment.html' %}
+
+           {% include 'helpdesk/partials/comment.html' %}
+
         {% endfor %}
 
         {% if not request.user.is_superuser %}
@@ -51,7 +57,7 @@
     <div class="content-tarefa-status">
         <span><b>Ticket</b> #{{ tarefa.id }}</span>
         <span class="tarefa-autor"><b>Autor </b>{{tarefa.author.first_name}} {{tarefa.author.last_name}}</span>
-        <span class="tarefa-autor"><b>Setor </b>{{usuario_setor}}</span>
+        <span class="tarefa-autor"><b>Setor </b>{{tarefa.author.profile.Category}}</span>
         <span class="tarefa-data-created"><b>Criado</b> {{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
         <span class="tarefa-data-updated"><b>Atualizado</b> {{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</span>
        

@@ -1,19 +1,23 @@
 {% load static %}
-<div class="content-tarefa-comment">
-    <div class="content-tarefa-comment-status">
-        <img src="{% static "helpdesk/imgs/user.jpg"%}" alt="" class="user-img">
-        <div class="content-tarefa-comment-status-grid">
-            <h3 class="tarefa-autor">{{comment.author.first_name}} {{comment.author.last_name}}</h3>
-            <span class="tarefa-cetegoria">Criado em {{comment.created_at|date:"d/m/Y"}} às {{comment.created_at|date:"H:i"}}</span>
-        </div> 
+    <div class="content-tarefa-comment">
+        <div class="content-tarefa-comment-status">
+            {% if comment.author.profile.cover_profile %}
+            <img src="{{comment.author.profile.cover_profile.url}}" alt="" class="user-img">
+            {% else %}
+            <img src="{% static "helpdesk/imgs/user.jpg"%}" alt="" class="user-img">  
+            {% endif %} 
+            <div class="content-tarefa-comment-status-grid">
+                <h3 class="tarefa-autor">{{comment.author.first_name}} {{comment.author.last_name}}</br> {{comment.author.profile.Category}}</h3>
+                <span class="tarefa-cetegoria">Criado em {{comment.created_at|date:"d/m/Y"}} às {{comment.created_at|date:"H:i"}}</span>
+            </div> 
+        </div>
+        
+        <div class="content-tarefa-comment-conteudo">
+            <p>{{comment.comment}}</p>
+        </div>
+        {% if comment.cover %}
+            <span class="content-tarefa-comment-cover" ><a target="_blank" href="{{comment.cover.url}}"><i class="fa-solid fa-cloud-arrow-up"></i><b>--Mostar anexo--</b></a></span>
+        {% endif %}
+        <div class="division-comment"></div>
     </div>
-    
-    <div class="content-tarefa-comment-conteudo">
-        <p>{{comment.comment}}</p>
-    </div>
-    {% if comment.cover %}
-        <span class="content-tarefa-comment-cover" ><a target="_blank" href="{{comment.cover.url}}"><i class="fa-solid fa-cloud-arrow-up"></i><b>--Mostar anexo--</b></a></span>
-    {% endif %}
-    <div class="division-comment"></div>
 
-</div>
