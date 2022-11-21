@@ -13,7 +13,7 @@
             <a href="#" class="tarefa-data">{{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</a>
         </div>
         <div class="tarefa">
-            {% if tarefa.prioridade == 'Urgencia' %}
+            {% if tarefa.prioridade == 'Urgente' %}
                 <a href="#" class="tarefa-prioridade-urgencia">{{tarefa.prioridade}}</a>
             {% elif tarefa.prioridade == 'Alta' %}
             <a href="#" class="tarefa-prioridade-alta">{{tarefa.prioridade}}</a>

@@ -101,7 +101,9 @@ img{
     margin: 0px 5px 0px 10px;
     margin-bottom: 15px;
     border-radius: 100px;
-    border: 2px solid var(--color-gray-6);
+    padding: 1px;
+    background-color: var(--color-gray-2);
+    border: 2px solid var(--color-gray-4);
 }
 
 .search-form{
@@ -905,7 +907,7 @@ img{
 .tarefa-prioridade-urgencia{
     background-color:#F88E82;
     border-radius: 3px;
-    padding: 5px 13px;
+    padding: 5px 15px;
 
 }
 .tarefa-prioridade-alta,

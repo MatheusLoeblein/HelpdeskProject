@@ -27,7 +27,7 @@ class AuthorTarefaForm(forms.ModelForm):
                     ('Baixa', 'Baixa'),
                     ('Moderada', 'Moderada'),
                     ('Alta', 'Alta'),
-                    ('Urgencia', 'Urgencia'),
+                    ('Urgente', 'Urgente'),
                 )
             ),
             'cover': forms.FileInput(attrs={
@@ -64,7 +64,7 @@ class AuthorTarefaForm(forms.ModelForm):
             self._my_errors['description'].append(
                 'Você não pode repetir o mesmo que no titulo.')
 
-        if category == None:
+        if category is None:
             self._my_errors['Category'].append(
                 'Por favor selecione o seu "Setor"')
 

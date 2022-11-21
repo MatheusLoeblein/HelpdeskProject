@@ -65,7 +65,7 @@
         
         <span class="tarefa-starus"><b>Status</b> {{tarefa.status}}</span>
         <span class="tarefa-prioridade"><b>Prioridade</b>
-            {% if tarefa.prioridade == 'Urgencia' %}
+            {% if tarefa.prioridade == 'Urgente' %}
                 <span href="#" class="tarefa-prioridade-urgencia">{{tarefa.prioridade}}</span>
             {% elif tarefa.prioridade == 'Alta' %}
                 <span href="#" class="tarefa-prioridade-alta">{{tarefa.prioridade}}</span>
