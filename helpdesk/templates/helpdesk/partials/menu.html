@@ -11,10 +11,10 @@
     </button>
     <div class="menu-content">
       <nav class="menu-nav">
-        <a href="{% url 'helpdesk:home' %}">Home</a>
+        <a href="{% url 'helpdesk:home' %}">Tarefas</a>
         {% if user.is_authenticated %}
           <a href="{% url 'authors:dashboard_tarefa_new' %}">Abrir Tarefa</a>
-          <a href="{% url 'authors:dashboard' %}">Dashboard</a>
+          <a href="{% url 'authors:dashboard' %}">Minhas Tarefas</a>
           <a class ="authors-logout-link" href="{% url 'authors:logout' %}">Logout</a>
           {% include  'authors/partials/form_logout.html'%}
         {% else %}
