@@ -1,10 +1,10 @@
 {% extends 'global/base.html' %}
 
-{% block title %} Dashboard |{% endblock title %}
+{% block title %} Minhas Tarefas |{% endblock title %}
 
 {% block content %}
 <div class="main-content-register">
-    <h2>Dashboard ({{user}})</h2>
+    <h2>Minhas Tarefas ({{user.first_name}})</h2>
   {% include 'helpdesk/partials/message.html' %}
 
   {% include  'authors/partials/login_message.html'%}

@@ -1,0 +1,39 @@
+<form class="addcomment-form" action="{{form_action}}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form-content-comment-grid">
+            <div class="form-content-comment">
+                {% for field in form %}
+                <div class="form-group-comment {{field.field.widget.attrs.class}}">
+                    {{ field }}
+                    {% if field.help_text %}
+                    <p class="help-text">{{ field.help_text }}</p>
+                    
+                    {% endif %}
+
+                    {{ field.errors }}
+                    </div> 
+
+                    {% if field.name == 'cover' and field.value.url %}
+                        <div class="form-content-comment">
+                            <img src="{{ field.value.url }}" alt="Anexo para {{tarefa.title}}">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+       
+        {% if form.errors %}
+        <div class="form-content-comment-grid">
+            <div class="form-group-comment">
+                <div class="message-error">
+                    Por favor corrija os erros no formulário
+                </div>
+            </div>    
+        </div>
+        {% endif %}
+        <div class="form-content-comment-grid">
+            <div class="form-content-comment">
+                <button class="span-2"type="submit">Enviar</button>
+            </div>    
+        </div>
+    </form>

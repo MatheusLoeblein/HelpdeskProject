@@ -5,7 +5,7 @@
                <div class="form-group {{field.field.widget.attrs.class}}">
                 <label for="{{ field.id.for_label }}">{{ field.label }}</label>
                 {{ field }}
-
+                {{ form.media }}
                 {% if field.help_text %}
                  <p class="help-text">{{ field.help_text }}</p>
                 

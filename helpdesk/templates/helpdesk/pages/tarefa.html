@@ -43,17 +43,20 @@
         {% endfor %}
 
         
+        
         {% if not request.user.is_superuser %}
             {% if not tarefa.status == 'Finalizado'%}
-                {% include 'helpdesk/partials/form_comment.html' %}
+            {% include  'authors/partials/form_comments.html'%}
             {% else %}
                 <p class="tarefa-finalizada">
                 <h3 class="tarefa-finalizada" > -- Ticket finalizado! Solicite aos administradores para abrilo Novamente! --</h3>
                 </p>
             {% endif %}
         {% elif request.user.is_superuser %}
-            {% include 'helpdesk/partials/form_comment.html' %}
+        {% include  'authors/partials/form_comments.html'%}
         {% endif %}
+
+
          </div> 
     <div class="content-tarefa-status">
         <span><b>Ticket</b> #{{ tarefa.id }}</span>

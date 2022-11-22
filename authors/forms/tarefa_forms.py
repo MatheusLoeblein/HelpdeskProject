@@ -2,6 +2,7 @@ from collections import defaultdict
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django_summernote.widgets import SummernoteWidget
 
 from helpdesk.models import Tarefa
 from utils.django_forms import add_attr
@@ -16,6 +17,8 @@ class AuthorTarefaForm(forms.ModelForm):
         add_attr(self.fields.get('title'), 'class', 'span-2')
         add_attr(self.fields.get('description'), 'class', 'span-2')
         add_attr(self.fields.get('cover'), 'class', 'span-2')
+
+    description = forms.CharField(label='Descrição', widget=SummernoteWidget())
 
     class Meta:
         model = Tarefa

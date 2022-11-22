@@ -2,10 +2,10 @@ import os
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
+from django.urls import reverse
 
 from authors.forms import CommentForm
 from authors.models import Profile
@@ -62,9 +62,13 @@ def tarefa(request, id):
     comments = Comment.objects.filter(
         Tarefa__id=id).order_by('created_at')
 
+    form = CommentForm()
+
     return render(request, "helpdesk/pages/tarefa.html", context={
         'tarefa': tarefa,
         'comments': comments,
+        'form': form,
+        'form_action': reverse('helpdesk:addcomment', args=(id,))
     })
 
 
@@ -103,7 +107,7 @@ def addcomment(request, id):
         if form.is_valid():
             data = Comment()
             data.comment = form.cleaned_data['comment']
-            if not status == None:
+            if not status is None:
                 data.status_modify = form.cleaned_data['status_modify']
             data.cover = form.cleaned_data['cover']
             data.Tarefa_id = id
