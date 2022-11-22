@@ -384,16 +384,18 @@ img{
 
 
 .content-tarefa-comment-conteudo{
-    display: flex;
+    display: grid;
+    margin-left: 25px;
     word-wrap: break-word;
+    margin-bottom: 40px;
 
 }
 
 .content-tarefa-comment-conteudo p{
     text-align: left;
     margin: 10px;
-    margin-bottom: 50px;
     max-width: 90%;
+    
 }
 
 .division-comment{
