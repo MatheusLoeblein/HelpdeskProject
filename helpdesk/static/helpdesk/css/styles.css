@@ -94,7 +94,16 @@ img{
     width: 150px;
     cursor: pointer;
     top: 150px;
-
+}
+.user-img{
+    width: 60px;
+    height: 60px;
+    margin: 0px 5px 0px 10px;
+    margin-bottom: 15px;
+    border-radius: 100px;
+    padding: 1px;
+    background-color: var(--color-gray-2);
+    border: 2px solid var(--color-gray-4);
 }
 
 .search-form{
@@ -249,7 +258,7 @@ img{
 .main-footer-position{
     position: absolute;
     width: 100%;
-    margin-top: 550px;
+    margin-top: 580px;
 }
 .main-footer {
     display: flex;
@@ -323,12 +332,16 @@ img{
 }
 
 .content-tarefa-conteudo-status{
+    display: flex;    
+}
+.content-tarefa-conteudo-status-grid{
     display: grid;
+    margin-top: 5px;
 }
 
 .content-tarefa-conteudo-status span, 
 .content-tarefa-conteudo-status h3{
-    margin-left: 10px;
+    margin-left: 5px;
 
 }
 
@@ -354,8 +367,14 @@ img{
 }
 
 .content-tarefa-comment-status {
-    display: grid;
+    display: flex;
 
+
+}
+.content-tarefa-comment-status-grid{
+    display: grid;
+    margin-top:5px;
+    margin-left: -5px;
 
 }
 .content-tarefa-comment-status span, .content-tarefa-comment-status h3{
@@ -402,28 +421,26 @@ img{
 
 }
 
+.tarefa-finalizada{
+    margin: 10px;
+}
+
 .form-content-comment-grid{
     display: grid;
-    grid-template-columns: 50% 50%;
-    gap: 30px 70px;
-    max-width: 700px;
+    max-width: 720px;
 }
 
-.form-content-comment{
-
+.addcomment-form{
+ margin-left: 15px;
 }
-
 .form-content-comment input,
 .form-content-comment textarea,
 .form-content-comment select {
-    width: 100%;
-    min-width: 540px;
+    width: 98%;
     border: 0.5px solid var(--color-gray-7);
     padding: 5px;
-    margin-left: 10px;
     border-radius: 3px;
     margin-bottom: 2px;
-
 
 }
 .form-content-comment select {
@@ -433,7 +450,6 @@ img{
 .form-content-comment button{
     width: 100%;
     min-width: 552px;
-    margin-left: 10px; 
     padding: 15px;
     border-radius: 3px;
     border: none;
@@ -472,16 +488,16 @@ img{
 
 .dash-menu-admin-content{
     display: grid; 
-    grid-template-columns: 20% 20% 60%;
-    max-width: 850px;
+    grid-template-columns: 25% 25% 25% 25%;
+    max-width: 650px;
     margin: 0 auto;
 }
 
 .export-xlsx{
-    background-color: rgb(216, 229, 248);
+    background-color: var(--color-gray-1);
+    box-shadow: -3px 3px 3px rgba(129, 99, 114, 0.658);
     text-align: center;
     padding: 10px;
-    box-shadow: -3px 3px 3px var(--color-gray-5);
     border-radius: 3px;
 
 }
@@ -500,9 +516,12 @@ img{
     margin: 0 auto;
     margin-bottom: 3rem;
     margin-top: 50px;
+    color: var(--color-gray-8)
 
 }
-
+.form-content label{
+    color:var(--color-gray-7);
+}
 .form-content input,
 .form-content select{
     border: none;
@@ -510,15 +529,17 @@ img{
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 0.5rem;
-    border-bottom: 1px solid  var(--color-gray-8);
+    border-bottom: 0.5px solid  var(--color-gray-7);
     background: none;
+    color: var(--color-gray-7);
+    
 }
 .form-content textarea{
     width: 100%;
-    padding: 0.5rem;
+    padding: 1rem;
     background: none;
     border: none;
-    border-bottom: 1px solid  var(--color-gray-8);
+    border-bottom: 1px solid  var(--color-gray-7);
 }
 
 .form-content textarea:focus{
@@ -533,7 +554,7 @@ img{
     width: 100%;
     border: none;
     background: none;
-    border-bottom: 1px solid  var(--color-gray-8);
+    border-bottom: 0.5px solid  var(--color-gray-8);
     outline: none;
 
 }
@@ -696,48 +717,74 @@ img{
     width: 400px;
     margin: 0 auto;
     margin-top: 120px;
-    background: rgb(216, 229, 248);
-    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-gray-7);
+    background-color: var(--color-gray-1);
+    box-shadow: -3px 3px 3px rgba(129, 99, 114, 0.658);
     border-radius: 3px;
 
 }
 
+.main-content-login-align h2{
+    text-align: center;
+    margin: 0 auto;
+    margin-right: 40px ;
+    margin-top: 30px;
+    color: var(--color-gray-9);
+}
 .main-content-login-align{
-    display: flex;
-    align-self: center;
-    justify-content: center;
+    color: var(--color-gray-7);
+    display: grid;
     margin: 0 auto;
     margin-right: 150px;
     max-width: 200px;
 
 }
+
+.main-content-login-align h5{
+    text-align: center;
+    margin-bottom: 50px;
+    align-self: center;
+}
+
+.main-content-login-align a{
+    cursor: pointer;
+    color: var(--color-font-formedica);
+    text-decoration: none;
+}
 .main-content-register-form{
-    background-color: rgb(216, 229, 248);
     width: 700px;
     margin-top: 240px;
     margin: 0 auto;
     max-height: 850px;
-    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-gray-7);
+    background-color: var(--color-gray-1);
+    box-shadow: -3px 3px 3px rgba(129, 99, 114, 0.658);
     border-radius: 3px;
 
 }
-
-
+.main-content-register-align h2{
+    text-align: center;
+    margin-left: 50px;
+    margin-top: 30px;
+    color: var(--color-gray-9);
+}
 .main-content-register-align{
-    display: flex;
+    display: grid;
     justify-content: center;
     margin: 0 auto;
     margin-right: 295px;
     max-width: 200px;
 
 }
+
 .main-content-dash-tarefa{
-    background-color: rgb(216, 229, 248);
+    border: 1px solid var(--color-gray-7);
+    background-color: var(--color-gray-1);
+    box-shadow: -3px 3px 3px rgba(129, 99, 114, 0.658);
     width: 720px;
     margin-top: 240px;
     margin: 0 auto;
-    max-height: 1200px;
-    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+    max-height: 1500px;
     border-radius: 3px;
 }
 
@@ -882,27 +929,27 @@ img{
 }
 
 .tarefa-prioridade-urgencia{
-    background-color: red;
+    background-color:#F88E82;
     border-radius: 3px;
-    padding: 5px 13px;
+    padding: 5px 15px;
 
 }
 .tarefa-prioridade-alta,
 .tarefa-prioridade-alta a  {
-    background: rgb(245, 245, 97);
+    background: #FFC38F;
     border-radius: 3px;
     padding: 5px 28px;
     color: #000;
     text-decoration: #000;
 }
 .tarefa-prioridade-moderada{
-    background-color: rgba(71, 145, 255, 0.637);
+    background-color: #F1F18D;
     border-radius: 3px;
     padding: 5px 11px;
 
 }
 .tarefa-prioridade-baixa{
-    background-color: var(--color-gray-3);
+    background-color: #C4F5C4;
     border-radius: 3px;
     padding: 5px 23px;
     width: 50px;

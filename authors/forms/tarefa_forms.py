@@ -2,6 +2,7 @@ from collections import defaultdict
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django_summernote.widgets import SummernoteWidget
 
 from helpdesk.models import Tarefa
 from utils.django_forms import add_attr
@@ -17,6 +18,8 @@ class AuthorTarefaForm(forms.ModelForm):
         add_attr(self.fields.get('description'), 'class', 'span-2')
         add_attr(self.fields.get('cover'), 'class', 'span-2')
 
+    description = forms.CharField(label='Descrição', widget=SummernoteWidget())
+
     class Meta:
         model = Tarefa
         fields = ['title',  'prioridade',
@@ -27,7 +30,7 @@ class AuthorTarefaForm(forms.ModelForm):
                     ('Baixa', 'Baixa'),
                     ('Moderada', 'Moderada'),
                     ('Alta', 'Alta'),
-                    ('Urgencia', 'Urgencia'),
+                    ('Urgente', 'Urgente'),
                 )
             ),
             'cover': forms.FileInput(attrs={
@@ -52,7 +55,7 @@ class AuthorTarefaForm(forms.ModelForm):
                 'O Titulo precisa de no minimo 5 Caracteres.')
         if len(title) > 35:
             self._my_errors['title'].append(
-                'O Titulo precisa de no minimo 25 Caracteres.')
+                'O Titulo não pode ter mais de 35 Caracteres.')
 
         if len(description) < 25:
             self._my_errors['description'].append(
@@ -64,7 +67,7 @@ class AuthorTarefaForm(forms.ModelForm):
             self._my_errors['description'].append(
                 'Você não pode repetir o mesmo que no titulo.')
 
-        if category == None:
+        if category is None:
             self._my_errors['Category'].append(
                 'Por favor selecione o seu "Setor"')
 

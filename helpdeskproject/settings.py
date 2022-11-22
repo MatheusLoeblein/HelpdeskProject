@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_summernote',
     'helpdesk',
     'authors',
 ]
@@ -156,3 +157,54 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'message-success',
     constants.WARNING: 'message-warning',
 }
+
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+SUMMERNOTE_CONFIG = {
+    # Using SummernoteWidget - iframe mode, default
+    'iframe': True,
+
+    # You can put custom Summernote settings
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+
+        # Change editor size
+        'width': '100%',
+        'height': '200',
+
+        # Use proper language setting automatically (default)
+        'lang': 'pt-BR',
+
+        # Toolbar customization
+        # https://summernote.org/deep-dive/#custom-toolbar-popover
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link']],
+            ['view', ['fullscreen', 'help']],
+        ],
+
+
+        # You can also add custom settings for external plugins
+        'print': {
+            'stylesheetUrl': '/some_static_folder/printable.css',
+        },
+        'codemirror': {
+            'mode': 'htmlmixed',
+            'lineNumbers': 'true',
+            'theme': 'monokai',
+        },
+    }
+}
+SUMMERNOTE_THEME = 'bs3'

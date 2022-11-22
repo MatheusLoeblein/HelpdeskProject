@@ -5,8 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
+from django.urls import reverse
 
 from authors.forms import CommentForm
+from authors.models import Profile
 from utils.pagination import make_pagination
 
 from .models import Comment, Tarefa
@@ -18,7 +20,14 @@ PER_PAGE = os.environ.get('PER_PAGE', 25)
 
 @login_required(login_url='authors:login', redirect_field_name='next')
 def home(request):
-    tarefas = Tarefa.objects.all().order_by('-data_up_at')
+
+    if request.user.is_superuser:
+        tarefas = Tarefa.objects.all().order_by('-data_up_at')
+    else:
+        usuario = Profile.objects.get(author=request.user)
+
+        tarefas = Tarefa.objects.filter(
+            Category=usuario.Category_id).order_by('-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
@@ -30,7 +39,9 @@ def home(request):
 
 @login_required(login_url='authors:login', redirect_field_name='next')
 def category(request, Category_id):
+
     tarefas = get_list_or_404(Tarefa.objects.filter(
+
         Category__id=Category_id,
     ).order_by('-data_up_at'))
 
@@ -51,20 +62,25 @@ def tarefa(request, id):
     comments = Comment.objects.filter(
         Tarefa__id=id).order_by('created_at')
 
+    form = CommentForm()
+
     return render(request, "helpdesk/pages/tarefa.html", context={
         'tarefa': tarefa,
         'comments': comments,
+        'form': form,
+        'form_action': reverse('helpdesk:addcomment', args=(id,))
     })
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
 def search(request):
     search_term = request.GET.get('q', '').strip()
-
+    usuario = Profile.objects.get(author=request.user)
+    usuario = usuario.Category_id
     if not search_term:
         raise Http404()
 
-    tarefas = Tarefa.objects.filter(
+    tarefas = Tarefa.objects.filter(Category=usuario).filter(
         Q(Q(title__icontains=search_term) | Q(
             status__icontains=search_term) | Q(id__icontains=search_term)),
     ).order_by('-data_up_at')
@@ -91,7 +107,7 @@ def addcomment(request, id):
         if form.is_valid():
             data = Comment()
             data.comment = form.cleaned_data['comment']
-            if not status == None:
+            if not status is None:
                 data.status_modify = form.cleaned_data['status_modify']
             data.cover = form.cleaned_data['cover']
             data.Tarefa_id = id

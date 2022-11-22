@@ -3,10 +3,9 @@
     <div class="login-message">
     Voce esta logando com 
     {{ request.user.first_name }}.
-    <a href="{% url 'authors:dashboard' %}">Suas tarefas</a>, 
-    <a href="{% url 'authors:dashboard_tarefa_new' %}">Crier uma tarefa</a> ou  
+
     {% include 'authors/partials/form_logout.html' %}
-    <a class="authors-logout-link" href="#">click aqui</a> para logout.
+    <a class="authors-logout-link" href="#">clique aqui</a> para deslogar.
     </div>
     {% endif %}
 </main>

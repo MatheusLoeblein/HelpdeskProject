@@ -40,7 +40,7 @@ class Comment(models.Model):
     status_choices = (
         ("Aberto", "Aberto"),
         ("Execução", "Execução"),
-        ("Fechado", "Fechado"),
+        ("Finalizado", "Finalizado"),
     )
     Tarefa = models.ForeignKey(
         Tarefa, on_delete=models.CASCADE, verbose_name='Tarefa')
@@ -50,7 +50,7 @@ class Comment(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, verbose_name='Autor')
     cover = models.ImageField(
-        upload_to='helpdesk/covers/%Y/%m/%d/', blank=True, null=True, verbose_name='Anexo')
+        upload_to='helpdesk/covers/%Y/%m/%d/', blank=True, null=True, verbose_name='Anexo')  # noqa
     status_modify = models.CharField(
         max_length=12, choices=status_choices, blank=True, null=True, default="Aberto", verbose_name='Status')  # noqa
 
@@ -59,12 +59,7 @@ class Comment(models.Model):
 
 
 @receiver(post_save, sender=Comment)
-def update_data(sender, instance, **kwargs):
+def update_tarefa(sender, instance, **kwargs):
     instance.Tarefa.data_up_at = instance.created_at
-    instance.Tarefa.save()
-
-
-@receiver(post_save, sender=Comment)
-def update_status(sender, instance, **kwargs):
     instance.Tarefa.status = instance.status_modify
     instance.Tarefa.save()
