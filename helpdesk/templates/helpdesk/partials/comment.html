@@ -13,7 +13,7 @@
         </div>
         
         <div class="content-tarefa-comment-conteudo">
-            <p>{{comment.comment|safe}}</p>
+            {{comment.comment|safe}}
         </div>
         {% if comment.cover %}
             <span class="content-tarefa-comment-cover" ><a target="_blank" href="{{comment.cover.url}}"><i class="fa-solid fa-cloud-arrow-up"></i><b>--Mostar anexo--</b></a></span>
