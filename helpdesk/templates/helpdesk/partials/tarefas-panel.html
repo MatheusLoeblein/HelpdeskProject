@@ -4,33 +4,37 @@
             <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-id">#{{ tarefa.id }}</a>
         </div>
         <div class="tarefa">
-            <a href="#" class="tarefa-situacao">{{tarefa.status}}</a>
+            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-situacao">{{tarefa.status}}</a>
         </div>
         <div class="tarefa">
             <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-titulo">{{ tarefa.title}}</a>
         </div>
+        
         <div class="tarefa">
-            <a href="#" class="tarefa-data">{{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</a>
+            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-data">{{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</a>
         </div>
         <div class="tarefa">
             {% if tarefa.prioridade == 'Urgente' %}
-                <a href="#" class="tarefa-prioridade-urgencia">{{tarefa.prioridade}}</a>
+                <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-prioridade-urgencia">{{tarefa.prioridade}}</a>
             {% elif tarefa.prioridade == 'Alta' %}
-            <a href="#" class="tarefa-prioridade-alta">{{tarefa.prioridade}}</a>
+            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-prioridade-alta">{{tarefa.prioridade}}</a>
             {% elif tarefa.prioridade == 'Moderada' %}
-            <a href="#" class="tarefa-prioridade-moderada">{{tarefa.prioridade}}</a>
+            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-prioridade-moderada">{{tarefa.prioridade}}</a>
             {% elif tarefa.prioridade == 'Baixa' %}
-            <a href="#" class="tarefa-prioridade-baixa">{{tarefa.prioridade}}</a>
+            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-prioridade-baixa">{{tarefa.prioridade}}</a>
             {% else %}
-                <a href="#" class="tarefa-prioridade">{{tarefa.prioridade}}</a>
+                <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-prioridade">{{tarefa.prioridade}}</a>
             {% endif %}
+        </div>
+        <div class="tarefa">
+            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-author">{{ tarefa.author.first_name}}</a>
         </div>
         <div class="tarefa">
             <a href="
             {% if request.user.is_superuser %}
                 {% url 'helpdesk:tarefas-category' tarefa.Category_id %}
             {% else %}
-                #
+                {% url 'helpdesk:tarefa' tarefa.id %}
             {% endif %}
             " class="categoria">{{tarefa.Category}}</a>
         </div>
