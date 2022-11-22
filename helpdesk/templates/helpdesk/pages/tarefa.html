@@ -28,7 +28,7 @@
                 <span class="tarefa-data-criação">Criado em {{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
                 </div>
             </div>
-             <p>{{tarefa.description}}</p>
+             <p>{{tarefa.description|safe}}</p>
         </div>
 
         <div class="division"></div>
@@ -42,6 +42,7 @@
 
         {% endfor %}
 
+        
         {% if not request.user.is_superuser %}
             {% if not tarefa.status == 'Finalizado'%}
                 {% include 'helpdesk/partials/form_comment.html' %}

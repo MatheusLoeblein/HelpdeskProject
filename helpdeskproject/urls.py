@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('helpdesk.urls')),
     path('authors/', include('authors.urls')),
 
-    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="authors/pages/password_reset.html"),
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="authors/pages/password_reset.html"),  # noqa
          name='reset_password'),
 
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="authors/pages/password_reset_sent.html"),  # noqa
@@ -36,7 +36,7 @@ urlpatterns = [
     path('reset_password_complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name="authors/pages/password_reset_done.html"), name="password_reset_complete"),  # noqa
 
-
+    path('summernote/', include('django_summernote.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

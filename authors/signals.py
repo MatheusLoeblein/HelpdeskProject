@@ -25,7 +25,7 @@ def create_profile(sender, instance, created, *args, **kwargs):
 
 @receiver(pre_delete, sender=Profile)
 def profile_cover_delete(sender, instance, *args, **kwargs):
-    old_instance = Profile.objects.get(pk=instance.pk)
+    old_instance = Profile.objects.filter(pk=instance.pk).first()
 
     if old_instance:
         delete_cover_profile(old_instance)
@@ -33,7 +33,7 @@ def profile_cover_delete(sender, instance, *args, **kwargs):
 
 @receiver(pre_save, sender=Profile)
 def profile_cover_update(sender, instance, *args, **kwargs):
-    old_instance = Profile.objects.get(pk=instance.pk)
+    old_instance = Profile.objects.filter(pk=instance.pk).first()
 
     if not old_instance:
         return
