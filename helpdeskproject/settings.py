@@ -171,10 +171,6 @@ SUMMERNOTE_CONFIG = {
     # Using SummernoteWidget - iframe mode, default
     'iframe': True,
 
-    # Or, you can set it to `False` to use SummernoteInplaceWidget by default - no iframe mode
-    # In this case, you have to load Bootstrap/jQuery sources and dependencies manually.
-    # Use this when you're already using Bootstrap/jQuery based themes.
-
     # You can put custom Summernote settings
     'summernote': {
         # As an example, using Summernote Air-mode
@@ -195,7 +191,6 @@ SUMMERNOTE_CONFIG = {
             ['fontname', ['fontname']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
             ['insert', ['link']],
             ['view', ['fullscreen', 'help']],
         ],
@@ -208,7 +203,6 @@ SUMMERNOTE_CONFIG = {
         'codemirror': {
             'mode': 'htmlmixed',
             'lineNumbers': 'true',
-            # You have to include theme file in 'css' or 'css_for_inplace' before using it.
             'theme': 'monokai',
         },
     }
