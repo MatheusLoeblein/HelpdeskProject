@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-from utils.django_forms import add_attr, add_placeholder, strong_password
+from utils.django_forms import add_attr, strong_password
 
 
 class RegisterForm(forms.ModelForm):
@@ -19,13 +19,13 @@ class RegisterForm(forms.ModelForm):
     username = forms.CharField(
         label='Usuario',
         help_text=(
-            'O nome de usuário deve ter letras, números ou um desse caracteres @.+-_. '
+            'O nome de usuário pode ter letras, números ou um desse caracteres @.+-_. '  # noqa
             'O comprimento deve estar entre 4 e 150 caracteres.'
         ),
         error_messages={
             'required': 'Este campo não deve estar vazio',
             'min_length': 'O nome de usuário deve ter pelo menos 4 caracteres',
-            'max_length': 'O nome de usuário deve ter pelo menos 150 caracteres',
+            'max_length': 'O nome de usuário deve ter pelo menos 150 caracteres',  # noqa
         },
         min_length=4, max_length=150,
     )
@@ -90,7 +90,7 @@ class RegisterForm(forms.ModelForm):
         password2 = cleaned_data.get('password2')
         if password != password2:
             password_confirmation_error = ValidationError(
-                'Senhas não devem ser iguais',
+                'Senhas não são iguais',
                 code='invalid'
             )
             raise ValidationError({

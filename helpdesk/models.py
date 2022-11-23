@@ -16,7 +16,7 @@ class Tarefa(models.Model):
     status_choices = (
         ("Aberto", "Aberto"),
         ("Execução", "Execução"),
-        ("Fechado", "Fechado"),
+        ("Finalizado", "Finalizado"),
     )
     title = models.CharField(max_length=65, verbose_name='Título')
     description = models.TextField(verbose_name='Descrição')
@@ -31,6 +31,7 @@ class Tarefa(models.Model):
         Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, verbose_name='Autor')
+    global_msg = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
