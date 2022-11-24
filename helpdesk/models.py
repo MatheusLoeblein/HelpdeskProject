@@ -31,7 +31,8 @@ class Tarefa(models.Model):
         Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, verbose_name='Autor')
-    global_msg = models.BooleanField(default=False)
+    global_msg = models.BooleanField(
+        default=False, verbose_name='Mensagem Global')
 
     def __str__(self):
         return self.title
@@ -55,8 +56,21 @@ class Comment(models.Model):
     status_modify = models.CharField(
         max_length=12, choices=status_choices, blank=True, null=True, default="Aberto", verbose_name='Status')  # noqa
 
-    def __str__(self):
-        return str(self.Tarefa)
+
+class Notification(models.Model):
+    type_choices = (
+        ("Comment", "Comment"),
+        ("New Task", "New Task"),
+        ("Status", "Status"),
+    )
+    type = models.CharField(
+        max_length=8, choices=type_choices, blank=True, null=True)
+    Tarefa = models.ForeignKey(
+        Tarefa, on_delete=models.CASCADE, verbose_name='Tarefa')
+    author = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, verbose_name='Autor')
+    created_at = models.DateTimeField(auto_now_add=True)
+    visualization = models.BooleanField(default=False)
 
 
 @receiver(post_save, sender=Comment)

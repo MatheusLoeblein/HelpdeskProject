@@ -25,9 +25,8 @@ def home(request):
         tarefas = Tarefa.objects.all().order_by('-data_up_at')
     else:
         usuario = Profile.objects.get(author=request.user)
-
         tarefas = Tarefa.objects.filter(
-            Category=usuario.Category_id).order_by('-data_up_at')
+            Category=usuario.Category_id).order_by('-data_up_at') | Tarefa.objects.filter(global_msg=1).order_by('-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 

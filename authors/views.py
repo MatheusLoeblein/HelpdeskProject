@@ -137,7 +137,7 @@ def dashboard_tarefa_edit(request, id):
 
         messages.success(request, 'Sua tarefa foi salva com sucesso!')
 
-        return redirect(reverse('authors:dashboard_tarefa_edit', args=(id,)))
+        return redirect(reverse('authors:dashboard'))
 
     return render(request, 'authors/pages/dashboard_tarefa.html', {
         'form': form
@@ -163,7 +163,8 @@ def dashboard_tarefa_new(request):
 
         messages.success(request, 'tarefa criada com sucesso.')
 
-        return redirect(reverse('authors:dashboard_tarefa_edit', args=(tarefa.id,)))  # noqa
+        #return redirect(reverse('authors:dashboard_tarefa_edit', args=(tarefa.id,)))  # noqa
+        return redirect(reverse('helpdesk:home'))
 
     return render(request, 'authors/pages/dashboard_tarefa.html', {
         'form': form,
