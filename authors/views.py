@@ -99,12 +99,13 @@ def dashboard(request):
     tarefas = Tarefa.objects.filter(
         author=request.user,
     )
-
+    tarefas_count = len(tarefas)
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
     return render(request, 'authors/pages/dashboard.html', {
         'tarefas': page_obj,
         'pagination_range': pagination_range,
+        'tarefas_count': tarefas_count
 
     })
 

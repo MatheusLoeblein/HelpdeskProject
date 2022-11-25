@@ -44,7 +44,7 @@ class Profile(models.Model):
         saved = super().save(*args, **kwargs)
         if self.cover_profile:
             try:
-                self.resize_image(self.cover_profile, 60)
+                self.resize_image(self.cover_profile, 100)
             except FileNotFoundError:
                 ...
         return saved

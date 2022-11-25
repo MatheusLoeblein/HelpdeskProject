@@ -1,11 +1,21 @@
+{% load static %}
 <main class="main-login-menssage">
     {% if user.is_authenticated %}
+    <div class="Profile-panel">
+        {% if user.profile.cover_profile %}
+        <img src="{{user.profile.cover_profile.url}}" alt="" class="user-img-profile">
+        {% else %}
+        <img src="{% static "helpdesk/imgs/user.jpg"%}" alt="" class="user-img-profile">
+        {% endif %}
+    </div>
     <div class="login-message">
-    Voce esta logando com 
-    {{ request.user.first_name }}.
+    <b>{{ request.user.first_name }} {{ request.user.last_name }}</br>
+    
+    Numero de tarefas: {{tarefas_count}}
 
+    </b>
     {% include 'authors/partials/form_logout.html' %}
-    <a class="authors-logout-link" href="#">clique aqui</a> para deslogar.
+    <a class="authors-logout-link" href="#">@</a>
     </div>
     {% endif %}
 </main>

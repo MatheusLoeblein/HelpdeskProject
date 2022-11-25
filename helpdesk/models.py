@@ -12,12 +12,28 @@ class Category(models.Model):
         return self.name
 
 
+class Tasktipe(models.Model):
+    tipe = models.CharField(max_length=35, verbose_name='Tipo de Tarefa')
+
+    def __str__(self):
+        return self.tipe
+
+
+class Location(models.Model):
+    name = models.CharField(max_length=10, verbose_name='Local')
+
+    def __str__(self):
+        return self.name
+
+
 class Tarefa(models.Model):
     status_choices = (
         ("Aberto", "Aberto"),
         ("Execução", "Execução"),
         ("Finalizado", "Finalizado"),
     )
+    tipe = models.ForeignKey(
+        Tasktipe, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Tipo de Tarefa')
     title = models.CharField(max_length=65, verbose_name='Título')
     description = models.TextField(verbose_name='Descrição')
     prioridade = models.CharField(max_length=20, verbose_name='Prioridade')
@@ -31,6 +47,8 @@ class Tarefa(models.Model):
         Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, verbose_name='Autor')
+    local = models.ForeignKey(
+        Location, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Local')
     global_msg = models.BooleanField(
         default=False, verbose_name='Mensagem Global')
 
