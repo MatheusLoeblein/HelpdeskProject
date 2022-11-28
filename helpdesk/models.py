@@ -31,6 +31,7 @@ class Tarefa(models.Model):
         ("Aberto", "Aberto"),
         ("Execução", "Execução"),
         ("Finalizado", "Finalizado"),
+        ("Global", "Global"),
     )
     tipe = models.ForeignKey(
         Tasktipe, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Tipo de Tarefa')

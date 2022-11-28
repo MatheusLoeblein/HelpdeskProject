@@ -6,6 +6,8 @@
         status-signal-execucao
     {% elif tarefa.status == 'Finalizado' %}
         status-signal-finalizado
+    {% elif tarefa.global_msg == 'True' %}
+        status-signal-global   
     {% endif %}
         ">
     

@@ -176,6 +176,10 @@ img{
     border-left: 8px solid #C4F5C4;
     border-right: 8px solid #C4F5C4;
 }
+.status-signal-global{
+    border-left: 8px solid #a0196c;
+    border-right: 8px solid #a0196c;
+}
 .tarefas-panel-head {
     display: grid;
     grid-template-columns:   7% 10% 20% 13% 16% 10% 13% 10%;
@@ -726,7 +730,7 @@ img{
 }
 
 .login-message{
-    display: grid;
+    display: flex
     text-align: left;
     margin-top: 20px;
     margin-left: 20px;
