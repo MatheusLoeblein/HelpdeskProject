@@ -49,7 +49,7 @@
             {% include  'authors/partials/form_comments.html'%}
             {% else %}
                 <p class="tarefa-finalizada">
-                <h3 class="tarefa-finalizada" > -- Ticket finalizado! Solicite aos administradores para abrilo Novamente! --</h3>
+                <h3 class="tarefa-finalizada" > -- Ticket finalizado. Se necessário reabrir, acione o administrador! --</h3>
                 </p>
             {% endif %}
         {% elif request.user.is_superuser %}
