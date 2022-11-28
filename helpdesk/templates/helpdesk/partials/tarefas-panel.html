@@ -1,13 +1,13 @@
 <div class="main-tarefas-conteiner"> 
     <div class="tarefas-panel-a
-    {% if tarefa.status == 'Aberto' %}
+    {% if tarefa.global_msg %}
+        status-signal-global   
+    {% elif tarefa.status == 'Aberto' %}
         status-signal-aberto
     {% elif tarefa.status == 'Execução' %}
         status-signal-execucao
     {% elif tarefa.status == 'Finalizado' %}
-        status-signal-finalizado
-    {% elif tarefa.global_msg == 'True' %}
-        status-signal-global   
+        status-signal-finalizado  
     {% endif %}
         ">
     
