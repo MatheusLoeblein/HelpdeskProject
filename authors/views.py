@@ -5,14 +5,15 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import HttpResponseRedirect, redirect, render
 from django.urls import reverse
 
+from authors.models import Profile
 from helpdesk.models import Tarefa
 from utils.helpdesk.export_xlsx import export_xlsx
 from utils.pagination import make_pagination
 
-from .forms import AuthorTarefaForm, LoginForm, RegisterForm
+from .forms import AuthorTarefaForm, LoginForm, ProfileForm, RegisterForm
 
 PER_PAGE = os.environ.get('PER_PAGE', 25)
 
@@ -211,3 +212,24 @@ def export_tarefas_xlsx(request):
 
     response = export_xlsx(model, filename_final, queryset, columns)
     return response
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def addprofileimg(request):
+
+    url = request.META.get('HTTP_REFERER')
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        usuario = Profile.objects.get(author=request.user)
+        if form.is_valid():
+            form = Profile()
+            form = usuario
+            form.save()
+
+            messages.success(request, 'Foto adicionada com Sucesso!')
+
+            return (HttpResponseRedirect(url))
+
+        messages.error(request, 'Erro ao adicionar Foto.')
+    return (HttpResponseRedirect(url))

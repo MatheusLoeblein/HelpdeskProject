@@ -177,8 +177,17 @@ img{
     border-right: 8px solid #C4F5C4;
 }
 .status-signal-global{
-    border-left: 8px solid #b34488;
-    border-right: 8px solid #b34488;
+    border-left: 8px solid var(--color-font-formedica);
+    border-right: 8px solid var(--color-font-formedica);
+}
+
+.panel-head-form a{
+    text-decoration: none;
+    color: var(--color-gray-8);
+}
+.panel-head-form a:hover{
+    color: var(--color-font-formedica);
+    transition: all 300ms ease-in-out;
 }
 .tarefas-panel-head {
     display: grid;
@@ -241,7 +250,8 @@ img{
 }
 .tarefas-panel-dashboard-:hover {
     background-color: #cce5ff;
-
+    transform: scale(1.015);
+    transition: all 300ms ease-in-out;
 }
 
 .tarefas-panel-dashboard- a ,
@@ -468,6 +478,11 @@ img{
     margin: 20px;
     margin-left: 40px;
 }
+.tarefa-global-msg{
+    margin: 20px;
+    margin-left: 100px;
+}
+
 
 .form-content-comment-grid{
     display: grid;
@@ -970,7 +985,7 @@ img{
     display: flex;
     flex-flow: column wrap;
     font-family: var(--font-headings);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-top: 50px;
     
 }

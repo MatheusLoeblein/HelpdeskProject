@@ -19,6 +19,8 @@ urlpatterns = [
          name="dashboard_tarefa_delete"),
     path('dashboard/export/xlsx/', views.export_tarefas_xlsx,
          name="dashboard_export_xlsx"),
+    path('dashboard/addprofileimg/', views.addprofileimg, name="addprofileimg")
+
 
 
 ]
