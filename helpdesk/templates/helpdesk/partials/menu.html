@@ -15,12 +15,14 @@
         {% if user.is_authenticated %}
           <a href="{% url 'authors:dashboard_tarefa_new' %}">Abrir Tarefa</a>
           <a href="{% url 'authors:dashboard' %}">Minhas Tarefas</a>
+          <a href="{% url 'helpdesk:finalizado' %}">Finalizadas</a>
           <a class ="authors-logout-link" href="{% url 'authors:logout' %}">Logout</a>
           {% include  'authors/partials/form_logout.html'%}
         {% else %}
           <a class="author-logout-link" href="{% url 'authors:login' %}">Login</a>
           <a href="{% url 'authors:register' %}">Cadastro</a>
       {% endif %}
+        
       </nav>
     </div>
   </div>

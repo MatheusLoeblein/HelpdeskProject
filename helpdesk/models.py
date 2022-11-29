@@ -97,3 +97,6 @@ def update_tarefa(sender, instance, **kwargs):
     instance.Tarefa.data_up_at = instance.created_at
     instance.Tarefa.status = instance.status_modify
     instance.Tarefa.save()
+    if instance.Tarefa.status == "Finalizado":
+        instance.Tarefa.prioridade = "Baixa"
+        instance.Tarefa.save()
