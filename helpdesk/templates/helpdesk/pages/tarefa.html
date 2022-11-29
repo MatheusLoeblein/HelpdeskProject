@@ -10,7 +10,7 @@
     <div class="content-tarefa-main">
         <div class="head-tarefa-content">
 
-            <h2>{{ tarefa.title}}</h2>
+            <h2>{{tarefa.tipe}}</h2>
         </div>  
             
            
@@ -46,10 +46,16 @@
         
         {% if not request.user.is_superuser %}
             {% if not tarefa.status == 'Finalizado'%}
-            {% include  'authors/partials/form_comments.html'%}
+                {% if not tarefa.global_msg %}
+                {% include  'authors/partials/form_comments.html'%}
+                {% else %}
+                <p class="tarefa-global-msg">
+                    <h3 class="tarefa-global-msg" > -- Ticket so pode ser alterado por administradores! --</h3>
+                    </p>
+                {% endif %}
             {% else %}
                 <p class="tarefa-finalizada">
-                <h3 class="tarefa-finalizada" > -- Ticket finalizado! Solicite aos administradores para abrilo Novamente! --</h3>
+                <h3 class="tarefa-finalizada" > -- Ticket finalizado. Se necessário reabrir, acione o administrador! --</h3>
                 </p>
             {% endif %}
         {% elif request.user.is_superuser %}
@@ -67,7 +73,7 @@
        
         <div class="division-status"></div>
         
-        <span class="tarefa-starus"><b>Status</b> {{tarefa.status}}</span>
+        <span class="tarefa-status"><b>Status</b> {{tarefa.status}}</span>
         <span class="tarefa-prioridade"><b>Prioridade</b>
             {% if tarefa.prioridade == 'Urgente' %}
                 <span href="#" class="tarefa-prioridade-urgencia">{{tarefa.prioridade}}</span>

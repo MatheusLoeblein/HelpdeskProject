@@ -12,12 +12,29 @@ class Category(models.Model):
         return self.name
 
 
+class Tasktipe(models.Model):
+    tipe = models.CharField(max_length=35, verbose_name='Tipo de Tarefa')
+
+    def __str__(self):
+        return self.tipe
+
+
+class Location(models.Model):
+    name = models.CharField(max_length=10, verbose_name='Local')
+
+    def __str__(self):
+        return self.name
+
+
 class Tarefa(models.Model):
     status_choices = (
         ("Aberto", "Aberto"),
         ("Execução", "Execução"),
-        ("Fechado", "Fechado"),
+        ("Finalizado", "Finalizado"),
+        ("Global", "Global"),
     )
+    tipe = models.ForeignKey(
+        Tasktipe, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Tipo de Tarefa')
     title = models.CharField(max_length=65, verbose_name='Título')
     description = models.TextField(verbose_name='Descrição')
     prioridade = models.CharField(max_length=20, verbose_name='Prioridade')
@@ -31,6 +48,10 @@ class Tarefa(models.Model):
         Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, verbose_name='Autor')
+    local = models.ForeignKey(
+        Location, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Local')
+    global_msg = models.BooleanField(
+        default=False, verbose_name='Mensagem Global')
 
     def __str__(self):
         return self.title
@@ -54,8 +75,21 @@ class Comment(models.Model):
     status_modify = models.CharField(
         max_length=12, choices=status_choices, blank=True, null=True, default="Aberto", verbose_name='Status')  # noqa
 
-    def __str__(self):
-        return str(self.Tarefa)
+
+class Notification(models.Model):
+    type_choices = (
+        ("Comment", "Comment"),
+        ("New Task", "New Task"),
+        ("Status", "Status"),
+    )
+    type = models.CharField(
+        max_length=8, choices=type_choices, blank=True, null=True)
+    Tarefa = models.ForeignKey(
+        Tarefa, on_delete=models.CASCADE, verbose_name='Tarefa')
+    author = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, verbose_name='Autor')
+    created_at = models.DateTimeField(auto_now_add=True)
+    visualization = models.BooleanField(default=False)
 
 
 @receiver(post_save, sender=Comment)
@@ -63,3 +97,6 @@ def update_tarefa(sender, instance, **kwargs):
     instance.Tarefa.data_up_at = instance.created_at
     instance.Tarefa.status = instance.status_modify
     instance.Tarefa.save()
+    if instance.Tarefa.status == "Finalizado":
+        instance.Tarefa.prioridade = "Baixa"
+        instance.Tarefa.save()

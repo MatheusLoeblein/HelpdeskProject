@@ -28,7 +28,7 @@
             {% for tarefa in tarefas %}
                 <div class="tarefas-panel-dashboard-">
                 <a class = "lista-dashboard"href="{% url 'helpdesk:tarefa' tarefa.id %}">#{{tarefa.id}} </a>
-                <a class = "lista-dashboard"href="{% url 'helpdesk:tarefa' tarefa.id %}">{{ tarefa.title }}</a>   
+                <a class = "lista-dashboard"href="{% url 'helpdesk:tarefa' tarefa.id %}">{{ tarefa.tipe }}</a>   
                 <a class = "lista-dashboard"href="{% url 'helpdesk:tarefa' tarefa.id %}">{{ tarefa.data_at }}</a>
                 {% if tarefa.status == 'Aberto' %}
                 <a class = "lista-dashboard-edit"href="{% url 'authors:dashboard_tarefa_edit' tarefa.id %}">✒️</a>

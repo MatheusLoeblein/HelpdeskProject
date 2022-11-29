@@ -10,7 +10,11 @@
 {% include 'helpdesk/partials/message.html' %}
 
     {% include 'helpdesk/partials/tarefas-head.html'%}
-   
+
+    {% for global in global_msg %}
+        {% include 'helpdesk/partials/tarefas-panel.html'%}
+    {% endfor %}
+        
     {% for tarefa in tarefas %}
         {% include 'helpdesk/partials/tarefas-panel.html'%}
     {% empty %}

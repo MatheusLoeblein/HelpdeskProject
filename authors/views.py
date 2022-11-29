@@ -5,14 +5,15 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import HttpResponseRedirect, redirect, render
 from django.urls import reverse
 
+from authors.models import Profile
 from helpdesk.models import Tarefa
 from utils.helpdesk.export_xlsx import export_xlsx
 from utils.pagination import make_pagination
 
-from .forms import AuthorTarefaForm, LoginForm, RegisterForm
+from .forms import AuthorTarefaForm, LoginForm, ProfileForm, RegisterForm
 
 PER_PAGE = os.environ.get('PER_PAGE', 25)
 
@@ -99,12 +100,13 @@ def dashboard(request):
     tarefas = Tarefa.objects.filter(
         author=request.user,
     )
-
+    tarefas_count = len(tarefas)
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
     return render(request, 'authors/pages/dashboard.html', {
         'tarefas': page_obj,
         'pagination_range': pagination_range,
+        'tarefas_count': tarefas_count
 
     })
 
@@ -137,7 +139,7 @@ def dashboard_tarefa_edit(request, id):
 
         messages.success(request, 'Sua tarefa foi salva com sucesso!')
 
-        return redirect(reverse('authors:dashboard_tarefa_edit', args=(id,)))
+        return redirect(reverse('authors:dashboard'))
 
     return render(request, 'authors/pages/dashboard_tarefa.html', {
         'form': form
@@ -163,7 +165,8 @@ def dashboard_tarefa_new(request):
 
         messages.success(request, 'tarefa criada com sucesso.')
 
-        return redirect(reverse('authors:dashboard_tarefa_edit', args=(tarefa.id,)))  # noqa
+        #return redirect(reverse('authors:dashboard_tarefa_edit', args=(tarefa.id,)))  # noqa
+        return redirect(reverse('helpdesk:home'))
 
     return render(request, 'authors/pages/dashboard_tarefa.html', {
         'form': form,
@@ -209,3 +212,24 @@ def export_tarefas_xlsx(request):
 
     response = export_xlsx(model, filename_final, queryset, columns)
     return response
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def addprofileimg(request):
+
+    url = request.META.get('HTTP_REFERER')
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        usuario = Profile.objects.get(author=request.user)
+        if form.is_valid():
+            form = Profile()
+            form = usuario
+            form.save()
+
+            messages.success(request, 'Foto adicionada com Sucesso!')
+
+            return (HttpResponseRedirect(url))
+
+        messages.error(request, 'Erro ao adicionar Foto.')
+    return (HttpResponseRedirect(url))

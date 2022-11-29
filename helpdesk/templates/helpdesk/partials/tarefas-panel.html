@@ -1,5 +1,16 @@
-<div class="main-tarefas-conteiner">  
-   <div class="tarefas-panel-a" >
+<div class="main-tarefas-conteiner"> 
+    <div class="tarefas-panel-a
+    {% if tarefa.global_msg %}
+        status-signal-global   
+    {% elif tarefa.status == 'Aberto' %}
+        status-signal-aberto
+    {% elif tarefa.status == 'Execução' %}
+        status-signal-execucao
+    {% elif tarefa.status == 'Finalizado' %}
+        status-signal-finalizado  
+    {% endif %}
+        ">
+    
         <div class="tarefa">
             <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-id">#{{ tarefa.id }}</a>
         </div>
@@ -7,9 +18,11 @@
             <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-situacao">{{tarefa.status}}</a>
         </div>
         <div class="tarefa">
-            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-titulo">{{ tarefa.title}}</a>
+            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-titulo">{{ tarefa.tipe}}</a>
         </div>
-        
+        <div class="tarefa">
+            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-titulo">{{ tarefa.local}}</a>
+        </div>
         <div class="tarefa">
             <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-data">{{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</a>
         </div>
