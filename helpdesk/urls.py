@@ -11,4 +11,6 @@ urlpatterns = [
          views.category, name="tarefas-category"),
     path('tarefa/<int:id>/', views.tarefa, name="tarefa"),
     path('tarefa/addcomment/<int:id>', views.addcomment, name="addcomment"),
+    path('status/', views.situacao, name="status"),
+    path('prioridade/', views.prioridade, name="prioridade"),
 ]

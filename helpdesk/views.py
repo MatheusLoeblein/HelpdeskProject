@@ -26,7 +26,60 @@ def home(request):
     else:
         usuario = Profile.objects.get(author=request.user)
         tarefas = Tarefa.objects.filter(
-            Category=usuario.Category_id).order_by('-data_up_at') | Tarefa.objects.filter(global_msg=1).order_by('-data_up_at')
+            Category=usuario.Category_id,
+            status="Aberto"
+        ).order_by('-data_up_at') | Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Execução"
+        ).order_by('-data_up_at') | Tarefa.objects.filter(global_msg=1).order_by('-data_up_at')
+
+    page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
+
+    return render(request, "helpdesk/pages/home.html", context={
+        'tarefas': page_obj,
+        'pagination_range': pagination_range,
+    })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def situacao(request):
+
+    if request.user.is_superuser:
+        tarefas = Tarefa.objects.all().order_by('status', '-data_up_at')
+    else:
+        usuario = Profile.objects.get(author=request.user)
+        tarefas = tarefas = Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Aberto"
+        ).order_by('status', '-data_up_at') | Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Execução"
+        ).order_by('status', '-data_up_at')
+
+    page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
+
+    return render(request, "helpdesk/pages/home.html", context={
+        'tarefas': page_obj,
+        'pagination_range': pagination_range,
+    })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def prioridade(request):
+
+    if request.user.is_superuser:
+        tarefas = Tarefa.objects.all().order_by('-data_up_at')
+    else:
+        usuario = Profile.objects.get(author=request.user)
+        tarefas = tarefas = Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Aberto",
+        ).filter(Q(Q(prioridade="Urgente") | Q(
+            prioridade="Alta") | Q(prioridade="Moderada") | Q(prioridade="Baixa"))) | Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Execução",
+        ).filter(Q(Q(prioridade="Urgente") | Q(
+            prioridade="Alta") | Q(prioridade="Moderada") | Q(prioridade="Baixa")))
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
