@@ -43,7 +43,7 @@
     --color-gray-8: #323232;
     --color-gray-9: #191919;
 
-    --font-primary: sans-serif;
+    --font-primary: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
    /* --font-headings: 'Roboto Slab', serif; */
     --font-headings:  Verdana;
 
@@ -54,6 +54,8 @@
     margin: 0;
     padding: 0;
 }
+
+
 body {
     background-color:var(--color-gray-0);
     font-family: var(--font-headings);
@@ -66,6 +68,7 @@ img{
 }
 .header {
     display: flex;
+    min-width: 100vh;
     justify-content: center;
     padding: 10px;
    /* background-color: rgba(0, 0, 0, 0.756);*/
@@ -82,18 +85,26 @@ img{
 }
 
 .menu a {
-    padding: 15px;
+
     text-decoration: none;
     font-family:var(--font-primary);
     color: var(--color-font-formedica);
     font-size: 30px;
+}
+.menu h6{
+
+    text-align: right;
+    padding: 0;
+    font-size: 10px;
+    color: #9E1F63;
+    font-family:var(--font-primary);
+
 }
 
 .logo {
     margin-top: 10px;
     width: 150px;
     cursor: pointer;
-    top: 150px;
 }
 .user-img{
     width: 60px;

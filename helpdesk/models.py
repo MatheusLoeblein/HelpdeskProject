@@ -45,7 +45,7 @@ class Tarefa(models.Model):
     cover = models.ImageField(
         upload_to='helpdesk/covers/%Y/%m/%d/', blank=True, null=True, verbose_name='Anexo')  # noqa
     Category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
+        Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor Responsável')  # noqa
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, verbose_name='Autor')
     local = models.ForeignKey(

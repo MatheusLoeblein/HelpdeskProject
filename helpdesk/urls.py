@@ -12,5 +12,6 @@ urlpatterns = [
     path('tarefa/<int:id>/', views.tarefa, name="tarefa"),
     path('tarefa/addcomment/<int:id>', views.addcomment, name="addcomment"),
     path('status/', views.status, name="status"),
+    path('-status/', views.status_, name="-status"),
     path('finalizados/', views.finalizado, name="finalizado")
 ]

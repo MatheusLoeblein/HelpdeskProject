@@ -5,7 +5,13 @@
             #Ticket
         </div>
         <div class="panel-head-form">
-          <a href="{% url 'helpdesk:status' %}">⇣ Situação </a>  
+          <a href="          
+          {% if request.get_full_path == '/status/' %}
+            {% url 'helpdesk:-status' %}
+          {% else %}
+            {% url 'helpdesk:status' %}
+          {% endif %}
+          ">⇣ Situação </a>  
         </div>
         <div class="panel-head-form">
             Tipo da tarefa

@@ -52,10 +52,33 @@ def status(request):
         tarefas = Tarefa.objects.filter(
             Category=usuario.Category_id,
             status="Aberto"
-        ).order_by('-data_up_at') | Tarefa.objects.filter(
+        ).order_by('status', '-data_up_at') | Tarefa.objects.filter(
             Category=usuario.Category_id,
             status="Execução"
-        ).order_by('-data_up_at')
+        ).order_by('status', '-data_up_at')
+
+    page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
+
+    return render(request, "helpdesk/pages/home.html", context={
+        'tarefas': page_obj,
+        'pagination_range': pagination_range,
+    })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def status_(request):
+
+    if request.user.is_superuser:
+        tarefas = Tarefa.objects.all().order_by('-status', '-data_up_at')
+    else:
+        usuario = Profile.objects.get(author=request.user)
+        tarefas = Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Aberto"
+        ).order_by('-status', '-data_up_at') | Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Execução"
+        ).order_by('-status', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
