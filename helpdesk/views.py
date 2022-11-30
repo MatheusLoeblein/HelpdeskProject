@@ -152,8 +152,8 @@ def search(request):
     if not search_term:
         raise Http404()
 
-    tarefas = Tarefa.objects.filter(Category=usuario).filter(Q(Q(title__icontains=search_term) | Q(
-        status__icontains=search_term) | Q(id__icontains=search_term) | Q(prioridade__icontains=search_term))).order_by('-data_up_at')
+    tarefas = Tarefa.objects.filter(Category=usuario).filter(Q(Q(title__icontains=search_term) | Q(  # noqa
+        status__icontains=search_term) | Q(id__icontains=search_term) | Q(prioridade__icontains=search_term))).order_by('-data_up_at')  # noqa
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
