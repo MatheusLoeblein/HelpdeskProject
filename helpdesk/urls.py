@@ -14,4 +14,5 @@ urlpatterns = [
     path('status/', views.status, name="status"),
     path('-status/', views.status_, name="-status"),
     path('finalizados/', views.finalizado, name="finalizado")
+
 ]

@@ -31,8 +31,16 @@ def home(request):
         ).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(
             Category=usuario.Category_id,
             status="Execução"
+<<<<<<< HEAD
+        ).order_by('-data_up_at') | Tarefa.objects.filter(global_msg=1).order_by('-data_up_at')
+=======
         ) | Tarefa.objects.filter(
+<<<<<<< HEAD
             global_msg=1).order_by('-global_msg', '-data_up_at')
+=======
+            global_msg=1).order_by('-data_up_at')
+>>>>>>> 72527e843dae0d3875bfbe9aca44b61a8e051cf3
+>>>>>>> e128931322e720ae33983af6fed9828e02bc2b78
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
@@ -43,18 +51,32 @@ def home(request):
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
+<<<<<<< HEAD
+def situacao(request):
+=======
 def status(request):
+>>>>>>> 72527e843dae0d3875bfbe9aca44b61a8e051cf3
 
     if request.user.is_superuser:
         tarefas = Tarefa.objects.all().order_by('-global_msg', 'status', '-data_up_at')
     else:
         usuario = Profile.objects.get(author=request.user)
+<<<<<<< HEAD
+        tarefas = tarefas = Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Aberto"
+        ).order_by('status', '-data_up_at') | Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Execução"
+        ).order_by('status', '-data_up_at')
+=======
         tarefas = Tarefa.objects.filter(
             Category=usuario.Category_id,
             status="Aberto"
         ).order_by('-global_msg', 'status', '-data_up_at') | Tarefa.objects.filter(
             Category=usuario.Category_id,
             status="Execução"
+<<<<<<< HEAD
         ).order_by('-global_msg', 'status', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
@@ -80,6 +102,10 @@ def status_(request):
             Category=usuario.Category_id,
             status="Execução"
         ).order_by('-global_msg', '-status', '-data_up_at')
+=======
+        ).order_by('-data_up_at')
+>>>>>>> 72527e843dae0d3875bfbe9aca44b61a8e051cf3
+>>>>>>> e128931322e720ae33983af6fed9828e02bc2b78
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
@@ -90,6 +116,23 @@ def status_(request):
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
+<<<<<<< HEAD
+def prioridade(request):
+
+    if request.user.is_superuser:
+        tarefas = Tarefa.objects.all().order_by('-data_up_at')
+    else:
+        usuario = Profile.objects.get(author=request.user)
+        tarefas = tarefas = Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Aberto",
+        ).filter(Q(Q(prioridade="Urgente") | Q(
+            prioridade="Alta") | Q(prioridade="Moderada") | Q(prioridade="Baixa"))) | Tarefa.objects.filter(
+            Category=usuario.Category_id,
+            status="Execução",
+        ).filter(Q(Q(prioridade="Urgente") | Q(
+            prioridade="Alta") | Q(prioridade="Moderada") | Q(prioridade="Baixa")))
+=======
 def finalizado(request):
 
     if request.user.is_superuser:
@@ -101,6 +144,7 @@ def finalizado(request):
             Category=usuario.Category_id,
             status="Finalizado"
         ).order_by('-data_up_at')
+>>>>>>> 72527e843dae0d3875bfbe9aca44b61a8e051cf3
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 

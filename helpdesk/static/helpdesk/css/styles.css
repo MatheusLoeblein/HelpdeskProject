@@ -195,10 +195,13 @@ img{
 .panel-head-form a{
     text-decoration: none;
     color: var(--color-gray-8);
+<<<<<<< HEAD
+=======
 }
 .panel-head-form a:hover{
     color: var(--color-font-formedica);
     transition: all 300ms ease-in-out;
+>>>>>>> 72527e843dae0d3875bfbe9aca44b61a8e051cf3
 }
 .tarefas-panel-head {
     display: grid;
@@ -261,8 +264,14 @@ img{
 }
 .tarefas-panel-dashboard-:hover {
     background-color: #cce5ff;
+<<<<<<< HEAD
+    transform: scale(1.01);
+    transition: all 300ms ease-in-out;
+
+=======
     transform: scale(1.015);
     transition: all 300ms ease-in-out;
+>>>>>>> 72527e843dae0d3875bfbe9aca44b61a8e051cf3
 }
 
 .tarefas-panel-dashboard- a ,
