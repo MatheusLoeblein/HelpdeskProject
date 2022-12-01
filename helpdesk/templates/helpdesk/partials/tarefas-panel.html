@@ -20,7 +20,7 @@
         </div>
         <div class="tarefa">
             {% if tarefa.global_msg %}
-                <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-situacao">Fixo</a>
+                <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-situacao">Fixado</a>
             {% elif not tarefa.global_msg %}
                 <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-situacao">{{tarefa.status}}</a>
             {% endif %}
