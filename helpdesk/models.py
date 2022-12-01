@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 
@@ -31,7 +31,6 @@ class Tarefa(models.Model):
         ("Aberto", "Aberto"),
         ("Execução", "Execução"),
         ("Finalizado", "Finalizado"),
-        ("Global", "Global"),
     )
     tipe = models.ForeignKey(
         Tasktipe, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Tipo de Tarefa')
@@ -62,6 +61,7 @@ class Comment(models.Model):
         ("Aberto", "Aberto"),
         ("Execução", "Execução"),
         ("Finalizado", "Finalizado"),
+
     )
     Tarefa = models.ForeignKey(
         Tarefa, on_delete=models.CASCADE, verbose_name='Tarefa')

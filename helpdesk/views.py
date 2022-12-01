@@ -68,7 +68,7 @@ def status(request):
 def status_(request):
 
     if request.user.is_superuser:
-        tarefas = Tarefa.objects.all().order_by('global_msg', '-status', '-data_up_at')
+        tarefas = Tarefa.objects.all().order_by('-global_msg', '-status', '-data_up_at')
 
     else:
         usuario = Profile.objects.get(author=request.user)
