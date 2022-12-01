@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 
@@ -31,7 +31,6 @@ class Tarefa(models.Model):
         ("Aberto", "Aberto"),
         ("Execução", "Execução"),
         ("Finalizado", "Finalizado"),
-        ("Global", "Global"),
     )
     tipe = models.ForeignKey(
         Tasktipe, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Tipo de Tarefa')
@@ -45,7 +44,7 @@ class Tarefa(models.Model):
     cover = models.ImageField(
         upload_to='helpdesk/covers/%Y/%m/%d/', blank=True, null=True, verbose_name='Anexo')  # noqa
     Category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
+        Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor Responsável')  # noqa
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, verbose_name='Autor')
     local = models.ForeignKey(
@@ -62,6 +61,7 @@ class Comment(models.Model):
         ("Aberto", "Aberto"),
         ("Execução", "Execução"),
         ("Finalizado", "Finalizado"),
+
     )
     Tarefa = models.ForeignKey(
         Tarefa, on_delete=models.CASCADE, verbose_name='Tarefa')

@@ -15,7 +15,11 @@
             <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-id">#{{ tarefa.id }}</a>
         </div>
         <div class="tarefa">
-            <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-situacao">{{tarefa.status}}</a>
+            {% if tarefa.global_msg %}
+                <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-situacao">📌Fixo</a>
+            {% elif not tarefa.global_msg %}
+                <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-situacao">{{tarefa.status}}</a>
+            {% endif %}
         </div>
         <div class="tarefa">
             <a href="{% url 'helpdesk:tarefa' tarefa.id %}" class="tarefa-titulo">{{ tarefa.tipe}}</a>

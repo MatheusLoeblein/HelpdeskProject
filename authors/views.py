@@ -8,7 +8,7 @@ from django.http import Http404
 from django.shortcuts import HttpResponseRedirect, redirect, render
 from django.urls import reverse
 
-from authors.models import Profile
+from authors.models import Maquinas, Profile
 from helpdesk.models import Tarefa
 from utils.helpdesk.export_xlsx import export_xlsx
 from utils.pagination import make_pagination
@@ -233,3 +233,13 @@ def addprofileimg(request):
 
         messages.error(request, 'Erro ao adicionar Foto.')
     return (HttpResponseRedirect(url))
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def maquinas(request):
+
+    maquinas = Maquinas.objects.all()
+
+    return render(request, 'authors/pages/maquinas.html', {
+        'maquinas': maquinas,
+    })
