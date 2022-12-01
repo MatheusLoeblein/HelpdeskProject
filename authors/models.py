@@ -26,6 +26,8 @@ class IP(models.Model):
 
 
 class Maquinas(models.Model):
+    ativo = models.BooleanField(
+        default=False, verbose_name="Ativo?")
     nome = models.CharField(max_length=30, verbose_name='Nome da Maquina')
     Category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
