@@ -16,6 +16,9 @@
           <a href="{% url 'authors:dashboard_tarefa_new' %}">Abrir Tarefa</a>
           <a href="{% url 'authors:dashboard' %}">Minhas Tarefas</a>
           <a href="{% url 'helpdesk:finalizado' %}">Finalizadas</a>
+          {% if user.is_superuser %}
+            <a href="{% url 'admin:index' %}">Administração</a>
+          {% endif %}
           <a class ="authors-logout-link" href="{% url 'authors:logout' %}">Logout</a>
           {% include  'authors/partials/form_logout.html'%}
         {% else %}

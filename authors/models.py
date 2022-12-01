@@ -32,7 +32,7 @@ class Maquinas(models.Model):
     config = models.CharField(max_length=100, verbose_name='Config da maquina')
     anydesk = models.CharField(max_length=11, verbose_name='Anydesk')
     usuario2 = models.CharField(
-        max_length=30, verbose_name='Usuario Temporario')
+        max_length=30, verbose_name='Usuario Temporario', null=True, blank=True)
     usuario = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Usuario')  # noqa
     ramal = models.CharField(max_length=4, null=True, verbose_name='Ramal')
