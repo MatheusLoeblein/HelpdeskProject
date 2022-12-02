@@ -757,7 +757,7 @@ img{
 }
 
 .login-message{
-    display: flex
+    display: flex;
     text-align: left;
     margin-top: 20px;
     margin-left: 20px;
@@ -1087,3 +1087,10 @@ img{
 
 }
 
+.panel-content-maquinas{
+    transition: all 300ms ease-in-out;
+}
+.panel-content-maquinas:hover{
+    transition: all 300ms ease-in-out;
+    transform: scale(1.05);
+}

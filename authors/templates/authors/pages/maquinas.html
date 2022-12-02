@@ -13,7 +13,7 @@
 
         {% for maquina in maquinas %}
         
-        <div>
+        <div class="panel-content-maquinas">
             <div class="maquinas-panel-head">
                 <p>
                 {% if maquina.ativo %}
@@ -30,16 +30,28 @@
             <div class="maquinas-panel-content">
                 <p>{{maquina.config}}</p>
                 <p>{{maquina.usuario.first_name}} {{maquina.usuario.last_name}}</p>
-                <p>{{maquina.ramal}}</p>
+                <p>Ramal: {{maquina.ramal}}</p>
                 <p>{{maquina.email}}</p>
-                <p>{{maquina.skype}}</p>
-                <p>{{maquina.windows}}</p>
-                <p>{{maquina.ip}}</p>
-                <p>{{maquina.usuariofc}}</p>
-                <p>{{maquina.celular}}</p>
+                <p>Skype: {{maquina.skype}}</p>
+                <p>Windows {{maquina.windows}}</p>
+                <p>IP: {{maquina.ip}}</p>
+                <p>FC: {{maquina.usuariofc}}</p>
+                <p>Celular: {{maquina.celular}}</p>
                 <p>{{maquina.gmail}}</p>
-                <p>{{maquina.e7}}</p>
-                <p>{{maquina.office}}</p>
+                <p>E7 Antivirus
+                    {% if maquina.e7 %}
+                        ✔️
+                    {% elif not maquina.e7 %}
+                        ❌
+                    {% endif %}
+                </p>
+                <p>Microsoft Office 
+                    {% if maquina.office %}
+                        ✔️
+                    {% elif not maquina.office %}
+                        ❌
+                    {% endif %}
+                </p>
                 <p>{{maquina.data_at}}</p>
             </div>
         </div>
