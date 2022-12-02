@@ -26,6 +26,8 @@ class IP(models.Model):
 
 
 class Maquinas(models.Model):
+    ativo = models.BooleanField(
+        default=False, verbose_name="Ativo?")
     nome = models.CharField(max_length=30, verbose_name='Nome da Maquina')
     Category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
@@ -64,6 +66,8 @@ class Profile(models.Model):
         Category, on_delete=models.SET_NULL, null=True, blank=True)
     cover_profile = models.ImageField(upload_to='helpdesk/profile/imgs/%Y/%m/%d/',
                                       blank=True, null=True, verbose_name='Foto de perfil')
+    maquina = models.ForeignKey(
+        Maquinas, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Maquina')
 
     def __str__(self):
         return str(self.author)

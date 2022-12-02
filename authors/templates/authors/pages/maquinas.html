@@ -3,17 +3,63 @@
 {% block title %} Controle de Maquinas | {{ user.first_name }} |{% endblock title %}
 
 {% block content %}
+
     <div class="main-content-register">
         <h2>Controle de Maquinas ({{user.first_name}})</h2>
 
     {% include 'helpdesk/partials/message.html' %}
 
-        <div class="maquinas-panel-content">
-            asdda
+    <section class="section-maquinas-content">
 
+        {% for maquina in maquinas %}
+        
+        <div class="panel-content-maquinas">
+            <div class="maquinas-panel-head">
+                <p>
+                {% if maquina.ativo %}
+                    🟢
+                {% else %}
+                    🔴
+                {% endif %}
+                    
+                </p>
+                <p>{{maquina.nome}}</p> 
+                <p>{{maquina.Category}}</li>
+                <p>{{maquina.anydesk}}</p>
+            </div>
+            <div class="maquinas-panel-content">
+                <p>{{maquina.config}}</p>
+                <p>{{maquina.usuario.first_name}} {{maquina.usuario.last_name}}</p>
+                <p>Ramal: {{maquina.ramal}}</p>
+                <p>{{maquina.email}}</p>
+                <p>Skype: {{maquina.skype}}</p>
+                <p>Windows {{maquina.windows}}</p>
+                <p>IP: {{maquina.ip}}</p>
+                <p>FC: {{maquina.usuariofc}}</p>
+                <p>Celular: {{maquina.celular}}</p>
+                <p>{{maquina.gmail}}</p>
+                <p>E7 Antivirus
+                    {% if maquina.e7 %}
+                        ✔️
+                    {% elif not maquina.e7 %}
+                        ❌
+                    {% endif %}
+                </p>
+                <p>Microsoft Office 
+                    {% if maquina.office %}
+                        ✔️
+                    {% elif not maquina.office %}
+                        ❌
+                    {% endif %}
+                </p>
+                <p>{{maquina.data_at}}</p>
+            </div>
         </div>
 
 
 
+        {% endfor %}
+    
+    </section>
 
 {% endblock content %}

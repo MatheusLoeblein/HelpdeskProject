@@ -68,9 +68,10 @@
         <span><b>Ticket</b> #{{ tarefa.id }}</span>
         <span class="tarefa-autor"><b>Autor </b>{{tarefa.author.first_name}} {{tarefa.author.last_name}}</span>
         <span class="tarefa-autor"><b>Setor </b>{{tarefa.author.profile.Category}}</span>
+        <span class="tarefa-maquina-anydesk"><b>Anydesk</b> {{tarefa.author.profile.maquina.anydesk}}</span>
         <span class="tarefa-data-created"><b>Criado</b> {{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
         <span class="tarefa-data-updated"><b>Atualizado</b> {{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</span>
-       
+        
         <div class="division-status"></div>
         
         <span class="tarefa-status"><b>Status</b> {{tarefa.status}}</span>
