@@ -13,7 +13,8 @@ from helpdesk.models import Tarefa
 from utils.helpdesk.export_xlsx import export_xlsx
 from utils.pagination import make_pagination
 
-from .forms import AuthorTarefaForm, LoginForm, ProfileForm, RegisterForm
+from .forms import (AuthorTarefaForm, LoginForm, MaquinasForm, ProfileForm,
+                    RegisterForm)
 
 PER_PAGE = os.environ.get('PER_PAGE', 25)
 
@@ -242,4 +243,40 @@ def maquinas(request):
 
     return render(request, 'authors/pages/maquinas.html', {
         'maquinas': maquinas,
+    })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def addmaquina_view(request):
+
+    form = MaquinasForm()
+
+    return render(request, 'authors/pages/maquinas_new.html', {
+        'form': form,
+        'form_action': reverse('authors:maquina_new'),
+    })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def addmaquina(request):
+
+    form = MaquinasForm(
+        data=request.POST or None,
+        files=request.FILES or None,
+    )
+
+    if form.is_valid():
+
+        maquina = form.save(commit=False)
+
+        maquina.save()
+
+        messages.success(request, 'Maquina Cadastrada com sucesso.')
+
+        return redirect(reverse('authors:maquinas'))
+
+    return render(request, 'authors/pages/maquinas_new.html', {
+        'form': form,
+        'form_action': reverse('authors:maquina_new'),
+
     })

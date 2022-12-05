@@ -8,6 +8,10 @@
         <h2>Controle de Maquinas ({{user.first_name}})</h2>
 
     {% include 'helpdesk/partials/message.html' %}
+    
+    <div class="addmaquina-link-main">
+        <a class="addmaquina-link" href="{% url 'authors:maquina_view' %}">Nova Maquina</a>
+    </div>
 
     <section class="section-maquinas-content">
 

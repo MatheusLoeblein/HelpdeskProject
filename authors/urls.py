@@ -20,8 +20,8 @@ urlpatterns = [
     path('dashboard/export/xlsx/', views.export_tarefas_xlsx,
          name="dashboard_export_xlsx"),
     path('dashboard/addprofileimg/', views.addprofileimg, name="addprofileimg"),
-    path('maquinas/', views.maquinas, name="maquinas")
-
-
+    path('maquinas/', views.maquinas, name="maquinas"),
+    path('maquina/view/', views.addmaquina_view, name="maquina_view"),
+    path('maquina/new/', views.addmaquina, name="maquina_new"),
 
 ]

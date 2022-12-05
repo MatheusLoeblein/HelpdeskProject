@@ -15,12 +15,12 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Usuariofc)
 class UsuariofcAdmin(admin.ModelAdmin):
-    ...
+    ordering = 'id',
 
 
 @admin.register(IP)
 class IPAdmin(admin.ModelAdmin):
-    ...
+    ordering = 'id',
 
 
 @admin.register(Maquinas)

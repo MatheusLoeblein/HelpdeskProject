@@ -1094,3 +1094,22 @@ img{
     transition: all 300ms ease-in-out;
     transform: scale(1.05);
 }
+
+.addmaquina-link {
+    background-color: var(--color-gray-8);
+    padding: 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    color:  var(--color-gray-1);
+    margin-left: 150px;
+
+}
+
+.addmaquina-link:hover {
+    background-color: var(--color-font-formedica);
+}
+
+.addmaquina-link-main{
+    margin-top: 50px;
+
+}
