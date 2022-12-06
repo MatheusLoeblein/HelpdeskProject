@@ -1,5 +1,5 @@
 {% load static %}
-<main class="main-login-menssage">
+<div class="main-login-menssage">
     {% if user.is_authenticated %}
     <div class="Profile-panel">
         {% if user.profile.cover_profile %}
@@ -19,10 +19,10 @@
     <div class="login-message">
     <b>{{ request.user.first_name }} {{ request.user.last_name }}</br>
     
-    Numero de tarefas: {{tarefas_count}}
+    Numero de tarefas: {{tarefas_count}} 
 
     </b>
     {% include 'authors/partials/form_logout.html' %}
     </div>
     {% endif %}
-</main>
+</div>
