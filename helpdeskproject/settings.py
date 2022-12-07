@@ -169,7 +169,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 SUMMERNOTE_CONFIG = {
     # Using SummernoteWidget - iframe mode, default
-    'iframe': True,
+    'iframe': False,
 
     # You can put custom Summernote settings
     'summernote': {
@@ -191,7 +191,7 @@ SUMMERNOTE_CONFIG = {
             ['fontname', ['fontname']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
-            ['insert', ['link', 'emoji']],
+            ['insert', ['link']],
             ['view', ['fullscreen', 'help']],
         ],
 
@@ -205,6 +205,8 @@ SUMMERNOTE_CONFIG = {
             'lineNumbers': 'true',
             'theme': 'monokai',
         },
-    }
+    },
+    # Require users to be authenticated for uploading attachments.
+    'attachment_require_authentication': True,
 }
 SUMMERNOTE_THEME = 'bs3'
