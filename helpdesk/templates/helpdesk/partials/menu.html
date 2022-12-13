@@ -11,6 +11,25 @@
     </button>
     <div class="menu-content">
       <nav class="menu-nav">
+        {% load static %}
+        {% if user.is_authenticated %}  
+          <div class="main-login-menssage">
+                {% if user.profile.cover_profile %}
+                <img src="{{user.profile.cover_profile.url}}" alt="" class="user-img-profile">
+                {% else %}
+                <img src="{% static "helpdesk/imgs/user.jpg"%}" alt="" class="user-img-profile">
+                {% endif %}
+                <div class="login-message">
+                  <span>
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                  </span>
+                  <span>
+                    {{request.user.profile.Category}}
+                  </span>
+                </div>
+          </div>
+        <div class="bar-menu"></div>
+        {% endif %}
         <a href="{% url 'helpdesk:home' %}">Tarefas</a>
         {% if user.is_authenticated %}
           <a href="{% url 'authors:dashboard_tarefa_new' %}">Abrir Tarefa</a>

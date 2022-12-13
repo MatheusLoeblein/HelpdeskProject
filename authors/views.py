@@ -101,13 +101,31 @@ def dashboard(request):
     tarefas = Tarefa.objects.filter(
         author=request.user,
     )
-    tarefas_count = len(tarefas)
+    tarefas_a = Tarefa.objects.filter(
+        author=request.user,
+        status='Aberto'
+    )
+    tarefas_e = Tarefa.objects.filter(
+        author=request.user,
+        status='Execução'
+    )
+    tarefas_f = Tarefa.objects.filter(
+        author=request.user,
+        status='Finalizada'
+    )
+
+    tarefas_a = len(tarefas_a)
+    tarefas_e = len(tarefas_e)
+    tarefas_f = len(tarefas_f)
+
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
     return render(request, 'authors/pages/dashboard.html', {
         'tarefas': page_obj,
         'pagination_range': pagination_range,
-        'tarefas_count': tarefas_count
+        'tarefas_a': tarefas_a,
+        'tarefas_e': tarefas_e,
+        'tarefas_f': tarefas_f
 
     })
 

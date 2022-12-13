@@ -9,11 +9,16 @@
     {% include 'helpdesk/partials/message.html' %}
     {% include  'authors/partials/login_message.html'%}
 
-        {% include 'authors/partials/dash_admin_menu.html' %}
 
         <div class="authors-dashboard-container">
             {% if tarefas %}
             <h3>Suas tarefas</h3>
+
+            <div class="tarefas-count">
+            <span>Abertas: {{tarefas_a}}</span>
+            <span>Executando: {{tarefas_e}}</span>
+            <span>Finalizadas: {{tarefas_f}}</span>
+            </div>
 
             <main>
             
@@ -26,7 +31,17 @@
             </div>
             {% endif %}
             {% for tarefa in tarefas %}
-                <div class="tarefas-panel-dashboard-">
+                <div class="tarefas-panel-dashboard- 
+                {% if tarefa.global_msg %}
+                    status-signal-global   
+                {% elif tarefa.status == 'Aberto' %}
+                    status-signal-aberto
+                {% elif tarefa.status == 'Execução' %}
+                    status-signal-execucao
+                {% elif tarefa.status == 'Finalizado' %}
+                    status-signal-finalizado  
+                {% endif %}
+                    ">
                 <a class = "lista-dashboard"href="{% url 'helpdesk:tarefa' tarefa.id %}">#{{tarefa.id}} </a>
                 <a class = "lista-dashboard"href="{% url 'helpdesk:tarefa' tarefa.id %}">{{ tarefa.tipe }}</a>   
                 <a class = "lista-dashboard"href="{% url 'helpdesk:tarefa' tarefa.id %}">{{ tarefa.data_at }}</a>

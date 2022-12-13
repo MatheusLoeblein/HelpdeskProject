@@ -24,9 +24,8 @@ def home(request):
     if request.user.is_superuser:
         tarefas = Tarefa.objects.all().order_by('-global_msg', '-data_up_at')
     else:
-        usuario = Profile.objects.get(author=request.user)
         tarefas = Tarefa.objects.filter(
-            Category=usuario.Category_id
+            Category=request.user.Category_id
         ).order_by('-global_msg', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)

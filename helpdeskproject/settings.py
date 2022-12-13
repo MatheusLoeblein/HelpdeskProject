@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'helpdesk',
     'authors',
+    'dbbackup',
 ]
 
 MIDDLEWARE = [
@@ -210,3 +211,7 @@ SUMMERNOTE_CONFIG = {
     'attachment_require_authentication': True,
 }
 SUMMERNOTE_THEME = 'bs3'
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'  # o que salvar
+
+DBBACKUP_STORAGE_OPTIONS = {'location': 'backups/'}  # onde salvar

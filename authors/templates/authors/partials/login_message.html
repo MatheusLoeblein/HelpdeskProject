@@ -1,13 +1,12 @@
-{% load static %}
-<div class="main-login-menssage">
-    {% if user.is_authenticated %}
-    <div class="Profile-panel">
-        {% if user.profile.cover_profile %}
-        <img src="{{user.profile.cover_profile.url}}" alt="" class="user-img-profile">
-        {% else %}
-        <img src="{% static "helpdesk/imgs/user.jpg"%}" alt="" class="user-img-profile">
-        {% endif %}
-    </div>
+<div class="dash-menu-admin-content">
+    {% if request.user.is_superuser %}
+    <a href="{% url 'admin:index' %}" target="_blank" class="export-xlsx">Administração</a>
+    <a href="{% url 'authors:dashboard_export_xlsx' %}" class="export-xlsx">Exporta tarefas</a>
+    {% endif %}
+    <a href="{% url 'authors:dashboard' %}" class="export-xlsx">Visualizar tarefas</a>
+    <a href="{% url 'authors:dashboard_tarefa_new' %}" class="export-xlsx">Criar tarefa</a>
+    
+</div>
 {% comment "" %}   
     <form class="addprofileimg" action="{% url 'authors:addprofileimg' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -15,14 +14,3 @@
             <button type="submit">^</button>
     <form>
 {% endcomment %} 
-
-    <div class="login-message">
-    <b>{{ request.user.first_name }} {{ request.user.last_name }}</br>
-    
-    Numero de tarefas: {{tarefas_count}} 
-
-    </b>
-    {% include 'authors/partials/form_logout.html' %}
-    </div>
-    {% endif %}
-</div>

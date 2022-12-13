@@ -1,9 +1,0 @@
-<div class="dash-menu-admin-content">
-    {% if request.user.is_superuser %}
-    <a href="{% url 'admin:index' %}" target="_blank" class="export-xlsx">Administração</a>
-    <a href="{% url 'authors:dashboard_export_xlsx' %}" class="export-xlsx">Exporta tarefas</a>
-    {% endif %}
-    <a href="{% url 'authors:dashboard' %}" class="export-xlsx">Visualizar tarefas</a>
-    <a href="{% url 'authors:dashboard_tarefa_new' %}" class="export-xlsx">Criar tarefa</a>
-
-</div>
