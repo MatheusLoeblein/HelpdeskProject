@@ -46,7 +46,7 @@ def status(request):
 
         tarefas = Tarefa.objects.filter(
             Category=usuario.Category_id
-        ).order_by('-global_msg', 'status', '-data_up_at') | Tarefa.objects.filter(global_msg=True).order_by('-global_msg', '-data_up_at')
+        ).order_by('-global_msg', 'status', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
@@ -66,7 +66,7 @@ def status_(request):
         usuario = Profile.objects.get(author=request.user)
         tarefas = Tarefa.objects.filter(
             Category=usuario.Category_id
-        ).order_by('-global_msg', '-status', '-data_up_at') | Tarefa.objects.filter(global_msg=True).order_by('-global_msg', '-data_up_at')
+        ).order_by('-global_msg', '-status', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
