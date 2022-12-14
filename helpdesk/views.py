@@ -26,7 +26,7 @@ def home(request):
     else:
         tarefas = Tarefa.objects.filter(
             Category=request.user.profile.Category_id
-        ).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(global_msg=True).order_by('-global_msg', '-data_up_at')
+        ).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(author=request.user).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(global_msg=True).order_by('-global_msg', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
