@@ -1059,8 +1059,8 @@ img{
 
 .maquinas-panel-head{
     display: grid;
-    grid-template-columns: 10% 25% 30% 30%;
-    grid-gap: 10px;
+    grid-template-columns: 5% 25% 20% 20% 5% 5%;
+    grid-gap: 15px;
     border: 1px solid var(--color-gray-4);
     padding: 10px;
     text-align: left;
@@ -1116,4 +1116,195 @@ img{
 .addmaquina-link-main{
     margin-top: 50px;
 
+}
+
+
+.not-category{
+
+    color: rgb(197, 28, 28);
+}
+
+.addprofileimg input{
+    display: none;
+}
+
+.addprofileimg label{
+    padding: 5px;
+    font-size: 12px;
+    color: white;
+    background-color: var(--color-gray-7);
+    transition: all 100ms ease-in-out;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.addprofileimg label:hover{
+    background-color: var(--color-gray-6);
+    transition: all 100ms ease-in-out;
+
+}
+
+.addprofileimg button{
+    background-color: var(--color-gray-7);
+    border: none;
+    padding: 5px;
+    transition: all 100ms ease-in-out;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+
+}
+.addprofileimg button:hover{
+    background-color: var(--color-gray-6);
+    transition: all 100ms ease-in-out;
+
+}
+
+.carregar-img-input{
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.maquina-ativo{
+    border: 1.5px solid var(--color-gray-7);
+    width: 13px;
+    height: 13px;
+    border-radius: 13px;
+    margin: 0;
+}
+.ativo{
+    animation-name: ativo;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+@keyframes ativo{
+    0% {
+        background: #239c4b;
+    }
+    50% {
+        background: white;
+    }
+    100% {
+        background: #239c4b;
+    }
+}
+
+.maquina-inativo{
+    border: 2px solid var(--color-gray-6);
+    width: 13px;
+    height: 13px;
+    border-radius: 13px;
+    margin: 0;
+}
+.inativo{
+    animation-name: inativo;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+@keyframes inativo{
+    0% {
+        background: #f70a0a;
+    }
+    50% {
+        background: white;
+    }
+    100% {
+        background: #f70a0a;
+    }
+}
+
+.form-content-maquina{
+    text-align: left;
+    max-width: 34rem;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    margin-top: 50px;
+    color: var(--color-gray-8)
+
+}
+.form-content-maquina label{
+    color:var(--color-gray-7);
+}
+.form-content-maquina input,
+.form-content-maquina select{
+    border: none;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 0.5rem;
+    border-bottom: 0.5px solid  var(--color-gray-7);
+    background: none;
+    color: var(--color-gray-7);
+    
+}
+.form-content-maquina textarea{
+    width: 100%;
+    padding: 1rem;
+    background: none;
+    border: none;
+    border-bottom: 1px solid  var(--color-gray-7);
+}
+
+.form-content-maquina textarea:focus{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid  var(--color-gray-8);
+
+}
+
+.form-content-maquina input:focus,
+.form-content-maquina select:focus{
+    width: 100%;
+    border: none;
+    background: none;
+    border-bottom: 0.5px solid  var(--color-gray-8);
+    outline: none;
+
+}
+.form-content-grid-maquina{
+    display: grid;
+    grid-template-columns: repeat(calc(1*3), 1fr);
+    gap: 30px 50px;
+
+}
+
+.form-content-maquina button{
+    padding: 1rem 16.5rem;
+    border: none;
+    background-color:#1C1C1C;
+    color: white;
+    margin-top: -20px;
+    cursor: pointer;
+    border-radius: 3px;
+    
+}
+.form-content-maquina button:hover {
+    background-color:#1C75BC;
+    transition: all 300ms ease-in-out;
+
+}
+
+.form-content-maquina label,
+.help-text,
+.errorlist
+{
+    display:block;
+    font-size: 1rem;
+}
+.main-content-maquina-form-align{
+    display: grid;
+    justify-content: center;
+    margin: 0 auto;
+    margin-right: 250px;
+    max-width: 240px;
+
+}
+.main-content-maquina-form{
+    border: 1px solid var(--color-gray-7);
+    background-color: var(--color-gray-1);
+    box-shadow: -3px 3px 3px rgba(129, 99, 114, 0.658);
+    width: 720px;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 3px;
 }

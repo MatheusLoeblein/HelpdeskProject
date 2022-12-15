@@ -1,0 +1,39 @@
+<form action="{{form_action}}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form-content-maquina form-content-grid-maquina">
+            {% for field in form %}
+               <div class="form-group-maquina {{field.field.widget.attrs.class}}">
+                <label for="{{ field.id.for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {{ form.media }}
+                {% if field.help_text %}
+                 <p class="help-text">{{ field.help_text }}</p>
+                
+                {% endif %}
+
+                 {{ field.errors }}
+                </div> 
+
+                {% if field.name == 'cover' and field.value.url %}
+                    <div class="span-2">
+                        <img src="{{ field.value.url }}" alt="Anexo para {{tarefa.title}}">
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+       
+        {% if form.errors %}
+        <div class="form-content-maquina form-content-grid-maquina">
+            <div class="form-group-maquina">
+                <div class="message-error">
+                    Por favor corrija os erros no formulário
+                </div>
+            </div>    
+        </div>
+        {% endif %}
+        <div class="form-content-maquina form-content-grid-maquina">
+            <div class="form-group-maquina">
+                <button class="span-2"type="submit">Enviar</button>
+            </div>    
+        </div>
+    </form>

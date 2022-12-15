@@ -34,7 +34,8 @@ class Tarefa(models.Model):
     )
     tipe = models.ForeignKey(
         Tasktipe, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Tipo de Tarefa')
-    title = models.CharField(max_length=65, verbose_name='Título')
+    setor_author = models.CharField(
+        max_length=65, verbose_name='Setor do Autor', null=True, blank=True)
     description = models.TextField(verbose_name='Descrição')
     prioridade = models.CharField(max_length=20, verbose_name='Prioridade')
     status = models.CharField(
@@ -53,7 +54,7 @@ class Tarefa(models.Model):
         default=False, verbose_name='Mensagem Global')
 
     def __str__(self):
-        return self.title
+        return str(self.tipe)
 
 
 class Comment(models.Model):

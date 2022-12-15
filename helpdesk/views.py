@@ -26,7 +26,7 @@ def home(request):
     else:
         tarefas = Tarefa.objects.filter(
             Category=request.user.profile.Category_id
-        ).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(author=request.user).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(global_msg=True).order_by('-global_msg', '-data_up_at')
+        ).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(author=request.user).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(setor_author=request.user.profile.Category).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(global_msg=True).order_by('-global_msg', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
@@ -46,7 +46,7 @@ def status(request):
 
         tarefas = Tarefa.objects.filter(
             Category=usuario.Category_id
-        ).order_by('-global_msg', 'status', '-data_up_at')
+        ).order_by('-global_msg', 'status', '-data_up_at') | Tarefa.objects.filter(author=request.user).order_by('-global_msg', 'status', '-data_up_at') | Tarefa.objects.filter(setor_author=request.user.profile.Category).order_by('-global_msg', 'status', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
@@ -66,7 +66,7 @@ def status_(request):
         usuario = Profile.objects.get(author=request.user)
         tarefas = Tarefa.objects.filter(
             Category=usuario.Category_id
-        ).order_by('-global_msg', '-status', '-data_up_at')
+        ).order_by('-global_msg', '-status', '-data_up_at') | Tarefa.objects.filter(author=request.user).order_by('-global_msg', '-status', '-data_up_at') | Tarefa.objects.filter(setor_author=request.user.profile.Category).order_by('-global_msg', '-status', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
@@ -87,7 +87,7 @@ def finalizado(request):
         tarefas = Tarefa.objects.filter(
             Category=usuario.Category_id,
             status="Finalizado"
-        ).order_by('-data_up_at')
+        ).order_by('-data_up_at') | Tarefa.objects.filter(author=request.user, status="Finalizado").order_by('-data_up_at') | Tarefa.objects.filter(setor_author=request.user.profile.Category, status="Finalizado").order_by('-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
@@ -140,7 +140,7 @@ def search(request):
     if not search_term:
         raise Http404()
 
-    tarefas = Tarefa.objects.filter(Category=usuario).filter(Q(Q(title__icontains=search_term) | Q(  # noqa
+    tarefas = Tarefa.objects.filter(Category=usuario).filter(Q(Q(  # noqa
         status__icontains=search_term) | Q(id__icontains=search_term) | Q(prioridade__icontains=search_term))).order_by('-data_up_at')  # noqa
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)

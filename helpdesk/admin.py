@@ -18,10 +18,10 @@ class LocationAdmin(admin.ModelAdmin):
 
 class TarefaAdmin(SummernoteModelAdmin):
     summernote_fields = ('description')
-    list_display = ['id', 'tipe', 'title',
+    list_display = ['id', 'tipe', 'setor_author',
                     'data_up_at', 'local', 'Category', 'author']
-    list_display_links = 'tipe', 'title',
-    search_fields = ['id', 'title', 'data_at',
+    list_display_links = 'tipe', 'setor_author',
+    search_fields = ['id', 'setor_author', 'data_at',
                      'Category', 'author', 'prioridade', ]
     list_filter = 'Category', 'author', 'tipe', 'local'
     list_per_page = 15

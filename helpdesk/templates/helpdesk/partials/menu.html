@@ -12,8 +12,16 @@
     <div class="menu-content">
       <nav class="menu-nav">
         {% load static %}
-        {% if user.is_authenticated %}  
+        {% if user.is_authenticated %} 
           <div class="main-login-menssage">
+                <div class="carregar-img-input">
+                <form class="addprofileimg" action="{% url 'authors:addprofileimg' %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                    <label for="id_cover_profile">Carregar Foto</label>
+                    <input type="file" name="cover_profile" accept="image/*" id="id_cover_profile" >
+                    <button type="submit">Enviar</button>
+                <form>
+                </div>
                 {% if user.profile.cover_profile %}
                 <img src="{{user.profile.cover_profile.url}}" alt="" class="user-img-profile">
                 {% else %}

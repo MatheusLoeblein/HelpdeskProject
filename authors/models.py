@@ -27,7 +27,7 @@ class IP(models.Model):
 
 class Maquinas(models.Model):
     ativo = models.BooleanField(
-        default=False, verbose_name="Ativo?")
+        default=False, verbose_name="Maquina Ativa")
     nome = models.CharField(max_length=30, verbose_name='Nome da Maquina')
     Category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
@@ -44,15 +44,15 @@ class Maquinas(models.Model):
     ip = models.OneToOneField(
         IP, on_delete=models.CASCADE,  verbose_name='IP Address')
     usuariofc = models.OneToOneField(
-        Usuariofc, on_delete=models.CASCADE, verbose_name='Usuario Conexão Fórmula Certa')  # noqa
+        Usuariofc, on_delete=models.CASCADE, verbose_name='Fórmula Certa')  # noqa
     celular = models.CharField(
         max_length=11, null=True, verbose_name='Numero de Celular')
     gmail = models.CharField(max_length=65, null=True,
                              verbose_name='Conta Google')
     e7 = models.BooleanField(
-        default=False, verbose_name='E7 Antivirus instalado?')
+        default=False, verbose_name='E7 Antivirus')
     office = models.BooleanField(
-        default=False, verbose_name='Office instalado?')
+        default=False, verbose_name='Pacote Office')
     data_at = models.DateTimeField(auto_now_add=True)
     data_up_at = models.DateTimeField(auto_now=True)
 

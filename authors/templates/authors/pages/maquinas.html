@@ -10,7 +10,7 @@
     {% include 'helpdesk/partials/message.html' %}
     
     <div class="addmaquina-link-main">
-        <a class="addmaquina-link" href="{% url 'authors:maquina_view' %}">Nova Maquina</a>
+        <a class="addmaquina-link" href="{% url 'authors:maquina_view' %}"> Nova Maquina </a>
     </div>
 
     <section class="section-maquinas-content">
@@ -19,17 +19,24 @@
         
         <div class="panel-content-maquinas">
             <div class="maquinas-panel-head">
-                <p>
+
                 {% if maquina.ativo %}
-                    🟢
+                    <p class="maquina-ativo ativo"></p>
                 {% else %}
-                    🔴
+                    <p class="maquina-inativo inativo"></p>
                 {% endif %}
                     
-                </p>
+
                 <p>{{maquina.nome}}</p> 
                 <p>{{maquina.Category}}</li>
                 <p>{{maquina.anydesk}}</p>
+
+                <a href="{% url 'authors:maquina_edit' maquina.id %}" class="plaintext-button plaintext-button2">📝</a>
+                <form action="{% url 'authors:maquina_delete' %}" class="logout-form form-delete" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{maquina.id}}">
+                    <button type="submit" class="plaintext-button plaintext-button2">❌</button>
+                </form>
             </div>
             <div class="maquinas-panel-content">
                 <p>{{maquina.config}}</p>

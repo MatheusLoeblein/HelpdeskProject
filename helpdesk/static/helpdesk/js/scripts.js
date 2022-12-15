@@ -4,7 +4,7 @@
       for (const form of forms) {
         form.addEventListener('submit', function (e) {
           e.preventDefault();
-          const confirmed = confirm('Você esta apagando uma Tarefa, ela sera excluida do nósso banco de dados, Confirmar?');
+          const confirmed = confirm('Você esta Tentando apagar uma Instancia, ela sera excluida do nósso banco de dados, "Deseja Confirmar?"');
           if (confirmed) {
             form.submit();
           }

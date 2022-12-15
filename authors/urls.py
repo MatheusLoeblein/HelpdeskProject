@@ -19,9 +19,11 @@ urlpatterns = [
          name="dashboard_tarefa_delete"),
     path('dashboard/export/xlsx/', views.export_tarefas_xlsx,
          name="dashboard_export_xlsx"),
-    path('dashboard/addprofileimg/', views.addprofileimg, name="addprofileimg"),
+    path('dashboard/addprofileimg/',
+         views.addprofileimg, name="addprofileimg"),
     path('maquinas/', views.maquinas, name="maquinas"),
     path('maquina/view/', views.addmaquina_view, name="maquina_view"),
     path('maquina/new/', views.addmaquina, name="maquina_new"),
-
+    path('maquina/<int:id>/edit/', views.maquina_edit, name="maquina_edit"),
+    path('maquina/delete/', views.maquina_delete, name="maquina_delete"),
 ]

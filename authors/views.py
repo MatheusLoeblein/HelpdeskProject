@@ -179,6 +179,7 @@ def dashboard_tarefa_new(request):
 
         # se o usuario da sessão for o mesmo que criou a tarefa..
         tarefa.author = request.user
+        tarefa.setor_author = request.user.profile.Category
 
         tarefa.save()
 
@@ -236,15 +237,17 @@ def export_tarefas_xlsx(request):
 @login_required(login_url='authors:login', redirect_field_name='next')
 def addprofileimg(request):
 
+    usuario = Profile.objects.get(author=request.user)
+
     url = request.META.get('HTTP_REFERER')
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
-        usuario = Profile.objects.get(author=request.user)
+        form = ProfileForm(request.POST, request.FILES, instance=usuario)
+
         if form.is_valid():
-            form = Profile()
-            form = usuario
-            form.save()
+
+            foto = form.save(commit=False)
+            foto.save()
 
             messages.success(request, 'Foto adicionada com Sucesso!')
 
@@ -278,6 +281,9 @@ def addmaquina_view(request):
 @login_required(login_url='authors:login', redirect_field_name='next')
 def addmaquina(request):
 
+    if not request.POST:
+        raise Http404()
+
     form = MaquinasForm(
         data=request.POST or None,
         files=request.FILES or None,
@@ -298,3 +304,70 @@ def addmaquina(request):
         'form_action': reverse('authors:maquina_new'),
 
     })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def maquina_edit(request, id):
+
+    if not request.user.is_superuser:
+        messages.error(
+            request, 'Você não tem permissão suficiente, acione a administração.')
+
+        return redirect(reverse('authors:maquinas'))
+
+    maquina = Maquinas.objects.get(
+        pk=id
+    )
+
+    if not maquina:
+        raise Http404()
+
+    form = MaquinasForm(
+        data=request.POST or None,
+        files=request.FILES or None,
+        instance=maquina
+    )
+
+    if form.is_valid():
+
+        maquina = form.save(commit=False)
+
+        maquina.save()
+
+        messages.success(request, 'Maquina Salva com sucesso.')
+
+        return redirect(reverse('authors:maquinas'))
+
+    return render(request, 'authors/pages/maquinas_new.html', {
+        'form': form,
+        'form_action': reverse('authors:maquina_new'),
+
+    })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def maquina_delete(request):
+
+    if not request.user.is_superuser:
+        messages.error(
+            request, 'Você não tem permissão suficiente, acione a administração.')
+
+        return redirect(reverse('authors:maquinas'))
+
+    if not request.POST:
+        raise Http404()
+
+    POST = request.POST
+    id = POST.get('id')
+
+    maquina = Maquinas.objects.get(
+        pk=id
+    )
+
+    if not maquina:
+        raise Http404()
+
+    maquina.delete()
+
+    messages.success(request, 'Maquina deletada com sucesso.')
+    return redirect(reverse('authors:maquinas'))

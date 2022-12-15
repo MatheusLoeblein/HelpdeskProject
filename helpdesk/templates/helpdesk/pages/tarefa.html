@@ -68,8 +68,23 @@
     <div class="content-tarefa-status">
         <span><b>Ticket</b> #{{ tarefa.id }}</span>
         <span class="tarefa-autor"><b>Autor </b>{{tarefa.author.first_name}} {{tarefa.author.last_name}}</span>
-        <span class="tarefa-autor"><b>Setor </b>{{tarefa.author.profile.Category}}</span>
-        <span class="tarefa-maquina-anydesk"><b>Anydesk</b> {{tarefa.author.profile.maquina.anydesk}}</span>
+        <span class="tarefa-autor"><b>Setor </b>
+            
+            {% if tarefa.author.profile.Category %}
+            {{tarefa.author.profile.Category}}
+            {% else %}
+            <a class="not-category">Setor não atribuido</a>
+            {% endif %}
+                
+        </span>
+        <span class="tarefa-maquina-anydesk"><b>Anydesk </b> 
+            
+            {% if tarefa.author.profile.maquina.anydesk %}
+            {{tarefa.author.profile.maquina.anydesk}}
+            {% else %}
+            <a class="not-category">Maquina não vinculada </a>
+            {% endif %}
+        </span>
         <span class="tarefa-data-created"><b>Criado</b> {{tarefa.data_at|date:"d/m/Y"}} às {{tarefa.data_at|date:"H:i"}}</span>
         <span class="tarefa-data-updated"><b>Atualizado</b> {{tarefa.data_up_at|date:"d/m/Y"}} às {{tarefa.data_up_at|date:"H:i"}}</span>
         
