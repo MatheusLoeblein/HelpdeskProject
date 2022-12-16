@@ -25,13 +25,16 @@ class IP(models.Model):
         return str(self.numero)
 
 
-class impressora(models.Model):
+class Impressora(models.Model):
     nome = models.CharField(max_length=30, verbose_name='Impressora')
     ip = models.OneToOneField(
         IP, on_delete=models.CASCADE,  verbose_name='IP Address')
     Category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
     mac = models.CharField(max_length=17, verbose_name='MAC')
+
+    def __str__(self):
+        return self.nome
 
 
 class Maquinas(models.Model):
@@ -67,6 +70,8 @@ class Maquinas(models.Model):
     data_up_at = models.DateTimeField(auto_now=True)
     mac = models.CharField(max_length=17, null=True,
                            blank=True, verbose_name='MAC')
+    impressora = models.ForeignKey(
+        Impressora, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Impressora padrão')
 
     def __str__(self):
         return self.nome

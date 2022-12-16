@@ -34,19 +34,19 @@
                 <form action="{% url 'authors:maquina_delete' %}" class="logout-form form-delete" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="id" value="{{maquina.id}}">
-                    <button type="submit" class="plaintext-button plaintext-button2">❌</button>
+                    <button type="submit" class="plaintext-button plaintext-button2">🗑️</button>
                 </form>
             </div>
             <div class="maquinas-panel-content">
                 <p>{{maquina.config}}</p>
-                <p>{{maquina.usuario.first_name}} {{maquina.usuario.last_name}}</p>
-                <p>Ramal: {{maquina.ramal}}</p>
+                <p>Usuario {{maquina.usuario.first_name}} {{maquina.usuario.last_name}}</p>
+                <p>Ramal {{maquina.ramal}}</p>
                 <p>{{maquina.email}}</p>
-                <p>Skype: {{maquina.skype}}</p>
+                <p>Skype {{maquina.skype}}</p>
                 <p>Windows {{maquina.windows}}</p>
-                <p>IP: {{maquina.ip}}</p>
-                <p>FC: {{maquina.usuariofc}}</p>
-                <p>Celular: {{maquina.celular}}</p>
+                <p>IP {{maquina.ip}}</p>
+                <p>FC {{maquina.usuariofc}}</p>
+                <p>Celular {{maquina.celular}}</p>
                 <p>{{maquina.gmail}}</p>
                 <p>E7 Antivirus
                     {% if maquina.e7 %}
@@ -62,10 +62,22 @@
                         ❌
                     {% endif %}
                 </p>
-                <p>{{maquina.data_at}}</p>
-                <p>{{maquina.mac}}</p>
-                <p>{{maquina.Category}}</p>
-                <p>Impressora</p>
+                <p>Adicionada {{maquina.data_at|date:"d/m/Y"}}</p>
+                <p>
+                    {% if maquina.mac %}
+                    MAC {{maquina.mac}}
+                    {% elif not maquina.mac %}
+                    MAC não cadastrado
+                    {% endif %}
+                    </p>
+                <p>Setor {{maquina.Category}}</p>
+                <p class="maquina-impressoras">
+                    {% if maquina.impressora %}
+                    <a href="http://{{maquina.impressora.ip}}" target="_blank">{{maquina.impressora}}</a>
+                    {% else %}
+                    Impressora não vinculada
+                    {% endif %}
+                </p>
             </div>
         </div>
 

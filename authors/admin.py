@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from authors.models import IP, Maquinas, Profile, Usuariofc
+from authors.models import IP, Impressora, Maquinas, Profile, Usuariofc
 
 
 @admin.register(Profile)
@@ -21,6 +21,14 @@ class UsuariofcAdmin(admin.ModelAdmin):
 @admin.register(IP)
 class IPAdmin(admin.ModelAdmin):
     ordering = 'id',
+
+
+@admin.register(Impressora)
+class ImpressoraAdmin(admin.ModelAdmin):
+    ordering = 'id',
+    list_display = ['nome', 'ip', 'Category', 'mac']
+    list_display_links = ['nome']
+    list_filter = ['Category']
 
 
 @admin.register(Maquinas)
