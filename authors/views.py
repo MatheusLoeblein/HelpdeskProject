@@ -111,7 +111,7 @@ def dashboard(request):
     )
     tarefas_f = Tarefa.objects.filter(
         author=request.user,
-        status='Finalizada'
+        status='Finalizado'
     )
 
     tarefas_a = len(tarefas_a)
@@ -295,7 +295,7 @@ def addmaquina(request):
 
         maquina.save()
 
-        messages.success(request, 'Maquina Cadastrada com sucesso.')
+        messages.success(request, 'Máquina Cadastrada com sucesso.')
 
         return redirect(reverse('authors:maquinas'))
 
@@ -311,13 +311,13 @@ def maquina_edit(request, id):
 
     if not request.user.is_superuser:
         messages.error(
-            request, 'Você não tem permissão suficiente, acione a administração.')
+            request, 'Você não tem permissão suficiente, acione a administração.')  # noqa
 
         return redirect(reverse('authors:maquinas'))
 
-    maquina = Maquinas.objects.get(
+    maquina = Maquinas.objects.filter(
         pk=id
-    )
+    ).first()
 
     if not maquina:
         raise Http404()
@@ -334,13 +334,12 @@ def maquina_edit(request, id):
 
         maquina.save()
 
-        messages.success(request, 'Maquina Salva com sucesso.')
+        messages.success(request, 'Máquina Salva com sucesso.')
 
         return redirect(reverse('authors:maquinas'))
 
     return render(request, 'authors/pages/maquinas_new.html', {
         'form': form,
-        'form_action': reverse('authors:maquina_new'),
 
     })
 
@@ -350,7 +349,7 @@ def maquina_delete(request):
 
     if not request.user.is_superuser:
         messages.error(
-            request, 'Você não tem permissão suficiente, acione a administração.')
+            request, 'Você não tem permissão suficiente, acione a administração.')  # noqa
 
         return redirect(reverse('authors:maquinas'))
 
@@ -369,5 +368,5 @@ def maquina_delete(request):
 
     maquina.delete()
 
-    messages.success(request, 'Maquina deletada com sucesso.')
+    messages.success(request, 'Máquina deletada com sucesso.')
     return redirect(reverse('authors:maquinas'))

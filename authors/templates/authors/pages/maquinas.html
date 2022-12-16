@@ -1,16 +1,16 @@
 {% extends 'global/base.html' %}
 
-{% block title %} Controle de Maquinas | {{ user.first_name }} |{% endblock title %}
+{% block title %} Controle de Máquinas | {{ user.first_name }} |{% endblock title %}
 
 {% block content %}
 
     <div class="main-content-register">
-        <h2>Controle de Maquinas ({{user.first_name}})</h2>
+        <h2>Controle de Máquinas ({{user.first_name}})</h2>
 
     {% include 'helpdesk/partials/message.html' %}
     
     <div class="addmaquina-link-main">
-        <a class="addmaquina-link" href="{% url 'authors:maquina_view' %}"> Nova Maquina </a>
+        <a class="addmaquina-link" href="{% url 'authors:maquina_view' %}"> Nova Máquina </a>
     </div>
 
     <section class="section-maquinas-content">
@@ -28,7 +28,6 @@
                     
 
                 <p>{{maquina.nome}}</p> 
-                <p>{{maquina.Category}}</li>
                 <p>{{maquina.anydesk}}</p>
 
                 <a href="{% url 'authors:maquina_edit' maquina.id %}" class="plaintext-button plaintext-button2">📝</a>
@@ -64,6 +63,9 @@
                     {% endif %}
                 </p>
                 <p>{{maquina.data_at}}</p>
+                <p>{{maquina.mac}}</p>
+                <p>{{maquina.Category}}</p>
+                <p>Impressora</p>
             </div>
         </div>
 

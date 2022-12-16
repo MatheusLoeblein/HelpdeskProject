@@ -1048,9 +1048,8 @@ img{
 
 .section-maquinas-content{
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 30px;
-    max-width: 850px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-gap:15px;
     margin: 0 auto;
     margin-top: 50px;
     
@@ -1059,7 +1058,7 @@ img{
 
 .maquinas-panel-head{
     display: grid;
-    grid-template-columns: 5% 25% 20% 20% 5% 5%;
+    grid-template-columns: 5% 35%  30% 5% 5%;
     grid-gap: 15px;
     border: 1px solid var(--color-gray-4);
     padding: 10px;
@@ -1067,6 +1066,7 @@ img{
     font-size: 14px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    background-color: white
 }
 
 .maquinas-panel-head p{
@@ -1105,7 +1105,7 @@ img{
     border-radius: 3px;
     text-decoration: none;
     color:  var(--color-gray-1);
-    margin-left: 150px;
+
 
 }
 

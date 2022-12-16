@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
@@ -33,7 +33,7 @@ class Tarefa(models.Model):
         ("Finalizado", "Finalizado"),
     )
     tipe = models.ForeignKey(
-        Tasktipe, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Tipo de Tarefa')
+        Tasktipe, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Tipo de Tarefa')  # noqa
     setor_author = models.CharField(
         max_length=65, verbose_name='Setor do Autor', null=True, blank=True)
     description = models.TextField(verbose_name='Descrição')
@@ -49,7 +49,7 @@ class Tarefa(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, verbose_name='Autor')
     local = models.ForeignKey(
-        Location, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Local')
+        Location, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Local')  # noqa
     global_msg = models.BooleanField(
         default=False, verbose_name='Mensagem Global')
 

@@ -25,16 +25,26 @@ class IP(models.Model):
         return str(self.numero)
 
 
-class Maquinas(models.Model):
-    ativo = models.BooleanField(
-        default=False, verbose_name="Maquina Ativa")
-    nome = models.CharField(max_length=30, verbose_name='Nome da Maquina')
+class impressora(models.Model):
+    nome = models.CharField(max_length=30, verbose_name='Impressora')
+    ip = models.OneToOneField(
+        IP, on_delete=models.CASCADE,  verbose_name='IP Address')
     Category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
-    config = models.CharField(max_length=100, verbose_name='Config da maquina')
+    mac = models.CharField(max_length=17, verbose_name='MAC')
+
+
+class Maquinas(models.Model):
+    ativo = models.BooleanField(
+        default=False, verbose_name="Máquina Ativa")
+    nome = models.CharField(max_length=30, verbose_name='Nome da Máquina')
+    Category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Setor')  # noqa
+    config = models.CharField(
+        max_length=100, verbose_name='Configurações da máquina')
     anydesk = models.CharField(max_length=11, verbose_name='Anydesk')
     usuario2 = models.CharField(
-        max_length=30, verbose_name='Usuario Temporario', null=True, blank=True)
+        max_length=30, verbose_name='Usuario Temporario', null=True, blank=True)  # noqa
     usuario = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Usuario')  # noqa
     ramal = models.CharField(max_length=4, null=True, verbose_name='Ramal')
@@ -55,6 +65,8 @@ class Maquinas(models.Model):
         default=False, verbose_name='Pacote Office')
     data_at = models.DateTimeField(auto_now_add=True)
     data_up_at = models.DateTimeField(auto_now=True)
+    mac = models.CharField(max_length=17, null=True,
+                           blank=True, verbose_name='MAC')
 
     def __str__(self):
         return self.nome
@@ -64,10 +76,10 @@ class Profile(models.Model):
     author = models.OneToOneField(User, on_delete=models.CASCADE)
     Category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True)
-    cover_profile = models.ImageField(upload_to='helpdesk/profile/imgs/%Y/%m/%d/',
-                                      blank=True, null=True, verbose_name='Foto de perfil')
+    cover_profile = models.ImageField(upload_to='helpdesk/profile/imgs/%Y/%m/%d/',  # noqa
+                                      blank=True, null=True, verbose_name='Foto de perfil')  # noqa
     maquina = models.ForeignKey(
-        Maquinas, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Maquina')
+        Maquinas, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Máquina')  # noqa
 
     def __str__(self):
         return str(self.author)

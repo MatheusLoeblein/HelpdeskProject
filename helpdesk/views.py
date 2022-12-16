@@ -42,10 +42,8 @@ def status(request):
     if request.user.is_superuser:
         tarefas = Tarefa.objects.all().order_by('-global_msg', 'status', '-data_up_at')
     else:
-        usuario = Profile.objects.get(author=request.user)
-
         tarefas = Tarefa.objects.filter(
-            Category=usuario.Category_id
+            Category=request.user.profile.Category_id
         ).order_by('-global_msg', 'status', '-data_up_at') | Tarefa.objects.filter(author=request.user).order_by('-global_msg', 'status', '-data_up_at') | Tarefa.objects.filter(setor_author=request.user.profile.Category).order_by('-global_msg', 'status', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
@@ -63,9 +61,8 @@ def status_(request):
         tarefas = Tarefa.objects.all().order_by('-global_msg', '-status', '-data_up_at')
 
     else:
-        usuario = Profile.objects.get(author=request.user)
         tarefas = Tarefa.objects.filter(
-            Category=usuario.Category_id
+            Category=request.user.profile.Category_id
         ).order_by('-global_msg', '-status', '-data_up_at') | Tarefa.objects.filter(author=request.user).order_by('-global_msg', '-status', '-data_up_at') | Tarefa.objects.filter(setor_author=request.user.profile.Category).order_by('-global_msg', '-status', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
@@ -83,9 +80,8 @@ def finalizado(request):
         tarefas = Tarefa.objects.filter(
             status="Finalizado").order_by('-data_up_at')
     else:
-        usuario = Profile.objects.get(author=request.user)
         tarefas = Tarefa.objects.filter(
-            Category=usuario.Category_id,
+            Category=request.user.profile.Category_id,
             status="Finalizado"
         ).order_by('-data_up_at') | Tarefa.objects.filter(author=request.user, status="Finalizado").order_by('-data_up_at') | Tarefa.objects.filter(setor_author=request.user.profile.Category, status="Finalizado").order_by('-data_up_at')
 
@@ -135,12 +131,11 @@ def tarefa(request, id):
 @login_required(login_url='authors:login', redirect_field_name='next')
 def search(request):
     search_term = request.GET.get('q', '').strip()
-    usuario = Profile.objects.get(author=request.user)
-    usuario = usuario.Category_id
+
     if not search_term:
         raise Http404()
 
-    tarefas = Tarefa.objects.filter(Category=usuario).filter(Q(Q(  # noqa
+    tarefas = Tarefa.objects.filter(Category=request.user.profile.Category_id).filter(Q(Q(  # noqa
         status__icontains=search_term) | Q(id__icontains=search_term) | Q(prioridade__icontains=search_term))).order_by('-data_up_at')  # noqa
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
