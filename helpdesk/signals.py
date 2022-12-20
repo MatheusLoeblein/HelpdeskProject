@@ -1,5 +1,6 @@
 import os
 
+from django.core.mail import send_mail
 from django.db.models.signals import post_save, pre_delete, pre_save
 from django.dispatch import receiver
 
@@ -53,3 +54,27 @@ def comment_cover_update(sender, instance, *args, **kwargs):
 
     if is_new_cover:
         delete_cover(old_instance)
+
+
+@receiver(post_save, sender=Tarefa)
+def send_email_on_model_change(sender, instance, **kwargs):
+
+    if kwargs['created']:
+        subject = f'Help Desk Formédica - {str(instance.tipe)}'
+        message = f'A Tarefa com o assunto "{str(instance.tipe)}" e com o id #{instance.id}, foi Criada você pode verificar agora, pode ser importante..'
+        recipient_list = ['informatica@formedica.com.br']
+    else:
+        subject = f'Help Desk Formédica - {str(instance.tipe)}'
+        message = f'A Tarefa com o assunto "{str(instance.tipe)}" e com o id #{instance.id}, acaba de ser atualizada'
+        recipient_list = [instance.author.email]
+
+    from_email = 'formedica@formedica.com.br'
+
+    # Obtém o URL do post
+    post_url = f'http://127.0.0.1:8000/tarefa/{instance.id}'
+    print(post_url)
+
+    # Adiciona o URL do post à mensagem do email
+    message += '\n\nVeja a solicitaçõa clicando aqui: {}'.format(post_url)
+
+    send_mail(subject, message, from_email, recipient_list)

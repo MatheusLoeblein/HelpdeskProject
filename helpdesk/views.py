@@ -112,6 +112,7 @@ def category(request, Category_id):
 
 @login_required(login_url='authors:login', redirect_field_name='next')
 def tarefa(request, id):
+
     tarefa = Tarefa.objects.filter(
         pk=id).first()
 
