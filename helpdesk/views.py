@@ -8,7 +8,6 @@ from django.shortcuts import HttpResponseRedirect, get_list_or_404, render
 from django.urls import reverse
 
 from authors.forms import CommentForm
-from authors.models import Profile
 from utils.pagination import make_pagination
 
 from .models import Comment, Tarefa
@@ -125,7 +124,7 @@ def tarefa(request, id):
         'tarefa': tarefa,
         'comments': comments,
         'form': form,
-        'form_action': reverse('helpdesk:addcomment', args=(id,))
+        'form_action': reverse('helpdesk:addcomment', args=(id,)),
     })
 
 

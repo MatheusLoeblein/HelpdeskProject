@@ -47,9 +47,9 @@
             <a href="{% url 'admin:index' %}">Administração</a>
             <a href="{% url 'authors:maquinas' %}">Máquinas</a>
           {% endif %}
+          <a class="authors-logout-link" href="{% url 'authors:logout' %}">Logout</a>
           {% include 'authors/partials/form_logout.html' %}
-          <a class ="authors-logout-link" href="{% url 'authors:logout' %}">Logout</a>
-          {% else %}
+        {% else %}
           <a class="author-logout-link" href="{% url 'authors:login' %}">Login</a>
           <a href="{% url 'authors:register' %}">Cadastro</a>
         {% endif %}

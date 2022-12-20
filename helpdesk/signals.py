@@ -1,5 +1,6 @@
 import os
 
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.db.models.signals import post_save, pre_delete, pre_save
 from django.dispatch import receiver
@@ -69,10 +70,8 @@ def send_email_on_model_change(sender, instance, **kwargs):
         recipient_list = [instance.author.email]
 
     from_email = 'formedica@formedica.com.br'
-
     # Obtém o URL do post
-    post_url = f'http://127.0.0.1:8000/tarefa/{instance.id}'
-    print(post_url)
+    post_url = f'http://34.68.42.61/tarefa/{instance.id}'
 
     # Adiciona o URL do post à mensagem do email
     message += '\n\nVeja a solicitaçõa clicando aqui: {}'.format(post_url)
