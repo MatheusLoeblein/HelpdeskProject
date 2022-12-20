@@ -24,17 +24,17 @@ urlpatterns = [
     path('', include('helpdesk.urls')),
     path('authors/', include('authors.urls')),
 
-    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="authors/pages/password_reset.html"),  # noqa
-         name='reset_password'),
+    # path('reset_password/', auth_views.PasswordResetView.as_view(template_name="authors/pages/password_reset.html"),  # noqa
+    #      name='reset_password'),
 
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="authors/pages/password_reset_sent.html"),  # noqa
-         name="password_reset_done"),
+    # path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="authors/pages/password_reset_sent.html"),  # noqa
+    #      name="password_reset_done"),
 
-    path('reset/<str:uidb64>/<str:token>/', auth_views.PasswordResetConfirmView.as_view(template_name="authors/pages/password_reset_form.html"),  # noqa
-         name="password_reset_confirm"),
+    # path('reset/<str:uidb64>/<str:token>/', auth_views.PasswordResetConfirmView.as_view(template_name="authors/pages/password_reset_form.html"),  # noqa
+    #      name="password_reset_confirm"),
 
-    path('reset_password_complete/',
-         auth_views.PasswordResetCompleteView.as_view(template_name="authors/pages/password_reset_done.html"), name="password_reset_complete"),  # noqa
+    # path('reset_password_complete/',
+    #      auth_views.PasswordResetCompleteView.as_view(template_name="authors/pages/password_reset_done.html"), name="password_reset_complete"),  # noqa
 
     path('summernote/', include('django_summernote.urls')),
 ]

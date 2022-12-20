@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views
+from . import classes, views
 
 app_name = 'authors'
 
@@ -26,4 +26,13 @@ urlpatterns = [
     path('maquina/new/', views.addmaquina, name="maquina_new"),
     path('maquina/<int:id>/edit/', views.maquina_edit, name="maquina_edit"),
     path('maquina/delete/', views.maquina_delete, name="maquina_delete"),
+    path('resetPassword/', classes.password_reset, name="resetPassword"),
+    path('resetPassword/password_reset_done',
+         classes.password_reset_done, name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', classes.password_reset_confirm,
+         name="password_reset_confirm"),
+    path('reset/done/', classes.password_reset_complete,
+         name="password_reset_complete"),
+
+
 ]

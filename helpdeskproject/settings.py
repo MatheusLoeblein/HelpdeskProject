@@ -203,3 +203,5 @@ SUMMERNOTE_THEME = 'bs3'
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'  # o que salvar
 
 DBBACKUP_STORAGE_OPTIONS = {'location': 'backups/'}  # onde salvar
+
+LOGIN_URL = 'authors/login/'
