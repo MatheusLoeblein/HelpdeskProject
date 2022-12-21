@@ -5,10 +5,9 @@
     {% endif %}
     <a href="{% url 'authors:dashboard' %}" class="export-xlsx">Visualizar tarefas</a>
     <a href="{% url 'authors:dashboard_tarefa_new' %}" class="export-xlsx">Criar tarefa</a>
-    {% include 'authors/partials/form_logout.html' %}
     <a class="authors-logout-link export-xlsx" href="#">Logout</a>
-    
 </div>
+{% include 'authors/partials/form_logout.html' %}
 
     
 
