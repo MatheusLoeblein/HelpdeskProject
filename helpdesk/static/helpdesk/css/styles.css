@@ -145,8 +145,8 @@ img{
 
 .dash-menu-admin-content{
     display: grid; 
-    grid-template-columns: 25% 25% 25% 25%;
-    max-width: 650px;
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 750px;
     margin: 0 auto;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -1323,7 +1323,6 @@ img{
     color: var(--color-font-formedica);
     transition: all 300ms ease-in-out;
 }
-
 .reset-password-main{
     padding: 3rem;
     margin: 0 auto;

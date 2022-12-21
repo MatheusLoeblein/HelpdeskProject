@@ -13,6 +13,7 @@
       <nav class="menu-nav">
         {% load static %}
         {% if user.is_authenticated %} 
+        {% include 'authors/partials/form_logout.html' %}
           <div class="main-login-menssage">
                 <div class="carregar-img-input">
                 <form class="addprofileimg" action="{% url 'authors:addprofileimg' %}" method="POST" enctype="multipart/form-data">
@@ -48,7 +49,7 @@
             <a href="{% url 'authors:maquinas' %}">Máquinas</a>
           {% endif %}
           <a class="authors-logout-link" href="{% url 'authors:logout' %}">Logout</a>
-          {% include 'authors/partials/form_logout.html' %}
+          
         {% else %}
           <a class="author-logout-link" href="{% url 'authors:login' %}">Login</a>
           <a href="{% url 'authors:register' %}">Cadastro</a>
