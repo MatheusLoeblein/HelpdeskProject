@@ -21,11 +21,11 @@ PER_PAGE = os.environ.get('PER_PAGE', 25)
 def home(request):
 
     if request.user.is_superuser:
-        tarefas = Tarefa.objects.all().order_by('-global_msg', '-data_up_at')
+        tarefas = Tarefa.objects.all().order_by('-global_msg', 'status', '-data_up_at')
     else:
         tarefas = Tarefa.objects.filter(
             Category=request.user.profile.Category_id
-        ).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(author=request.user).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(setor_author=request.user.profile.Category).order_by('-global_msg', '-data_up_at') | Tarefa.objects.filter(global_msg=True).order_by('-global_msg', '-data_up_at')
+        ).order_by('-global_msg', 'status', '-data_up_at') | Tarefa.objects.filter(author=request.user).order_by('-global_msg', 'status', '-data_up_at') | Tarefa.objects.filter(setor_author=request.user.profile.Category).order_by('-global_msg', 'status', '-data_up_at') | Tarefa.objects.filter(global_msg=True).order_by('-global_msg', '-data_up_at')
 
     page_obj, pagination_range = make_pagination(request, tarefas, PER_PAGE)
 
